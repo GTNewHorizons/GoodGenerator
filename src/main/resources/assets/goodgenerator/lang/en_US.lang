@@ -18,8 +18,8 @@ tooltip.tile.nag.26.name=2-4x input hatch
 tooltip.tile.nag.27.name=0-1x output hatch
 tooltip.tile.nag.28.name=1x dynamo hatch (only accept ONE!)
 
-MAR_Casing.0.name=field restricting casing block
+MAR_Casing.0.name=Field Restricting Casing Block
 
-item.radiationProtectionPlate.name=radiation protection plate
+item.radiationProtectionPlate.name=Radiation Protection Plate
 
 itemGroup.Good Generator=Good Generator
