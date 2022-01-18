@@ -346,7 +346,7 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_MultiblockBas
             this.tEff = 0;
             return;
         }
-        this.tEff = (int)(Math.exp(-coefficient * (double)aFuel / (double)aPromoter) * EFFICIENCY_CEILING * 10000);
+        this.tEff = (int)(Math.exp(-coefficient * (double)aFuel / (double)aPromoter) * EFFICIENCY_CEILING * 10000 * ( 5 / coefficient - aFuel ) * ( coefficient / 5 ));
     }
 
     public int findLiquidAmount(FluidStack liquid, List<FluidStack> input) {
