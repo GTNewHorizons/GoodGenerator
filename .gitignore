@@ -6,3 +6,5 @@ out/
 *.ipr
 *.iws
 run/
+build.gradle
+*.gradle

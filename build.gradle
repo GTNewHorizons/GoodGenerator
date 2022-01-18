@@ -110,6 +110,9 @@ dependencies {
     compileOnly("com.github.GTNewHorizons:bartworks:master-SNAPSHOT:dev") {
         transitive = false
     }
+    compileOnly("com.github.GTNewHorizons:Baubles:master-SNAPSHOT:dev") {
+        transitive = false
+    }
     compileOnly("com.github.GTNewHorizons:GTplusplus:master-SNAPSHOT:dev") {
         transitive = false
     }
