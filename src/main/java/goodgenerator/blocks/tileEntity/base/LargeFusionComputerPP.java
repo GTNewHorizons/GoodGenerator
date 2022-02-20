@@ -46,7 +46,6 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
     public GT_Recipe mLastRecipe;
     public int para;
     public long mEUStore;
-    public final static int MAX_PARA = 256;
     private static final ClassValue<IStructureDefinition<LargeFusionComputerPP>> STRUCTURE_DEFINITION = new ClassValue<IStructureDefinition<LargeFusionComputerPP>>() {
         @Override
         protected IStructureDefinition<LargeFusionComputerPP> computeValue(Class<?> type) {
@@ -125,6 +124,8 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
 
     public abstract ITexture getTextureOverlay();
 
+    public abstract int getMaxPara();
+
     @Override
     public boolean allowCoverOnSide(byte aSide, GT_ItemStack aStack) {
         return aSide != getBaseMetaTileEntity().getFrontFacing();
@@ -194,9 +195,9 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
                     if (this.mEnergyHatches != null) {
                         for (GT_MetaTileEntity_Hatch_Energy tHatch : mEnergyHatches)
                             if (isValidMetaTileEntity(tHatch)) {
-                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * MAX_PARA) < maxEUStore()
-                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * MAX_PARA, false)) {
-                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * MAX_PARA, true);
+                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * getMaxPara() * extraPara(100)) < maxEUStore()
+                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), false)) {
+                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), true);
                                 } else if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock()) < maxEUStore()
                                         && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock(), false)) {
                                     aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock(), true);
@@ -206,9 +207,9 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
                     if (this.eEnergyMulti != null) {
                         for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti)
                             if (isValidMetaTileEntity(tHatch)) {
-                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * MAX_PARA) < maxEUStore()
-                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * MAX_PARA, false)) {
-                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * MAX_PARA, true);
+                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * getMaxPara() * extraPara(100)) < maxEUStore()
+                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), false)) {
+                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), true);
                                 } else if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock()) < maxEUStore()
                                         && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock(), false)) {
                                     aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock(), true);
@@ -340,7 +341,7 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
                 this.mLastRecipe = null;
                 return false;
             }
-            int pall = handleParallelRecipe(tRecipe, tFluids, null, Math.min(MAX_PARA * extraPara(tRecipe.mSpecialValue), (int) (getMaxEUInput() / tRecipe.mEUt / overclock(tRecipe.mSpecialValue))));
+            int pall = handleParallelRecipe(tRecipe, tFluids, null, Math.min(getMaxPara() * extraPara(tRecipe.mSpecialValue), (int) (getMaxEUInput() / tRecipe.mEUt / overclock(tRecipe.mSpecialValue))));
             this.para = pall;
             if (mRunningOnLoad || pall > 0) {
                 this.mLastRecipe = tRecipe;
@@ -360,12 +361,12 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
         long sum = 0;
         for (GT_MetaTileEntity_Hatch_Energy hatch : mEnergyHatches) {
             if (isValidMetaTileEntity(hatch)) {
-                sum += Math.min(2048L * tierOverclock() * MAX_PARA, hatch.maxEUInput() * hatch.maxAmperesIn());
+                sum += Math.min(2048L * tierOverclock() * getMaxPara() * extraPara(100), hatch.maxEUInput() * hatch.maxAmperesIn());
             }
         }
         for (GT_MetaTileEntity_Hatch_EnergyMulti hatch : eEnergyMulti) {
             if (isValidMetaTileEntity(hatch)) {
-                sum += Math.min(2048L * tierOverclock() * MAX_PARA, hatch.maxEUInput() * hatch.maxAmperesIn());
+                sum += Math.min(2048L * tierOverclock() * getMaxPara() * extraPara(100), hatch.maxEUInput() * hatch.maxAmperesIn());
             }
         }
         return sum;

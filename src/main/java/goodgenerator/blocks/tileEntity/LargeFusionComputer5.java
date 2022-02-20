@@ -42,17 +42,17 @@ public class LargeFusionComputer5 extends LargeFusionComputerPP {
         tt.addMachineType("Fusion Reactor")
                 .addInfo("Galaxy Collapse.")
                 .addInfo("Controller block for the Compact Fusion Reactor MK-V.")
-                .addInfo("268,435,456EU/t and 320M EU capacity per Energy Hatch")
+                .addInfo("167,772,160EU/t and 320M EU capacity per Energy Hatch")
                 .addInfo("If the recipe has a startup cost greater than the")
                 .addInfo("number of energy hatches * cap, you can't do it")
                 .addInfo("Make sure the whole structure is built in the 3x3")
                 .addInfo("chuck area of the ring center (not controller).")
                 .addInfo("Performs 4/4 overclock.")
-                .addInfo("Startup < 160,000,000 EU: 8192x Parallel")
-                .addInfo("Startup < 320,000,000 EU: 4096x Parallel")
-                .addInfo("Startup < 640,000,000 EU: 2048x Parallel")
-                .addInfo("Startup < 1,200,000,000 EU: 1024x Parallel")
-                .addInfo("Startup < 2,000,000,000 EU: 512x Parallel")
+                .addInfo("Startup < 160,000,000 EU: 320x Parallel")
+                .addInfo("Startup < 320,000,000 EU: 256x Parallel")
+                .addInfo("Startup < 640,000,000 EU: 192x Parallel")
+                .addInfo("Startup < 1,200,000,000 EU: 128x Parallel")
+                .addInfo("Startup < 2,000,000,000 EU: 64x Parallel")
                 .addInfo("Support" + EnumChatFormatting.BLUE + " Tec" + EnumChatFormatting.DARK_BLUE + "Tech" + EnumChatFormatting.GRAY + " Energy/Laser Hatches!")
                 .addInfo("The structure is too complex!")
                 .addInfo(BLUE_PRINT_INFO)
@@ -127,6 +127,11 @@ public class LargeFusionComputer5 extends LargeFusionComputerPP {
     }
 
     @Override
+    public int getMaxPara() {
+        return 64;
+    }
+
+    @Override
     public int tierOverclock() {
         return 256;
     }
@@ -139,14 +144,12 @@ public class LargeFusionComputer5 extends LargeFusionComputerPP {
     @Override
     public int extraPara(int startEnergy) {
         if (startEnergy < 160000000)
-            return 32;
+            return 5;
         if (startEnergy < 320000000)
-            return 16;
-        if (startEnergy < 640000000)
-            return 8;
-        if (startEnergy < 1200000000)
             return 4;
-        if (startEnergy < 2000000000)
+        if (startEnergy < 640000000)
+            return 3;
+        if (startEnergy < 1200000000)
             return 2;
         return 1;
     }

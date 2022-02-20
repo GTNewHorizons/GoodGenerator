@@ -40,12 +40,14 @@ public class LargeFusionComputer3 extends LargeFusionComputer {
         tt.addMachineType("Fusion Reactor")
                 .addInfo("Millions of nuclear.")
                 .addInfo("Controller block for the Compact Fusion Reactor MK-III.")
-                .addInfo("2,097,152EU/t and 20M EU capacity per Energy Hatch")
+                .addInfo("1,572,864EU/t and 20M EU capacity per Energy Hatch")
                 .addInfo("If the recipe has a startup cost greater than the")
                 .addInfo("number of energy hatches * cap, you can't do it")
                 .addInfo("Make sure the whole structure is built in the 3x3")
                 .addInfo("chuck area of the ring center (not controller).")
-                .addInfo("It can run 256x recipes at most.")
+                .addInfo("Startup < 160,000,000 EU: 192x Parallel")
+                .addInfo("Startup < 320,000,000 EU: 128x Parallel")
+                .addInfo("Startup < 640,000,000 EU: 64x Parallel")
                 .addInfo("Support" + EnumChatFormatting.BLUE + " Tec" + EnumChatFormatting.DARK_BLUE + "Tech" + EnumChatFormatting.GRAY + " Energy/Laser Hatches!")
                 .addInfo("The structure is too complex!")
                 .addInfo(BLUE_PRINT_INFO)
@@ -113,7 +115,12 @@ public class LargeFusionComputer3 extends LargeFusionComputer {
 
     @Override
     public int getMaxPara() {
-        return 256;
+        return 64;
+    }
+
+    @Override
+    public int extraPara(int startEnergy) {
+        return (startEnergy < 160000000 ? 3 : (startEnergy < 320000000 ? 2 : 1));
     }
 
     @Override

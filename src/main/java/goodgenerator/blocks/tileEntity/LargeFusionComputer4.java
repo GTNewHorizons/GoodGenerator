@@ -48,17 +48,16 @@ public class LargeFusionComputer4 extends LargeFusionComputerPP {
         tt.addMachineType("Fusion Reactor")
                 .addInfo("Galaxy Collapse.")
                 .addInfo("Controller block for the Compact Fusion Reactor MK-IV Prototype.")
-                .addInfo("16,777,216EU/t and 80M EU capacity per Energy Hatch")
+                .addInfo("33,554,432EU/t and 80M EU capacity per Energy Hatch")
                 .addInfo("If the recipe has a startup cost greater than the")
                 .addInfo("number of energy hatches * cap, you can't do it")
                 .addInfo("Make sure the whole structure is built in the 3x3")
                 .addInfo("chuck area of the ring center (not controller).")
                 .addInfo("Performs 4/4 overclock.")
-                .addInfo("Startup < 160,000,000 EU: 4096x Parallel")
-                .addInfo("Startup < 320,000,000 EU: 2048x Parallel")
-                .addInfo("Startup < 640,000,000 EU: 1024x Parallel")
-                .addInfo("Startup < 1,200,000,000 EU: 512x Parallel")
-                .addInfo("Startup < 2,000,000,000 EU: 256x Parallel")
+                .addInfo("Startup < 160,000,000 EU: 256x Parallel")
+                .addInfo("Startup < 320,000,000 EU: 192x Parallel")
+                .addInfo("Startup < 640,000,000 EU: 128x Parallel")
+                .addInfo("Startup < 1,200,000,000 EU: 64x Parallel")
                 .addInfo("Support" + EnumChatFormatting.BLUE + " Tec" + EnumChatFormatting.DARK_BLUE + "Tech" + EnumChatFormatting.GRAY + " Energy/Laser Hatches!")
                 .addInfo("The structure is too complex!")
                 .addInfo(BLUE_PRINT_INFO)
@@ -148,8 +147,13 @@ public class LargeFusionComputer4 extends LargeFusionComputerPP {
     }
 
     @Override
+    public int getMaxPara() {
+        return 64;
+    }
+
+    @Override
     public int tierOverclock() {
-        return 16;
+        return 64;
     }
 
     @Override
@@ -160,12 +164,10 @@ public class LargeFusionComputer4 extends LargeFusionComputerPP {
     @Override
     public int extraPara(int startEnergy) {
         if (startEnergy < 160000000)
-            return 16;
-        if (startEnergy < 320000000)
-            return 8;
-        if (startEnergy < 640000000)
             return 4;
-        if (startEnergy < 1200000000)
+        if (startEnergy < 320000000)
+            return 3;
+        if (startEnergy < 640000000)
             return 2;
         return 1;
     }

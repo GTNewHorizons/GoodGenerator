@@ -6,6 +6,7 @@ import goodgenerator.util.CrackRecipeAdder;
 import goodgenerator.util.ItemRefer;
 import com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader;
 import goodgenerator.util.MyRecipeAdder;
+import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -1238,7 +1239,7 @@ public class RecipeLoader_02 {
 
         GT_Values.RA.addAssemblerRecipe(
                 new ItemStack[] {
-                        ItemList.FusionComputer_LuV.get(16),
+                        ItemList.FusionComputer_LuV.get(48),
                         ItemRefer.HiC_T1.get(8),
                         MyMaterial.marCeM200.get(OrePrefixes.plate, 32),
                         GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Master, 8),
@@ -1256,7 +1257,7 @@ public class RecipeLoader_02 {
                 ItemRefer.Compact_Fusion_MK1.get(1),
                 24000,
                 new Object[] {
-                        ItemList.FusionComputer_ZPMV.get(16),
+                        ItemList.FusionComputer_ZPMV.get(48),
                         new Object[] {"circuitUltimate", 1},
                         new Object[] {"circuitUltimate", 1},
                         new Object[] {"circuitUltimate", 1},
@@ -1282,7 +1283,7 @@ public class RecipeLoader_02 {
                 ItemRefer.Compact_Fusion_MK2.get(1),
                 24000,
                 new Object[] {
-                        ItemList.FusionComputer_UV.get(16),
+                        ItemList.FusionComputer_UV.get(48),
                         new Object[] {"circuitSuperconductor", 1},
                         new Object[] {"circuitSuperconductor", 1},
                         new Object[] {"circuitSuperconductor", 1},
@@ -1322,11 +1323,13 @@ public class RecipeLoader_02 {
                     3
             );
 
+            int tID = GregTech_API.METATILEENTITIES[31076] != null ? 31076 : 965;
+
             GT_Values.RA.addAssemblylineRecipe(
                     ItemRefer.Compact_Fusion_MK3.get(1),
                     24000,
                     new Object[] {
-                            GT_ModHandler.getModItem("gregtech", "gt.blockmachines", 8, 31076),
+                            GT_ModHandler.getModItem("gregtech", "gt.blockmachines", 48, tID),
                             GT_OreDictUnificator.get(OrePrefixes.wireGt08, Materials.SuperconductorLuV, 32),
                             ItemList.Circuit_Wafer_PPIC.get(64),
                             ItemList.UHV_Coil.get(16),
@@ -1364,7 +1367,7 @@ public class RecipeLoader_02 {
                     ItemRefer.Compact_Fusion_MK4.get(1),
                     24000,
                     new Object[] {
-                            GT_ModHandler.getModItem("gregtech", "gt.blockmachines", 8, 965),
+                            GT_ModHandler.getModItem("gregtech", "gt.blockmachines", 48, 965),
                             GT_OreDictUnificator.get(OrePrefixes.wireGt08, Materials.SuperconductorUV, 32),
                             ItemList.Circuit_Wafer_QPIC.get(64),
                             ItemList.UHV_Coil.get(64),

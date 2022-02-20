@@ -120,6 +120,8 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_MultiblockBa
 
     public abstract int getMaxPara();
 
+    public abstract int extraPara(int startEnergy);
+
     public int textureIndex() {
         return 53;
     };
@@ -195,9 +197,9 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_MultiblockBa
                     if (this.mEnergyHatches != null) {
                         for (GT_MetaTileEntity_Hatch_Energy tHatch : mEnergyHatches)
                             if (isValidMetaTileEntity(tHatch)) {
-                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * getMaxPara()) < maxEUStore()
-                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara(), false)) {
-                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara(), true);
+                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * getMaxPara() * extraPara(100)) < maxEUStore()
+                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara()  * extraPara(100), false)) {
+                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), true);
                                 } else if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock()) < maxEUStore()
                                         && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock(), false)) {
                                     aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock(), true);
@@ -207,9 +209,9 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_MultiblockBa
                     if (this.eEnergyMulti != null) {
                         for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti)
                             if (isValidMetaTileEntity(tHatch)) {
-                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * getMaxPara()) < maxEUStore()
-                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara(), false)) {
-                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara(), true);
+                                if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock() * getMaxPara() * extraPara(100)) < maxEUStore()
+                                        && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), false)) {
+                                    aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock() * getMaxPara() * extraPara(100), true);
                                 } else if (aBaseMetaTileEntity.getStoredEU() + (2048L * tierOverclock()) < maxEUStore()
                                         && tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(2048L * tierOverclock(), false)) {
                                     aBaseMetaTileEntity.increaseStoredEnergyUnits(2048L * tierOverclock(), true);
@@ -353,7 +355,7 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_MultiblockBa
                 this.mLastRecipe = null;
                 return false;
             }
-            int pall = handleParallelRecipe(tRecipe, tFluids, null, Math.min(getMaxPara(), (int) (getMaxEUInput() / tRecipe.mEUt / overclock(tRecipe.mSpecialValue))));
+            int pall = handleParallelRecipe(tRecipe, tFluids, null, Math.min(getMaxPara() * extraPara(tRecipe.mSpecialValue), (int) (getMaxEUInput() / tRecipe.mEUt / overclock(tRecipe.mSpecialValue))));
             this.para = pall;
             if (mRunningOnLoad || pall > 0) {
                 this.mLastRecipe = tRecipe;
@@ -373,12 +375,12 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_MultiblockBa
         long sum = 0;
         for (GT_MetaTileEntity_Hatch_Energy hatch : mEnergyHatches) {
             if (isValidMetaTileEntity(hatch)) {
-                sum += Math.min(2048L * tierOverclock() * getMaxPara(), hatch.maxEUInput() * hatch.maxAmperesIn());
+                sum += Math.min(2048L * tierOverclock() * getMaxPara() * extraPara(100), hatch.maxEUInput() * hatch.maxAmperesIn());
             }
         }
         for (GT_MetaTileEntity_Hatch_EnergyMulti hatch : eEnergyMulti) {
             if (isValidMetaTileEntity(hatch)) {
-                sum += Math.min(2048L * tierOverclock() * getMaxPara(), hatch.maxEUInput() * hatch.maxAmperesIn());
+                sum += Math.min(2048L * tierOverclock() * getMaxPara() * extraPara(100), hatch.maxEUInput() * hatch.maxAmperesIn());
             }
         }
         return sum;
