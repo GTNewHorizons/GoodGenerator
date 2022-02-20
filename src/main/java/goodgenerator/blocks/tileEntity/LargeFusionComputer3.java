@@ -112,6 +112,11 @@ public class LargeFusionComputer3 extends LargeFusionComputer {
     }
 
     @Override
+    public int getMaxPara() {
+        return 256;
+    }
+
+    @Override
     public ITexture getTextureOverlay() {
         return textureOverlay;
     }

@@ -45,7 +45,7 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
     private boolean isLoadedChunk;
     public GT_Recipe mLastRecipe;
     public int para;
-    public int mEUStore;
+    public long mEUStore;
     public final static int MAX_PARA = 256;
     private static final ClassValue<IStructureDefinition<LargeFusionComputerPP>> STRUCTURE_DEFINITION = new ClassValue<IStructureDefinition<LargeFusionComputerPP>>() {
         @Override
@@ -183,7 +183,7 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
             if (mEfficiency < 0)
                 mEfficiency = 0;
             if (mRunningOnLoad && checkMachine(aBaseMetaTileEntity, mInventory[1])) {
-                this.mEUStore = (int) aBaseMetaTileEntity.getStoredEU();
+                this.mEUStore = aBaseMetaTileEntity.getStoredEU();
                 checkRecipe(mInventory[1]);
             }
             if (--mUpdate == 0 || --mStartUpCheck == 0) {
@@ -230,7 +230,7 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
                             mProgresstime = 0;
                             mMaxProgresstime = 0;
                             mEfficiencyIncrease = 0;
-                            this.mEUStore = (int) getBaseMetaTileEntity().getStoredEU();
+                            this.mEUStore = getBaseMetaTileEntity().getStoredEU();
                             if (aBaseMetaTileEntity.isAllowedToWork())
                                 checkRecipe(mInventory[1]);
                         }
@@ -238,7 +238,7 @@ public abstract class LargeFusionComputerPP extends GT_MetaTileEntity_Multiblock
                         if (aTick % 100 == 0 || aBaseMetaTileEntity.hasWorkJustBeenEnabled() || aBaseMetaTileEntity.hasInventoryBeenModified()) {
                             turnCasingActive(mMaxProgresstime > 0);
                             if (aBaseMetaTileEntity.isAllowedToWork()) {
-                                this.mEUStore = (int) getBaseMetaTileEntity().getStoredEU();
+                                this.mEUStore = getBaseMetaTileEntity().getStoredEU();
                                 if (checkRecipe(mInventory[1])) {
                                     if (this.mEUStore < this.mLastRecipe.mSpecialValue - this.mEUt) {
                                         mMaxProgresstime = 0;
