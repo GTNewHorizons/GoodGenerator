@@ -29,7 +29,7 @@ public class RecipeLoader_02 {
                 ItemRefer.Compact_Fusion_Coil_T0.get(1)
             },
             null,
-            ItemList.Casing_Coil_Superconductor.get(1),
+            ItemList.Casing_Coil_Superconductor.get(3),
             600,
             120000
         );
@@ -40,18 +40,18 @@ public class RecipeLoader_02 {
                 ItemRefer.Compact_Fusion_Coil_T1.get(1),
             },
             null,
-            ItemList.Casing_Fusion_Coil.get(1),
+            ItemList.Casing_Fusion_Coil.get(3),
             600,
             480000
         );
 
-        // Compact MK2 Fusion Disassembly Recipe
+        // Compact MK3 Fusion Disassembly Recipe
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[]{
                 ItemRefer.Compact_Fusion_Coil_T2.get(1),
             },
             null,
-            ItemList.Casing_Fusion_Coil.get(1),
+            ItemList.Casing_Fusion_Coil.get(3),
             600,
             1920000
         );
@@ -1351,7 +1351,7 @@ public class RecipeLoader_02 {
                     ItemRefer.Compact_Fusion_Coil_T3.get(1),
                 },
                 null,
-                GT_ModHandler.getModItem("miscutils", "gtplusplus.blockcasings.3", 1, 13),
+                GT_ModHandler.getModItem("miscutils", "gtplusplus.blockcasings.3", 3, 13),
                 600,
                 7680000
             );
