@@ -1,6 +1,7 @@
 package goodgenerator.blocks.tileEntity;
 
 import goodgenerator.blocks.tileEntity.GTMetaTileEntity.YOTTAHatch;
+import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_TooltipMultiBlockBase_EM;
 import goodgenerator.client.GUI.YOTTankGUIClient;
 import goodgenerator.common.container.YOTTankGUIContainer;
 import goodgenerator.loader.Loaders;
@@ -15,6 +16,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.IIconContainer;
+import gregtech.api.interfaces.ISecondaryDescribable;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -23,8 +25,6 @@ import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Input
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Output;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gregtech.api.util.GT_Utility;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,7 +44,7 @@ import static goodgenerator.util.StructureHelper.addTieredBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.util.GT_StructureUtility.*;
 
-public class YottaFluidTank extends GT_MetaTileEntity_MultiblockBase_EM implements IConstructable {
+public class YottaFluidTank extends GT_MetaTileEntity_TooltipMultiBlockBase_EM implements IConstructable {
 
     private static final IIconContainer textureFontOn = new Textures.BlockIcons.CustomIcon("iconsets/OVERLAY_QTANK");
     private static final IIconContainer textureFontOn_Glow = new Textures.BlockIcons.CustomIcon("iconsets/OVERLAY_QTANK_GLOW");
@@ -311,7 +311,7 @@ public class YottaFluidTank extends GT_MetaTileEntity_MultiblockBase_EM implemen
     }
 
     @Override
-    public String[] getDescription() {
+    protected GT_Multiblock_Tooltip_Builder createTooltip() {
         final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
         tt.addMachineType("Fluid Tank")
                 .addInfo("Controller block for the YOTTank.")
@@ -328,11 +328,7 @@ public class YottaFluidTank extends GT_MetaTileEntity_MultiblockBase_EM implemen
                 .addMaintenanceHatch("Hint block with dot 2")
                 .addOutputHatch("Hint block with dot 3")
                 .toolTipFinisher("Good Generator");
-        if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-            return tt.getInformation();
-        } else {
-            return tt.getStructureInformation();
-        }
+        return tt;
     }
 
     public BigInteger calStorage(int meta) {
@@ -410,12 +406,12 @@ public class YottaFluidTank extends GT_MetaTileEntity_MultiblockBase_EM implemen
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        structureBuild_EM(YOTTANK_BOTTOM, 2, 0, 0, hintsOnly, stackSize);
+        structureBuild_EM(YOTTANK_BOTTOM, 2, 0, 0, stackSize, hintsOnly);
         int height = stackSize.stackSize;
         if (height > 15) height = 15;
-        structureBuild_EM(YOTTANK_TOP, 2, height + 2, 0, hintsOnly, stackSize);
+        structureBuild_EM(YOTTANK_TOP, 2, height + 2, 0, stackSize, hintsOnly);
         while (height > 0) {
-            structureBuild_EM(YOTTANK_MID, 2, height, 0, hintsOnly, stackSize);
+            structureBuild_EM(YOTTANK_MID, 2, height, 0, stackSize, hintsOnly);
             height --;
         }
     }

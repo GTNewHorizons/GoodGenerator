@@ -1,5 +1,6 @@
 package goodgenerator.loader;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import goodgenerator.blocks.myFluids.FluidsBuilder;
 import goodgenerator.blocks.regularBlock.*;
 import goodgenerator.client.render.BlockRenderHandler;
@@ -9,6 +10,7 @@ import goodgenerator.blocks.tileEntity.GTMetaTileEntity.NeutronAccelerator;
 import goodgenerator.blocks.tileEntity.GTMetaTileEntity.NeutronSensor;
 import goodgenerator.blocks.tileEntity.GTMetaTileEntity.YOTTAHatch;
 import goodgenerator.crossmod.LoadedList;
+import goodgenerator.crossmod.ic2.CropsLoader;
 import goodgenerator.crossmod.nei.IMCForNEI;
 import goodgenerator.crossmod.nei.NEI_Config;
 import goodgenerator.crossmod.thaumcraft.LargeEssentiaEnergyData;
@@ -20,6 +22,7 @@ import goodgenerator.main.GoodGenerator;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import goodgenerator.util.CrackRecipeAdder;
+import goodgenerator.util.MaterialFix;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -66,6 +69,9 @@ public class Loaders {
     public static final Item advancedFuelRod = new MyItems("advancedFuelRod", GoodGenerator.GG);
     public static final Item fluidCore = new MyItems("fluidCore", GoodGenerator.GG, new String[]{GoodGenerator.MOD_ID+":fluidCore/1", GoodGenerator.MOD_ID+":fluidCore/2", GoodGenerator.MOD_ID+":fluidCore/3", GoodGenerator.MOD_ID+":fluidCore/4", GoodGenerator.MOD_ID+":fluidCore/5", GoodGenerator.MOD_ID+":fluidCore/6"});
     public static final Item upgradeEssentia = new MyItems("upgradeEssentia", GoodGenerator.GG, new String[]{GoodGenerator.MOD_ID+":upgradeEssentia/null", GoodGenerator.MOD_ID+":upgradeEssentia/air", GoodGenerator.MOD_ID+":upgradeEssentia/thermal", GoodGenerator.MOD_ID+":upgradeEssentia/unstable", GoodGenerator.MOD_ID+":upgradeEssentia/victus", GoodGenerator.MOD_ID+":upgradeEssentia/tainted", GoodGenerator.MOD_ID+":upgradeEssentia/mechanics", GoodGenerator.MOD_ID+":upgradeEssentia/spirit", GoodGenerator.MOD_ID+":upgradeEssentia/radiation", GoodGenerator.MOD_ID+":upgradeEssentia/electric"});
+    public static final Item highEnergyMixture = new MyItems("highEnergyMixture", GoodGenerator.GG, new String[]{GoodGenerator.MOD_ID+":highEnergyMixture"});
+    public static final Item saltyRoot = new MyItems("saltyRoot", GoodGenerator.GG, new String[]{GoodGenerator.MOD_ID+":saltyRoot"});
+    public static final Item huiCircuit = new MyItems("huiCircuit", addText("huiCircuit.tooltip", 5), GoodGenerator.GG, new String[]{GoodGenerator.MOD_ID+":ciruits/1", GoodGenerator.MOD_ID+":ciruits/2", GoodGenerator.MOD_ID+":ciruits/3", GoodGenerator.MOD_ID+":ciruits/4", GoodGenerator.MOD_ID+":ciruits/5"});
 
     public static final Block MAR_Casing = new Casing("MAR_Casing", new String[]{GoodGenerator.MOD_ID+":MAR_Casing"});
     public static final Block FRF_Casings = new Casing("FRF_Casing", new String[]{"gregtech:iconsets/MACHINE_CASING_MINING_BLACKPLUTONIUM"});
@@ -84,7 +90,8 @@ public class Loaders {
     public static final Block yottaFluidTankCasing = new ComplexTextureCasing("yottaFluidTankCasing", new String[]{GoodGenerator.MOD_ID+":yottaFluidTankCasing_SIDE"}, new String[]{GoodGenerator.MOD_ID+":yottaFluidTankCasing_TOP"});
     public static final Block supercriticalFluidTurbineCasing = new TurbineCasing("supercriticalFluidTurbineCasing", "supercriticalFluidTurbineCasing");
     public static final Block pressureResistantWalls = new Casing("pressureResistantWalls", new String[]{GoodGenerator.MOD_ID+":pressureResistantWalls"});
-
+    public static final Block preciseUnitCasing = new Casing("preciseUnitCasing", new String[]{GoodGenerator.MOD_ID+":preciseUnitCasing/1", GoodGenerator.MOD_ID+":preciseUnitCasing/2", GoodGenerator.MOD_ID+":preciseUnitCasing/3"});
+    public static final Block compactFusionCoil = new Casing("compactFusionCoil", new String[]{GoodGenerator.MOD_ID+":fuison/1", GoodGenerator.MOD_ID+":fuison/2", GoodGenerator.MOD_ID+":fuison/3", GoodGenerator.MOD_ID+":fuison/4", GoodGenerator.MOD_ID+":fuison/5"});
     public static Block essentiaHatch;
 
     public static ItemStack MAR;
@@ -97,13 +104,15 @@ public class Loaders {
     public static ItemStack YFH;
     public static ItemStack SCTurbine;
     public static ItemStack XHE;
+    public static ItemStack PA;
+    public static ItemStack[] LFC = new ItemStack[5];
 
     public static ItemStack[] NeutronAccelerators = new ItemStack[9];
     public static ItemStack[] Generator_Diesel = new ItemStack[2];
 
     //public static Item Isotope = new NuclearMetaItemGenerator();
 
-    public static void GTMetaTileRegister(){
+    public static void GTMetaTileRegister() {
         Loaders.MAR = new MultiNqGenerator(12732, "NaG", "Large Naquadah Reactor").getStackForm(1L);
         Loaders.FRF = new FuelRefineFactory(16999, "FRF", "Naquadah Fuel Refinery").getStackForm(1L);
         Loaders.UCFE = new UniversalChemicalFuelEngine(IDOffset, "UniversalChemicalFuelEngine", "Universal Chemical Fuel Engine").getStackForm(1L);
@@ -116,9 +125,19 @@ public class Loaders {
         Loaders.YFH = new YOTTAHatch(IDOffset + 14, "YottaFluidTankHatch", "YOTHatch", 5).getStackForm(1L);
         Loaders.SCTurbine = new SupercriticalFluidTurbine(IDOffset + 15, "SupercriticalSteamTurbine", "SC Steam Turbine").getStackForm(1L);
         Loaders.XHE = new ExtremeHeatExchanger(IDOffset + 16, "ExtremeHeatExchanger", "Extreme Heat Exchanger").getStackForm(1L);
+        Loaders.PA = new PreciseAssembler(IDOffset + 17, "PreciseAssembler", "Precise Auto-Assembler MT-3662").getStackForm(1L);
+        Loaders.LFC[0] = new LargeFusionComputer1(IDOffset + 18, "LargeFusionComputer1", "Compact Fusion Computer MK-I Prototype").getStackForm(1);
+        Loaders.LFC[1] = new LargeFusionComputer2(IDOffset + 19, "LargeFusionComputer2", "Compact Fusion Computer MK-II").getStackForm(1L);
+        Loaders.LFC[2] = new LargeFusionComputer3(IDOffset + 20, "LargeFusionComputer3", "Compact Fusion Computer MK-III").getStackForm(1L);
+        if (LoadedList.GTPP) {
+            Loaders.LFC[3] = new LargeFusionComputer4(IDOffset + 21, "LargeFusionComputer4", "Compact Fusion Computer MK-IV Prototype").getStackForm(1L);
+            Loaders.LFC[4] = new LargeFusionComputer5(IDOffset + 22, "LargeFusionComputer5", "Compact Fusion Computer MK-V").getStackForm(1L);
+        }
         Loaders.Generator_Diesel[0] = new DieselGenerator(1113, "basicgenerator.diesel.tier.04", "Turbo Supercharging Combustion Generator", 4).getStackForm(1L);
         Loaders.Generator_Diesel[1] = new DieselGenerator(1114, "basicgenerator.diesel.tier.05", "Ultimate Chemical Energy Releaser", 5).getStackForm(1L);
         CrackRecipeAdder.registerPipe(30995, MyMaterial.incoloy903, 15000, 8000, true);
+        CrackRecipeAdder.registerWire(32749, MyMaterial.signalium, 12, 131072, 16, true);
+        CrackRecipeAdder.registerWire(32737, MyMaterial.lumiium, 8, 524288, 64, true);
     }
 
     public static void Register() {
@@ -140,6 +159,8 @@ public class Loaders {
         GameRegistry.registerBlock(yottaFluidTankCasing, MyItemBlocks.class, "yottaFluidTankCasing");
         GameRegistry.registerBlock(supercriticalFluidTurbineCasing, MyItemBlocks.class, "supercriticalFluidTurbineCasing");
         GameRegistry.registerBlock(pressureResistantWalls, MyItemBlocks.class, "pressureResistantWalls");
+        GameRegistry.registerBlock(preciseUnitCasing, MyItemBlocks.class, "preciseUnitCasing");
+        GameRegistry.registerBlock(compactFusionCoil, MyItemBlocks.class, "compactFusionCoil");
         GameRegistry.registerItem(radiationProtectionPlate, "radiationProtectionPlate", GoodGenerator.MOD_ID);
         GameRegistry.registerItem(wrappedUraniumIngot, "wrappedUraniumIngot", GoodGenerator.MOD_ID);
         GameRegistry.registerItem(highDensityUraniumNugget, "highDensityUraniumNugget", GoodGenerator.MOD_ID);
@@ -167,6 +188,9 @@ public class Loaders {
         GameRegistry.registerItem(naquadriaMass, "naquadriaMass", GoodGenerator.MOD_ID);
         GameRegistry.registerItem(advancedFuelRod, "advancedFuelRod", GoodGenerator.MOD_ID);
         GameRegistry.registerItem(fluidCore, "fluidCore", GoodGenerator.MOD_ID);
+        GameRegistry.registerItem(highEnergyMixture, "highEnergyMixture", GoodGenerator.MOD_ID);
+        GameRegistry.registerItem(saltyRoot, "saltyRoot", GoodGenerator.MOD_ID);
+        GameRegistry.registerItem(huiCircuit, "huiCircuit", GoodGenerator.MOD_ID);
     }
 
     public static void compactMod() {
@@ -192,6 +216,9 @@ public class Loaders {
             Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage] = new ITexture[128];
             Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage][1] = TextureFactory.of(yottaFluidTankCasing);
             Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage][2] = TextureFactory.of(supercriticalFluidTurbineCasing);
+            Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage][3] = TextureFactory.of(preciseUnitCasing, 0);
+            Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage][4] = TextureFactory.of(preciseUnitCasing, 1);
+            Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage][5] = TextureFactory.of(preciseUnitCasing, 2);
         }
     }
 
@@ -205,11 +232,14 @@ public class Loaders {
         LoadedList.init();
     }
 
-    public static void initLoad(){
-        new BlockRenderHandler();
+    public static void initLoad() {
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            new BlockRenderHandler();
+        }
         GTMetaTileRegister();
         initLoadRecipes();
         IMCForNEI.IMCSender();
+        CropsLoader.registerCrops();
     }
 
     public static void postInitLoad(){
@@ -218,6 +248,7 @@ public class Loaders {
 
     public static void completeLoad(){
         RecipeLoader_02.FinishLoadRecipe();
+        MaterialFix.addRecipeForMultiItems();
     }
 
     public static void initLoadRecipes(){

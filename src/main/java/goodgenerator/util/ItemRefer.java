@@ -2,6 +2,7 @@ package goodgenerator.util;
 
 import goodgenerator.blocks.tileEntity.ExtremeHeatExchanger;
 import gregtech.api.util.GT_Utility;
+import ic2.core.Ic2Items;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -79,6 +80,15 @@ public final class ItemRefer {
     public static ItemRefer Essentia_Upgrade_Spirit = getItemStack(upgradeEssentia, 7);
     public static ItemRefer Essentia_Upgrade_Radiation = getItemStack(upgradeEssentia, 8);
     public static ItemRefer Essentia_Upgrade_Electric = getItemStack(upgradeEssentia, 9);
+    public static ItemRefer High_Energy_Mixture = getItemStack(highEnergyMixture);
+    public static ItemRefer Salty_Root = getItemStack(saltyRoot);
+    public static ItemRefer HiC_T1 = getItemStack(huiCircuit, 0);
+    public static ItemRefer HiC_T2 = getItemStack(huiCircuit, 1);
+    public static ItemRefer HiC_T3 = getItemStack(huiCircuit, 2);
+    public static ItemRefer HiC_T4 = getItemStack(huiCircuit, 3);
+    public static ItemRefer HiC_T5 = getItemStack(huiCircuit, 4);
+    public static ItemRefer IC2_Ir_Plate = getItemStack(Ic2Items.iridiumPlate);
+    public static ItemRefer IC2_Glass = getItemStack(Ic2Items.reinforcedGlass);
 
     public static ItemRefer Field_Restriction_Casing = getItemStack(MAR_Casing);
     public static ItemRefer Naquadah_Fuel_Refinery_Casing = getItemStack(FRF_Casings);
@@ -109,6 +119,14 @@ public final class ItemRefer {
     public static ItemRefer YOTTank_Cell_T10 = getItemStack(yottaFluidTankCell, 9);
     public static ItemRefer SC_Turbine_Casing = getItemStack(supercriticalFluidTurbineCasing);
     public static ItemRefer Pressure_Resistant_Wall = getItemStack(pressureResistantWalls);
+    public static ItemRefer Precise_Electronic_Unit_T1 = getItemStack(preciseUnitCasing, 0);
+    public static ItemRefer Precise_Electronic_Unit_T2 = getItemStack(preciseUnitCasing, 1);
+    public static ItemRefer Precise_Electronic_Unit_T3 = getItemStack(preciseUnitCasing, 2);
+    public static ItemRefer Compact_Fusion_Coil_T0 = getItemStack(compactFusionCoil, 0);
+    public static ItemRefer Compact_Fusion_Coil_T1 = getItemStack(compactFusionCoil, 1);
+    public static ItemRefer Compact_Fusion_Coil_T2 = getItemStack(compactFusionCoil, 2);
+    public static ItemRefer Compact_Fusion_Coil_T3 = getItemStack(compactFusionCoil, 3);
+    public static ItemRefer Compact_Fusion_Coil_T4 = getItemStack(compactFusionCoil, 4);
 
     public static ItemRefer Large_Naquadah_Reactor = getItemStack(MAR);
     public static ItemRefer Naquadah_Fuel_Refinery = getItemStack(FRF);
@@ -119,6 +137,12 @@ public final class ItemRefer {
     public static ItemRefer Combustion_Generator_IV = getItemStack(Generator_Diesel[1]);
     public static ItemRefer SC_Fluid_Turbine = getItemStack(SCTurbine);
     public static ItemRefer Extreme_Heat_Exchanger = getItemStack(XHE);
+    public static ItemRefer Precise_Assembler = getItemStack(PA);
+    public static ItemRefer Compact_Fusion_MK1 = getItemStack(LFC[0]);
+    public static ItemRefer Compact_Fusion_MK2 = getItemStack(LFC[1]);
+    public static ItemRefer Compact_Fusion_MK3 = getItemStack(LFC[2]);
+    public static ItemRefer Compact_Fusion_MK4 = getItemStack(LFC[3]);
+    public static ItemRefer Compact_Fusion_MK5 = getItemStack(LFC[4]);
 
     private Item mItem = null;
     private Block mBlock = null;

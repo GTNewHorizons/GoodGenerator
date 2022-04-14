@@ -1,6 +1,7 @@
 package goodgenerator.loader;
 
 import goodgenerator.crossmod.LoadedList;
+import goodgenerator.items.MyMaterial;
 import goodgenerator.main.GoodGenerator;
 import goodgenerator.util.ItemRefer;
 import goodgenerator.util.MyRecipeAdder;
@@ -38,6 +39,15 @@ public class NaquadahReworkRecipeLoader {
     public static void RecipeLoad(){
 
         if (!EnableNaquadahRework) return;
+
+        //Fix shit
+        GT_Values.RA.addPulveriserRecipe(
+                lowQualityNaquadriaSolution.get(OrePrefixes.cell, 1),
+                new ItemStack[]{Materials.Tin.getDust(2)},
+                new int[]{10000},
+                334,
+                4
+        );
 
         //Naquadah Rework Line
         GT_Values.RA.addBlastRecipe(
@@ -118,7 +128,7 @@ public class NaquadahReworkRecipeLoader {
         );
 
         GT_Values.RA.addChemicalRecipe(
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 60),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 40),
                 null,
                 fluorineRichWasteLiquid.getFluidOrGas(1500),
                 wasteLiquid.getFluidOrGas(1000),
@@ -200,7 +210,7 @@ public class NaquadahReworkRecipeLoader {
                 },
                 new FluidStack[]{
                         P507.getFluidOrGas(1000),
-                        Materials.SulfuricAcid.getFluid(32000)
+                        Materials.SulfuricAcid.getFluid(18000)
                 },
                 new FluidStack[]{
                         enrichedNaquadahRichSolution.getFluidOrGas(4000),
@@ -212,6 +222,16 @@ public class NaquadahReworkRecipeLoader {
                 },
                 400,
                 1920
+        );
+
+        GT_Values.RA.addChemicalRecipe(
+            WerkstoffLoader.ZincSulfate.get(OrePrefixes.dust, 1),
+            null,
+            Materials.Hydrogen.getGas(1000),
+            Materials.SulfuricAcid.getFluid(1000),
+            Materials.Zinc.getDust(1),
+            30,
+            7
         );
 
         GT_Values.RA.addAutoclaveRecipe(
@@ -270,13 +290,13 @@ public class NaquadahReworkRecipeLoader {
 
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[]{
-                        triniumSulphate.get(OrePrefixes.dust, 1),
+                        triniumSulphate.get(OrePrefixes.dust, 4),
                 },
                 new FluidStack[]{
-                        Materials.Hydrogen.getGas(1000)
+                        Materials.Hydrogen.getGas(4000)
                 },
                 new FluidStack[]{
-                        Materials.SulfuricAcid.getFluid(1000)
+                        Materials.SulfuricAcid.getFluid(4000)
                 },
                 new ItemStack[]{
                         GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Trinium, 1),
@@ -470,7 +490,7 @@ public class NaquadahReworkRecipeLoader {
                 GT_Utility.getIntegratedCircuit(2),
                 Materials.Nitrogen.getGas(1000),
                 null,
-                Materials.Naquadah.getNuggets(3),
+                Materials.Naquadah.getNuggets(1),
                 null,
                 2400,
                 7680,
@@ -694,7 +714,7 @@ public class NaquadahReworkRecipeLoader {
                     for (int i = 0; i < tRecipe.mOutputs.length; i ++) {
                         if (!GT_Utility.isStackValid(tRecipe.mOutputs[i])) continue;
                         if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadah.getDustTiny(1))) {
-                            tRecipe.mOutputs[i] = GT_Utility.copyAmount(tRecipe.mOutputs[i].stackSize * 2, naquadahEarth.get(OrePrefixes.dustTiny, 1));
+                            tRecipe.mOutputs[i] = GT_Utility.copyAmount(tRecipe.mOutputs[i].stackSize * 2L, naquadahEarth.get(OrePrefixes.dustTiny, 1));
                         }
                     }
                     if (!tRecipe.equals(recipe)){
