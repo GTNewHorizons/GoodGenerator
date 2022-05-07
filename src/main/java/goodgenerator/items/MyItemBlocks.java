@@ -71,8 +71,9 @@ public class MyItemBlocks extends ItemBlock {
             TEBlock tile = (TEBlock) Block.getBlockFromItem(p_77624_1_.getItem());
             if (tile.getIndex() == 1)
                 p_77624_3_.addAll(Arrays.asList(DescTextLocalization.addText("EssentiaHatch.tooltip", 2)));
-        }
-        else p_77624_3_.add(mNoTileEntityToolTip);
+            if (tile.getIndex() == 2)
+                p_77624_3_.addAll(Arrays.asList(DescTextLocalization.addText("EssentiaOutputHatch.tooltip", 2)));
+        } else p_77624_3_.add(mNoTileEntityToolTip);
 
         if (Block.getBlockFromItem(p_77624_1_.getItem()).equals(yottaFluidTankCell)) {
             StringBuilder cap = new StringBuilder();

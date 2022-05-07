@@ -1,6 +1,5 @@
 package goodgenerator.util;
 
-import goodgenerator.blocks.tileEntity.ExtremeHeatExchanger;
 import gregtech.api.util.GT_Utility;
 import ic2.core.Ic2Items;
 import net.minecraft.block.Block;
@@ -128,6 +127,9 @@ public final class ItemRefer {
     public static ItemRefer Compact_Fusion_Coil_T3 = getItemStack(compactFusionCoil, 3);
     public static ItemRefer Compact_Fusion_Coil_T4 = getItemStack(compactFusionCoil, 4);
 
+    public static ItemRefer Essentia_Filter_Casing = getItemStack(essentiaFilterCasing, 0);
+    public static ItemRefer Essentia_Output_Hatch = getItemStack(essentiaOutputHatch);
+
     public static ItemRefer Large_Naquadah_Reactor = getItemStack(MAR);
     public static ItemRefer Naquadah_Fuel_Refinery = getItemStack(FRF);
     public static ItemRefer Universal_Chemical_Fuel_Engine = getItemStack(UCFE);
@@ -143,6 +145,8 @@ public final class ItemRefer {
     public static ItemRefer Compact_Fusion_MK3 = getItemStack(LFC[2]);
     public static ItemRefer Compact_Fusion_MK4 = getItemStack(LFC[3]);
     public static ItemRefer Compact_Fusion_MK5 = getItemStack(LFC[4]);
+
+    public static ItemRefer Large_Essentia_Smeltery = getItemStack(LES);
 
     private Item mItem = null;
     private Block mBlock = null;
@@ -186,8 +190,8 @@ public final class ItemRefer {
         mItemStack = itemStack;
     }
 
-    public ItemStack get(int amount){
-        if (mItem != null ) return new ItemStack(mItem, amount, mMeta);
+    public ItemStack get(int amount) {
+        if (mItem != null) return new ItemStack(mItem, amount, mMeta);
         if (mBlock != null) return new ItemStack(mBlock, amount, mMeta);
         if (mItemStack != null) return GT_Utility.copyAmount(amount, mItemStack);
         return new ItemStack(_null_, amount, 0);
