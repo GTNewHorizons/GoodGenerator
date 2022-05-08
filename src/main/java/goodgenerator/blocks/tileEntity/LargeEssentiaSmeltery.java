@@ -24,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -63,7 +64,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     protected int nodeIncrease = 0;
 
     private IStructureDefinition<LargeEssentiaSmeltery> multiDefinition = null;
-    private ArrayList<EssentiaOutputHatch> mEssentiaOutputHatches = new ArrayList();
+    private ArrayList<EssentiaOutputHatch> mEssentiaOutputHatches = new ArrayList<>();
     private int pTier = 0;
     private XSTR xstr = new XSTR();
 
@@ -178,7 +179,9 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
 
     @Override
     public String[] getInfoData() {
-        return super.getInfoData();
+        String[] info = super.getInfoData();
+        info[8] = "Node Power: " + EnumChatFormatting.RED + this.nodePower * 100 / this.expectedPower() + "%" + EnumChatFormatting.RESET + " Purification Efficiency: " + EnumChatFormatting.AQUA + this.nodePurificationEfficiency + "%" + EnumChatFormatting.RESET + " Speed Up: " + EnumChatFormatting.GRAY + this.nodeIncrease + "%" + EnumChatFormatting.RESET;
+        return info;
     }
 
     @Override
@@ -340,6 +343,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
         this.nodePower = aNBT.getInteger("nodePower");
         this.nodePurificationEfficiency = aNBT.getInteger("nodePurificationEfficiency");
         this.nodeIncrease = aNBT.getInteger("nodeIncrease");
+
         this.mOutputAspects.aspects.clear();
         NBTTagList tlist = aNBT.getTagList("Aspects", 69);
         for (int j = 0; j < tlist.tagCount(); ++j) {
@@ -379,15 +383,16 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
 
             this.nodePurificationEfficiency = Math.max(0, this.nodePurificationEfficiency - 1);
             if (this.nodePurificationEfficiency < 100) {
-                this.nodePurificationEfficiency += Math.floor(VisNetHandler.drainVis(WORLD, x, y, z, Aspect.ORDER, 100) * 0.01);
+                this.nodePurificationEfficiency = (int) Math.max(100, this.nodePurificationEfficiency + Math.ceil(VisNetHandler.drainVis(WORLD, x, y, z, Aspect.ORDER, 100) * 0.05));
             }
 
-            this.nodeIncrease = Math.min(100, VisNetHandler.drainVis(WORLD, x, y, z, Aspect.FIRE, 125));
+            this.nodeIncrease = Math.min(100, VisNetHandler.drainVis(WORLD, x, y, z, Aspect.ENTROPY, 125));
         }
     }
 
     @Override
     public boolean onRunningTick(ItemStack aStack) {
+        this.nodePurificationEfficiency = Math.max(0, this.nodePurificationEfficiency - 5);
         if (xstr.nextInt(10) == 0) {
             if (xstr.nextInt(100) < Math.max(100 - this.nodePurificationEfficiency, 0) - 1) {
                 final World WORLD = this.getBaseMetaTileEntity().getWorld();
@@ -406,7 +411,6 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             }
         }
         return super.onRunningTick(aStack);
-
     }
 
     @Override
