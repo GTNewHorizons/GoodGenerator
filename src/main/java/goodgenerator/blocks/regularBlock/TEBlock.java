@@ -2,6 +2,7 @@ package goodgenerator.blocks.regularBlock;
 
 import goodgenerator.blocks.tileEntity.EssentiaHatch;
 import goodgenerator.blocks.tileEntity.EssentiaOutputHatch;
+import goodgenerator.blocks.tileEntity.EssentiaOutputHatch_ME;
 import goodgenerator.main.GoodGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -141,6 +142,7 @@ public class TEBlock extends BlockContainer {
     public TileEntity createTileEntity(World world, int meta) {
         if (index == 1) return new EssentiaHatch();
         if (index == 2) return new EssentiaOutputHatch();
+        if (index == 3) return new EssentiaOutputHatch_ME();
         return null;
     }
 

@@ -11,7 +11,7 @@ public class LoadedList {
     public static boolean THAUMIC_BASES;
     public static boolean THAUMIC_TINKERER;
     public static boolean AUTOMAGY;
-//    public static boolean WITCHING_GADGETS;
+    public static boolean WITCHING_GADGETS;
 
     public static void init() {
         GTPP = Loader.isModLoaded("miscutils");
@@ -21,7 +21,7 @@ public class LoadedList {
         THAUMIC_BASES = Loader.isModLoaded("thaumicbases");
         THAUMIC_TINKERER = Loader.isModLoaded("ThaumicTinkerer");
         AUTOMAGY = Loader.isModLoaded("Automagy");
-//        WITCHING_GADGETS = Loader.isModLoaded("witchinggadgets");
+        WITCHING_GADGETS = Loader.isModLoaded("WitchingGadgets");
     }
 
 }

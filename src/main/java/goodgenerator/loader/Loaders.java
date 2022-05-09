@@ -95,6 +95,7 @@ public class Loaders {
     public static final Block essentiaFilterCasing = new Casing("essentiaFilterCasing", new String[]{GoodGenerator.MOD_ID + ":essentiaFilterCasing"});
     public static Block essentiaHatch;
     public static Block essentiaOutputHatch;
+    public static Block essentiaOutputHatch_ME;
 
     public static ItemStack MAR;
     public static ItemStack FRF;
@@ -202,15 +203,18 @@ public class Loaders {
             GameRegistry.registerItem(upgradeEssentia, "upgradeEssentia", GoodGenerator.MOD_ID);
             GameRegistry.registerTileEntity(EssentiaHatch.class, "EssentiaHatch");
             GameRegistry.registerTileEntity(EssentiaOutputHatch.class, "EssentiaOutputHatch");
+            GameRegistry.registerTileEntity(EssentiaOutputHatch_ME.class, "EssentiaOutputHatch_ME");
             Loaders.LEG = new LargeEssentiaGenerator(IDOffset + 1, "LargeEssentiaGenerator", "Large Essentia Generator").getStackForm(1L);
             Loaders.LES = new LargeEssentiaSmeltery(IDOffset + 23, "LargeEssentiaSmeltery", "Large Essentia Smeltery").getStackForm(1L);
             essentiaHatch = new TEBlock("essentiaHatch", new String[]{GoodGenerator.MOD_ID + ":essentiaHatch"}, 1);
-            essentiaOutputHatch = new TEBlock("essentiaOutputHatch", new String[]{GoodGenerator.MOD_ID + ":essentiaHatch"}, 2);
+            essentiaOutputHatch = new TEBlock("essentiaOutputHatch", new String[]{GoodGenerator.MOD_ID + ":essentiaOutputHatch"}, 2);
+            essentiaOutputHatch_ME = new TEBlock("essentiaOutputHatch_ME", new String[]{GoodGenerator.MOD_ID + ":essentiaOutputHatch_ME"}, 3);
             GameRegistry.registerBlock(magicCasing, MyItemBlocks.class, "magicCasing");
             GameRegistry.registerBlock(essentiaCell, MyItemBlocks.class, "essentiaCell");
             GameRegistry.registerBlock(essentiaHatch, MyItemBlocks.class, "essentiaHatch");
             GameRegistry.registerBlock(essentiaOutputHatch, MyItemBlocks.class, "essentiaOutputHatch");
             GameRegistry.registerBlock(essentiaFilterCasing, MyItemBlocks.class, "essentiaFilterCasing");
+            GameRegistry.registerBlock(essentiaOutputHatch_ME, MyItemBlocks.class, "essentiaOutputHatch_ME");
 
             Textures.BlockIcons.casingTexturePages[GoodGeneratorTexturePage][0] = TextureFactory.of(magicCasing);
         }

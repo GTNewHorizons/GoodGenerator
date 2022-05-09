@@ -155,6 +155,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             .addInfo("Necessary evil.")
             .addInfo("Advanced Essentia smelting technology.")
             .addInfo("Max parallel dictated by structure size and Essentia Diffusion Cell tier")
+            .addInfo("Minimum Energy Hatch tier: HV")
             .addInfo("You can find more information about this machine in the Thaumonomicon.")
             .addPollutionAmount(getPollutionPerSecond(null))
             .addInfo("The structure is too complex!")
@@ -219,6 +220,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
                 return false;
             } else if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Energy) {
                 ((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity).updateTexture(aBaseCasingIndex);
+                if (((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity).mTier < 3) return false;
                 return this.mEnergyHatches.add((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity);
             } else if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_EnergyMulti) {
                 ((GT_MetaTileEntity_Hatch_EnergyMulti) aMetaTileEntity).updateTexture(aBaseCasingIndex);
@@ -369,7 +371,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         super.onPostTick(aBaseMetaTileEntity, aTick);
-        if (aTick % 5 == 0) {
+        if (aTick % 5 == 0 && this.mMachine) {
             final World WORLD = this.getBaseMetaTileEntity().getWorld();
             int x = this.getBaseMetaTileEntity().getXCoord();
             int y = this.getBaseMetaTileEntity().getYCoord();
@@ -383,7 +385,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
 
             this.nodePurificationEfficiency = Math.max(0, this.nodePurificationEfficiency - 1);
             if (this.nodePurificationEfficiency < 100) {
-                this.nodePurificationEfficiency = (int) Math.max(100, this.nodePurificationEfficiency + Math.ceil(VisNetHandler.drainVis(WORLD, x, y, z, Aspect.ORDER, 100) * 0.05));
+                this.nodePurificationEfficiency = (int) Math.min(100, this.nodePurificationEfficiency + Math.ceil(VisNetHandler.drainVis(WORLD, x, y, z, Aspect.ORDER, 100) * 0.05));
             }
 
             this.nodeIncrease = Math.min(100, VisNetHandler.drainVis(WORLD, x, y, z, Aspect.ENTROPY, 125));

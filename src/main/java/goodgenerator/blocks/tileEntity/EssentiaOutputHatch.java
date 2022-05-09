@@ -13,11 +13,11 @@ import java.util.Map;
 
 public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContainer, IEssentiaTransport {
 
-    private static final int CAPACITY = 256;
-    private AspectList current = new AspectList();
+    public static final int CAPACITY = 256;
+    protected AspectList mAspects = new AspectList();
 
     public void clear() {
-        this.current.aspects.clear();
+        this.mAspects.aspects.clear();
     }
 
     @Override
@@ -30,24 +30,24 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
     @Override
     public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
-        this.current.aspects.clear();
+        this.mAspects.aspects.clear();
         NBTTagList tlist = nbttagcompound.getTagList("Aspects", 69);
         for (int j = 0; j < tlist.tagCount(); ++j) {
             NBTTagCompound rs = tlist.getCompoundTagAt(j);
-            if (rs.hasKey("key")) current.add(Aspect.getAspect(rs.getString("key")), rs.getInteger("amount"));
+            if (rs.hasKey("key")) mAspects.add(Aspect.getAspect(rs.getString("key")), rs.getInteger("amount"));
         }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
-        Aspect[] aspectA = this.current.getAspects();
+        Aspect[] aspectA = this.mAspects.getAspects();
         NBTTagList nbtTagList = new NBTTagList();
         for (Aspect aspect : aspectA) {
             if (aspect != null) {
                 NBTTagCompound f = new NBTTagCompound();
                 f.setString("key", aspect.getTag());
-                f.setInteger("amount", this.current.getAmount(aspect));
+                f.setInteger("amount", this.mAspects.getAmount(aspect));
                 nbtTagList.appendTag(f);
             }
         }
@@ -60,12 +60,12 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public AspectList getAspects() {
-        return this.current;
+        return this.mAspects;
     }
 
     @Override
     public void setAspects(AspectList aspectList) {
-        this.current.add(aspectList);
+        this.mAspects.add(aspectList);
     }
 
     @Override
@@ -75,12 +75,7 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public int addToContainer(Aspect aspect, int amount) {
-        int remaining = 0;
-        if (amount > this.remainingCapacity()) {
-            remaining = amount - this.remainingCapacity();
-            this.current.add(aspect, this.remainingCapacity());
-        } else this.current.add(aspect, amount);
-        return remaining;
+        return this.addEssentia(aspect, amount, null);
     }
 
     public boolean addToContainer(AspectList aspectList) {
@@ -102,8 +97,8 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public boolean takeFromContainer(Aspect aspect, int amount) {
-        if (this.current != null && this.current.getAmount(aspect) >= amount) {
-            this.current.remove(aspect, amount);
+        if (this.mAspects != null && this.mAspects.getAmount(aspect) >= amount) {
+            this.mAspects.remove(aspect, amount);
             return true;
         } else return false;
     }
@@ -115,7 +110,7 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public boolean doesContainerContainAmount(Aspect aspect, int amount) {
-        return this.current.getAmount(aspect) >= amount;
+        return this.mAspects.getAmount(aspect) >= amount;
     }
 
     @Override
@@ -125,7 +120,7 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public int containerContains(Aspect aspect) {
-        return this.current.getAmount(aspect);
+        return this.mAspects.getAmount(aspect);
     }
 
     @Override
@@ -164,17 +159,22 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public int addEssentia(Aspect aspect, int amount, ForgeDirection direction) {
-        return 0;
+        int remaining = 0;
+        if (amount > this.remainingCapacity()) {
+            remaining = amount - this.remainingCapacity();
+            this.mAspects.add(aspect, this.remainingCapacity());
+        } else this.mAspects.add(aspect, amount);
+        return remaining;
     }
 
     @Override
     public Aspect getEssentiaType(ForgeDirection var1) {
-        return this.current.size() > 0 ? this.current.getAspects()[this.worldObj.rand.nextInt(this.current.getAspects().length)] : null;
+        return this.mAspects.size() > 0 ? this.mAspects.getAspects()[this.worldObj.rand.nextInt(this.mAspects.getAspects().length)] : null;
     }
 
     @Override
     public int getEssentiaAmount(ForgeDirection var1) {
-        return this.current.visSize();
+        return this.mAspects.visSize();
     }
 
     @Override
