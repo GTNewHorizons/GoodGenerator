@@ -143,7 +143,6 @@ public class EssentiaOutputHatch_ME extends EssentiaOutputHatch implements IActi
     }
 
     public int addEssentia(Aspect aspect, int amount, ForgeDirection side, Actionable mode) {
-        if (mode == Actionable.SIMULATE) return 0;
         long rejectedAmount = amount;
         if (this.getEssentiaMonitor()) {
             rejectedAmount = this.monitor.injectEssentia(aspect, amount, mode, this.getMachineSource(), true);
