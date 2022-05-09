@@ -281,6 +281,12 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
         this.mEfficiency = 10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000;
         this.mEfficiencyIncrease = 10000;
 
+        final World WORLD = this.getBaseMetaTileEntity().getWorld();
+        int x = this.getBaseMetaTileEntity().getXCoord();
+        int y = this.getBaseMetaTileEntity().getYCoord();
+        int z = this.getBaseMetaTileEntity().getZCoord();
+
+        this.drainNodePower(WORLD, x, y, z);
         this.nodePower -= expectedPower();
 
         calculatePerfectOverclockedNessMulti(RECIPE_EUT, (int) Math.ceil(this.mOutputAspects.visSize() * RECIPE_DURATION * (1 - this.nodeIncrease * 0.005)), 1, Math.min(Integer.MAX_VALUE, getMaxInputEnergy_EM()));
@@ -368,6 +374,14 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
         this.mOutputAspects.aspects.clear();
     }
 
+    private void drainNodePower(World world, int x, int y, int z) {
+        int power = this.expectedPower();
+        if (this.nodePower < power * 10) {
+            this.nodePower += VisNetHandler.drainVis(world, x, y, z, Aspect.WATER, power);
+            this.nodePower += VisNetHandler.drainVis(world, x, y, z, Aspect.FIRE, power);
+        }
+    }
+
     @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         super.onPostTick(aBaseMetaTileEntity, aTick);
@@ -377,11 +391,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             int y = this.getBaseMetaTileEntity().getYCoord();
             int z = this.getBaseMetaTileEntity().getZCoord();
 
-            int power = this.expectedPower();
-            if (this.nodePower < power * 10) {
-                this.nodePower += VisNetHandler.drainVis(WORLD, x, y, z, Aspect.WATER, power);
-                this.nodePower += VisNetHandler.drainVis(WORLD, x, y, z, Aspect.FIRE, power);
-            }
+            this.drainNodePower(WORLD, x, y, z);
 
             this.nodePurificationEfficiency = Math.max(0, this.nodePurificationEfficiency - 1);
             if (this.nodePurificationEfficiency < 100) {
