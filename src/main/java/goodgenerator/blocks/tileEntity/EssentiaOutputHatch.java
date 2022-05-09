@@ -65,7 +65,9 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public void setAspects(AspectList aspectList) {
-        this.mAspects.add(aspectList);
+        for (Map.Entry<Aspect, Integer> entry : aspectList.aspects.entrySet()) {
+            this.addEssentia(entry.getKey(), entry.getValue(), null);
+        }
     }
 
     @Override
@@ -75,30 +77,20 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public int addToContainer(Aspect aspect, int amount) {
-        return this.addEssentia(aspect, amount, null);
-    }
-
-    public boolean addToContainer(AspectList aspectList) {
-        if (aspectList.visSize() > this.remainingCapacity()) {
-            for (Map.Entry<Aspect, Integer> entry : aspectList.copy().aspects.entrySet()) {
-                Aspect aspect = entry.getKey();
-                int amount = entry.getValue();
-                int remaining = addToContainer(aspect, amount);
-                if (remaining != 0) {
-                    aspectList.reduce(aspect, remaining);
-                    this.markDirty();
-                    return false;
-                } else aspectList.remove(aspect);
-            }
-        } else this.setAspects(aspectList);
+        int remaining = 0;
+        if (amount > this.remainingCapacity()) {
+            remaining = amount - this.remainingCapacity();
+            this.mAspects.add(aspect, this.remainingCapacity());
+        } else this.mAspects.add(aspect, amount);
         this.markDirty();
-        return true;
+        return remaining;
     }
 
     @Override
     public boolean takeFromContainer(Aspect aspect, int amount) {
         if (this.mAspects != null && this.mAspects.getAmount(aspect) >= amount) {
             this.mAspects.remove(aspect, amount);
+            this.markDirty();
             return true;
         } else return false;
     }
@@ -159,12 +151,7 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public int addEssentia(Aspect aspect, int amount, ForgeDirection direction) {
-        int remaining = 0;
-        if (amount > this.remainingCapacity()) {
-            remaining = amount - this.remainingCapacity();
-            this.mAspects.add(aspect, this.remainingCapacity());
-        } else this.mAspects.add(aspect, amount);
-        return remaining;
+        return amount - addToContainer(aspect, amount);
     }
 
     @Override

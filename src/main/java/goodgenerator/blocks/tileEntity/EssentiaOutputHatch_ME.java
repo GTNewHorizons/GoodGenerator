@@ -128,13 +128,6 @@ public class EssentiaOutputHatch_ME extends EssentiaOutputHatch implements IActi
     }
 
     @Override
-    public void setAspects(AspectList aspectList) {
-        for (Map.Entry<Aspect, Integer> entry : aspectList.aspects.entrySet()) {
-            this.addEssentia(entry.getKey(), entry.getValue(), null);
-        }
-    }
-
-    @Override
     public boolean takeFromContainer(AspectList aspects) {
         return false;
     }

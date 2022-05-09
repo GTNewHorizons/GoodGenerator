@@ -26,6 +26,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.visnet.VisNetHandler;
@@ -33,6 +34,7 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static goodgenerator.util.DescTextLocalization.BLUE_PRINT_INFO;
@@ -52,8 +54,8 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     private static final int DEFAULT_STRUCTURE_LENGTH = 3;
     private static final int MAX_CONFIGURABLE_LENGTH = MAX_STRUCTURE_LENGTH - DEFAULT_STRUCTURE_LENGTH;
 
-    private static final int RECIPE_DURATION = 256;
-    private static final int RECIPE_EUT = 120;
+    private static final int RECIPE_DURATION = 32;
+    private static final int RECIPE_EUT = 480;
     private static final float NODE_COST_MULTIPLIER = 1.15f;
 
     public AspectList mOutputAspects = new AspectList();
@@ -96,6 +98,9 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
         this.mCasing = 0;
         this.mParallel = 0;
         this.pTier = 0;
+        this.nodePower = 0;
+        this.nodePurificationEfficiency = 0;
+        this.nodeIncrease = 0;
         this.mEssentiaOutputHatches.clear();
 
         if (!structureCheck_EM(STRUCTURE_PIECE_FIRST, 2, 2, 0)) return false;
@@ -155,7 +160,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             .addInfo("Necessary evil.")
             .addInfo("Advanced Essentia smelting technology.")
             .addInfo("Max parallel dictated by structure size and Essentia Diffusion Cell tier")
-            .addInfo("Minimum Energy Hatch tier: HV")
+            .addInfo("Energy Hatch tier: HV+")
             .addInfo("You can find more information about this machine in the Thaumonomicon.")
             .addPollutionAmount(getPollutionPerSecond(null))
             .addInfo("The structure is too complex!")
@@ -181,7 +186,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     @Override
     public String[] getInfoData() {
         String[] info = super.getInfoData();
-        info[8] = "Node Power: " + EnumChatFormatting.RED + this.nodePower * 100 / this.expectedPower() + "%" + EnumChatFormatting.RESET + " Purification Efficiency: " + EnumChatFormatting.AQUA + this.nodePurificationEfficiency + "%" + EnumChatFormatting.RESET + " Speed Up: " + EnumChatFormatting.GRAY + this.nodeIncrease + "%" + EnumChatFormatting.RESET;
+        info[8] = "Node Power: " + EnumChatFormatting.RED + this.nodePower + EnumChatFormatting.RESET + " Purification Efficiency: " + EnumChatFormatting.AQUA + this.nodePurificationEfficiency + "%" + EnumChatFormatting.RESET + " Speed Up: " + EnumChatFormatting.GRAY + this.nodeIncrease + "%" + EnumChatFormatting.RESET;
         return info;
     }
 
@@ -219,8 +224,8 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             if (aMetaTileEntity == null) {
                 return false;
             } else if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Energy) {
-                ((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity).updateTexture(aBaseCasingIndex);
                 if (((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity).mTier < 3) return false;
+                ((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity).updateTexture(aBaseCasingIndex);
                 return this.mEnergyHatches.add((GT_MetaTileEntity_Hatch_Energy) aMetaTileEntity);
             } else if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_EnergyMulti) {
                 ((GT_MetaTileEntity_Hatch_EnergyMulti) aMetaTileEntity).updateTexture(aBaseCasingIndex);
@@ -258,21 +263,17 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             ItemStack itemStack = tInputList.get(i);
             int stackSize = itemStack.stackSize;
             int sur = p - stackSize;
-            AspectList temp;
 
             if (sur > 0) {
                 p -= stackSize;
-                temp = getEssentia(itemStack, stackSize);
-                this.mOutputAspects.add(temp);
+                this.mOutputAspects.add(getEssentia(itemStack, stackSize));
                 if (!depleteInput(itemStack)) itemStack.stackSize = -1;
             } else if (sur == 0) {
-                temp = getEssentia(itemStack, stackSize);
-                this.mOutputAspects.add(temp);
+                this.mOutputAspects.add(getEssentia(itemStack, stackSize));
                 if (!depleteInput(itemStack)) itemStack.stackSize = -1;
                 break;
             } else {
-                temp = getEssentia(itemStack, p);
-                this.mOutputAspects.add(temp);
+                this.mOutputAspects.add(getEssentia(itemStack, p));
                 itemStack.stackSize -= p;
                 break;
             }
@@ -306,8 +307,12 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     }
 
     private void fillEssentiaOutputHatch() {
-        for (int i = 0; i < this.mEssentiaOutputHatches.size(); i++) {
-            if (this.mEssentiaOutputHatches.get(i).addToContainer(this.mOutputAspects)) break;
+        for (EssentiaOutputHatch outputHatch : this.mEssentiaOutputHatches) {
+            for (Map.Entry<Aspect, Integer> entry : this.mOutputAspects.aspects.entrySet()) {
+                Aspect aspect = entry.getKey();
+                int amount = entry.getValue();
+                this.mOutputAspects.remove(aspect, outputHatch.addEssentia(aspect, amount, null));
+            }
         }
         this.mOutputAspects.aspects.clear();
     }
@@ -405,20 +410,31 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     @Override
     public boolean onRunningTick(ItemStack aStack) {
         this.nodePurificationEfficiency = Math.max(0, this.nodePurificationEfficiency - 5);
-        if (xstr.nextInt(10) == 0) {
-            if (xstr.nextInt(100) < Math.max(100 - this.nodePurificationEfficiency, 0) - 1) {
+        if (xstr.nextInt(20) == 0) {
+            if (xstr.nextInt(100) < Math.max(100 - this.nodePurificationEfficiency, 0)) {
                 final World WORLD = this.getBaseMetaTileEntity().getWorld();
                 GT_MetaTileEntity_Hatch_Muffler mufflerHatch = this.mMufflerHatches.get(xstr.next(this.mMufflerHatches.size()));
                 int x = mufflerHatch.getBaseMetaTileEntity().getXCoord();
                 int y = mufflerHatch.getBaseMetaTileEntity().getYCoord();
                 int z = mufflerHatch.getBaseMetaTileEntity().getZCoord();
 
-                if (mufflerHatch.isFacingValid((byte) 2)) z -= 1;
-                else if (mufflerHatch.isFacingValid((byte) 3)) z += 1;
-                else if (mufflerHatch.isFacingValid((byte) 4)) x -= 1;
-                else if (mufflerHatch.isFacingValid((byte) 5)) x += 1;
-                else y += 1;
-
+                ForgeDirection facing = ForgeDirection.getOrientation(mufflerHatch.getBaseMetaTileEntity().getFrontFacing());
+                switch (facing) {
+                    case SOUTH:
+                        z += 1;
+                        break;
+                    case NORTH:
+                        z -= 1;
+                        break;
+                    case WEST:
+                        x -= 1;
+                        break;
+                    case EAST:
+                        x += 1;
+                        break;
+                    default:
+                        y += 1;
+                }
                 if (WORLD.getBlock(x, y, z) instanceof BlockAir) generateFluxGas(WORLD, x, y, z);
             }
         }
