@@ -140,10 +140,16 @@ public class TEBlock extends BlockContainer {
 
     @Override
     public TileEntity createTileEntity(World world, int meta) {
-        if (index == 1) return new EssentiaHatch();
-        if (index == 2) return new EssentiaOutputHatch();
-        if (index == 3) return new EssentiaOutputHatch_ME();
-        return null;
+        switch (index) {
+            case 1:
+                return new EssentiaHatch();
+            case 2:
+                return new EssentiaOutputHatch();
+            case 3:
+                return new EssentiaOutputHatch_ME();
+            default:
+                return null;
+        }
     }
 
     @Override

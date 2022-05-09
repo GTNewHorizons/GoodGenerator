@@ -267,10 +267,10 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             if (sur > 0) {
                 p -= stackSize;
                 this.mOutputAspects.add(getEssentia(itemStack, stackSize));
-                if (!depleteInput(itemStack)) itemStack.stackSize = -1;
+                if (!depleteInput(itemStack)) itemStack.stackSize = 0;
             } else if (sur == 0) {
                 this.mOutputAspects.add(getEssentia(itemStack, stackSize));
-                if (!depleteInput(itemStack)) itemStack.stackSize = -1;
+                if (!depleteInput(itemStack)) itemStack.stackSize = 0;
                 break;
             } else {
                 this.mOutputAspects.add(getEssentia(itemStack, p));

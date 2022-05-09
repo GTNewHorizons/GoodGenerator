@@ -106,8 +106,11 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
     }
 
     @Override
-    public boolean doesContainerContain(AspectList var1) {
-        return false;
+    public boolean doesContainerContain(AspectList aspectList) {
+        for (Map.Entry<Aspect, Integer> entry : aspectList.aspects.entrySet()) {
+            if (this.mAspects.getAmount(entry.getKey()) < entry.getValue()) return false;
+        }
+        return true;
     }
 
     @Override
@@ -146,7 +149,7 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public int takeEssentia(Aspect aspect, int amount, ForgeDirection var3) {
-        return this.canOutputTo(null) && this.takeFromContainer(aspect, amount) ? amount : 0;
+        return this.takeFromContainer(aspect, amount) ? amount : 0;
     }
 
     @Override
@@ -156,7 +159,7 @@ public class EssentiaOutputHatch extends TileThaumcraft implements IAspectContai
 
     @Override
     public Aspect getEssentiaType(ForgeDirection var1) {
-        return this.mAspects.size() > 0 ? this.mAspects.getAspects()[this.worldObj.rand.nextInt(this.mAspects.getAspects().length)] : null;
+        return this.mAspects.size() > 0 ? this.mAspects.getAspects()[0] : null;
     }
 
     @Override
