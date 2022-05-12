@@ -1031,7 +1031,7 @@ public class RecipeLoader {
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[]{
                         GT_Utility.getIntegratedCircuit(16),
-                        GT_OreDictUnificator.get(OrePrefixes.dust,Materials.PotassiumNitrade,2)
+                        GT_OreDictUnificator.get(OrePrefixes.dust,Materials.Saltpeter,2)
                 },
                 new FluidStack[]{
                         FluidRegistry.getFluidStack("liquidoxygen",1000),
@@ -1083,7 +1083,7 @@ public class RecipeLoader {
             GT_Values.RA.addMultiblockChemicalRecipe(
                     new ItemStack[]{
                             GT_Utility.getIntegratedCircuit(16),
-                            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.PotassiumNitrade, 2)
+                            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 2)
                     },
                     new FluidStack[]{
                             FluidRegistry.getFluidStack("fluid.hydrogenperoxide", 1000),
@@ -1136,7 +1136,7 @@ public class RecipeLoader {
             GT_Values.RA.addMultiblockChemicalRecipe(
                     new ItemStack[]{
                             GT_Utility.getIntegratedCircuit(16),
-                            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.PotassiumNitrade, 2)
+                            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 2)
                     },
                     new FluidStack[]{
                             FluidRegistry.getFluidStack("hydrogen peroxide", 1000),
