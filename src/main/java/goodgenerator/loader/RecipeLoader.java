@@ -1031,23 +1031,6 @@ public class RecipeLoader {
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[]{
                         GT_Utility.getIntegratedCircuit(16),
-                        GT_OreDictUnificator.get(OrePrefixes.dust,Materials.Saltpeter,2)
-                },
-                new FluidStack[]{
-                        FluidRegistry.getFluidStack("liquidoxygen",1000),
-                        Materials.NitrogenDioxide.getGas(1000)
-                },
-                new FluidStack[]{
-                        FluidRegistry.getFluidStack("combustionpromotor",500)
-                },
-                null,
-                200,
-                120
-        );
-
-        GT_Values.RA.addMultiblockChemicalRecipe(
-                new ItemStack[]{
-                        GT_Utility.getIntegratedCircuit(16),
                         WerkstoffLoader.SodiumNitrate.get(OrePrefixes.dust,2)
                 },
                 new FluidStack[]{
@@ -1063,23 +1046,6 @@ public class RecipeLoader {
         );
 
         if (LoadedList.GTPP) {
-            GT_Values.RA.addMultiblockChemicalRecipe(
-                    new ItemStack[]{
-                            GT_Utility.getIntegratedCircuit(16),
-                            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 2)
-                    },
-                    new FluidStack[]{
-                            FluidRegistry.getFluidStack("fluid.hydrogenperoxide", 1000),
-                            Materials.NitrogenDioxide.getGas(1000)
-                    },
-                    new FluidStack[]{
-                            FluidRegistry.getFluidStack("combustionpromotor", 2000)
-                    },
-                    null,
-                    200,
-                    120
-            );
-
             GT_Values.RA.addMultiblockChemicalRecipe(
                     new ItemStack[]{
                             GT_Utility.getIntegratedCircuit(16),
