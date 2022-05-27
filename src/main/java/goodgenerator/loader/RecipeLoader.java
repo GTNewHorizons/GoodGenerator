@@ -1098,24 +1098,7 @@ public class RecipeLoader {
                     200,
                     120
             );
-
-            GT_Values.RA.addMultiblockChemicalRecipe(
-                    new ItemStack[]{
-                            GT_Utility.getIntegratedCircuit(16),
-                            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 2)
-                    },
-                    new FluidStack[]{
-                            FluidRegistry.getFluidStack("hydrogen peroxide", 1000),
-                            Materials.NitrogenDioxide.getGas(1000)
-                    },
-                    new FluidStack[]{
-                            FluidRegistry.getFluidStack("combustionpromotor", 2000)
-                    },
-                    null,
-                    200,
-                    120
-            );
-
+            
             GT_Values.RA.addMultiblockChemicalRecipe(
                     new ItemStack[]{
                             GT_Utility.getIntegratedCircuit(16),
