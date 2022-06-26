@@ -731,7 +731,7 @@ public class MyMaterial implements Runnable {
             new short[]{0x33,0x33,0x33},
             "Naquadahine",
             subscriptNumbers("NqO2"),
-            new Werkstoff.Stats().setElektrolysis(true),
+            new Werkstoff.Stats().setElektrolysis(false),
             Werkstoff.Types.COMPOUND,
             new Werkstoff.GenerationFeatures().disable().onlyDust(),
             OffsetID + 62,

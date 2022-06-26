@@ -55,7 +55,7 @@ public class NaquadahReworkRecipeLoader {
                 GT_Utility.getIntegratedCircuit(1),
                 fluoroantimonicAcid.getFluidOrGas(3000),
                 lowQualityNaquadahEmulsion.getFluidOrGas(2000),
-                titaniumTrifluoride.get(OrePrefixes.dust, 1),
+                titaniumTrifluoride.get(OrePrefixes.dust, 4),
                 null,
                 100,
                 480,
