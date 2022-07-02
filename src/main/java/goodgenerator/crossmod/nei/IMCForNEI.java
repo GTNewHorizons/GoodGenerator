@@ -1,6 +1,7 @@
 package goodgenerator.crossmod.nei;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
+import goodgenerator.crossmod.LoadedList;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class IMCForNEI {
@@ -18,13 +19,17 @@ public class IMCForNEI {
         sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32019", -10);
         sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32020", -10);
         sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32021", -10);
-        sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32022", -10);
+        if (LoadedList.GTPP) {
+            sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32022", -10);
+        }
 //        sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32023", -10); // Compact Fusion MK-V
 
         sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32019", -10);
         sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32020", -10);
         sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32021", -10);
-        sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32022", -10);
+        if (LoadedList.GTPP) {
+            sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32022", -10);
+        }
 //        sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32023", -10); // Compact Fusion MK-V
     }
 
