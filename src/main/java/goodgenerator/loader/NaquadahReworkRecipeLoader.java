@@ -469,7 +469,7 @@ public class NaquadahReworkRecipeLoader {
         );
 
         GT_Values.RA.addBlastRecipe(
-                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Silicon, 16),
+                GT_OreDictUnificator.get(OrePrefixes.block, Materials.SiliconSG, 16),
                 naquadahine.get(OrePrefixes.dust, 3),
                 Materials.Argon.getGas(8000),
                 null,
