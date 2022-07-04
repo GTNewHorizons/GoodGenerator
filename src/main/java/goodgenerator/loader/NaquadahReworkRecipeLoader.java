@@ -199,10 +199,11 @@ public class NaquadahReworkRecipeLoader {
                 GT_Utility.getIntegratedCircuit(1),
                 lowQualityNaquadahEmulsion.getFluidOrGas(10000),
                 lowQualityNaquadahSolution.getFluidOrGas(9000),
-                galliumHydroxide.get(OrePrefixes.dust, 16),
+                galliumHydroxide.get(OrePrefixes.dust, 64),
+                galliumHydroxide.get(OrePrefixes.dust, 48),
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Antimony, 15),
-                null,null,null, null,
-                new int[]{6250, 10000},
+                null,null, null,
+                new int[]{6250, 6250, 10000},
                 1000,
                 1920
         );
@@ -274,8 +275,9 @@ public class NaquadahReworkRecipeLoader {
                         enrichedNaquadahSulphate.get(OrePrefixes.dust, 64),
                         enrichedNaquadahSulphate.get(OrePrefixes.dust, 64),
                         enrichedNaquadahSulphate.get(OrePrefixes.dust, 37),
-                        WerkstoffLoader.Sodiumsulfate.get(OrePrefixes.dust, 20),
-                        lowQualityNaquadriaSulphate.get(OrePrefixes.dust, 2)
+                        WerkstoffLoader.Sodiumsulfate.get(OrePrefixes.dust, 64),
+                        WerkstoffLoader.Sodiumsulfate.get(OrePrefixes.dust, 64),
+                        WerkstoffLoader.Sodiumsulfate.get(OrePrefixes.dust, 12),
                 },
                 120,
                 480,
@@ -326,14 +328,14 @@ public class NaquadahReworkRecipeLoader {
                 122880
         );
 
-        //Ga(OH)2 + 2Na = Ga + 2NaOH
+        //Ga(OH)3 + 3Na = Ga + 3NaOH
         GT_Values.RA.addChemicalRecipe(
-                galliumHydroxide.get(OrePrefixes.dust, 5),
+                galliumHydroxide.get(OrePrefixes.dust, 7),
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 2),
                 null,
                 null,
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Gallium, 1),
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 6),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 9),
                 40,
                 30
         );
@@ -410,10 +412,10 @@ public class NaquadahReworkRecipeLoader {
                 9100
         );
 
-        //InPO4 + Ga(OH)2 = InGaP
+        //InPO4 + Ga(OH)3 = InGaP
         GT_Values.RA.addMixerRecipe(
                 indiumPhosphate.get(OrePrefixes.dust, 6),
-                galliumHydroxide.get(OrePrefixes.dust, 5),
+                galliumHydroxide.get(OrePrefixes.dust, 7),
                 GT_Utility.getIntegratedCircuit(2),
                 null,
                 null,
@@ -499,7 +501,7 @@ public class NaquadahReworkRecipeLoader {
                 null,
                 null,
                 Materials.Naquadah.getDust(1),
-                sodiumOxide.get(OrePrefixes.dust, 6),
+                Materials.SodiumOxide.getDust(6),
                 100,
                 1920
         );

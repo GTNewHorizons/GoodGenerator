@@ -1282,19 +1282,6 @@ public class MyMaterial implements Runnable {
         TextureSet.SET_FLUID
     );
 
-    public static final Werkstoff sodiumOxide = new Werkstoff(
-        new short[]{0x22,0x5f,0xd1},
-        "Sodium Oxide",
-        subscriptNumbers("Na2O"),
-        new Werkstoff.Stats().setElektrolysis(true),
-        Werkstoff.Types.COMPOUND,
-        new Werkstoff.GenerationFeatures().disable().onlyDust(),
-        OffsetID + 107,
-        TextureSet.SET_SHINY,
-        new Pair<>(Sodium, 2),
-        new Pair<>(Oxygen, 1)
-    );
-
     public static final Werkstoff magnesiumSulphate = new Werkstoff(
         new short[]{0x87,0x74,0x91},
         "Magnesium Sulphate",
@@ -1302,9 +1289,9 @@ public class MyMaterial implements Runnable {
         new Werkstoff.Stats().setElektrolysis(true),
         Werkstoff.Types.COMPOUND,
         new Werkstoff.GenerationFeatures().disable().onlyDust(),
-        OffsetID + 108,
+        OffsetID + 107,
         TextureSet.SET_DULL,
-        new Pair<>(Magnesium, 2),
+        new Pair<>(Magnesium, 1),
         new Pair<>(Sulfur, 1),
         new Pair<>(Oxygen, 4)
     );

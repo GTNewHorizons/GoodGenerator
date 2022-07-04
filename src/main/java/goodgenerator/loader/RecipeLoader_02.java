@@ -718,12 +718,12 @@ public class RecipeLoader_02 {
             120
         );
 
-        //NH3 + 2C2H6O = C4H11N + H2O + 2H
+        //NH3 + 2C2H6O = C4H11N + 2H2O
         GT_Values.RA.addChemicalRecipe(
             Materials.Ammonia.getCells(1),
             GT_Utility.getIntegratedCircuit(1),
             Materials.Ethanol.getFluid(2000),
-            Materials.Hydrogen.getGas(2000),
+            Materials.Water.getFluid(2000),
             MyMaterial.diethylamine.get(OrePrefixes.cell, 1),
             200,
             120

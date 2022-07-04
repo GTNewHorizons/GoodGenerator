@@ -295,7 +295,7 @@ public class RecipeLoader {
                 120
         );
 
-        //Th(OH)4 + 4HF = ThF4 + H2O
+        //Th(OH)4 + 4HF = ThF4 + 4H2O
         GT_Values.RA.addChemicalRecipe(
                 MyMaterial.thoriumHydroxide.get(OrePrefixes.dust,9),
                 GT_Utility.getIntegratedCircuit(1),
@@ -532,7 +532,7 @@ public class RecipeLoader {
                 30
         );
 
-        //SbCl3 + 2Cl = SbCl4
+        //SbCl3 + 2Cl = SbCl5
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[]{
                         GT_Utility.getIntegratedCircuit(1),
