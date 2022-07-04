@@ -236,7 +236,7 @@ public class RecipeLoader {
         //Th-232
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[]{
-                        GT_OreDictUnificator.get(OrePrefixes.dust,Materials.Sugar,16),
+                        GT_OreDictUnificator.get(OrePrefixes.dust,Materials.Sugar,24),
                         MyMaterial.vanadiumPentoxide.get(OrePrefixes.dust,0),
                         GT_Utility.getIntegratedCircuit(1)
                 },

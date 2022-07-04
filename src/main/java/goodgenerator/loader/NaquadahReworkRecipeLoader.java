@@ -240,7 +240,7 @@ public class NaquadahReworkRecipeLoader {
         );
 
         GT_Values.RA.addAutoclaveRecipe(
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 27),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 60),
                 null,
                 enrichedNaquadahRichSolution.getFluidOrGas(10000),
                 P507.getFluidOrGas(2500),
@@ -250,20 +250,6 @@ public class NaquadahReworkRecipeLoader {
                 480,
                 false
         );
-
-        if (LoadedList.GTNH_CORE) {
-            GT_Values.RA.addAutoclaveRecipe(
-                    GT_ModHandler.getModItem("dreamcraft", "item.PotassiumHydroxideDust", 5),
-                    null,
-                    enrichedNaquadahRichSolution.getFluidOrGas(5000),
-                    P507.getFluidOrGas(1250),
-                    concentratedEnrichedNaquadahSludge.get(OrePrefixes.dust, 4),
-                    10000,
-                    500,
-                    480,
-                    false
-            );
-        }
 
         MyRecipeAdder.instance.addNeutronActivatorRecipe(
                 null,
@@ -484,7 +470,7 @@ public class NaquadahReworkRecipeLoader {
 
         GT_Values.RA.addBlastRecipe(
                 GT_OreDictUnificator.get(OrePrefixes.block, Materials.Silicon, 16),
-                naquadahine.get(OrePrefixes.dust, 1),
+                naquadahine.get(OrePrefixes.dust, 3),
                 Materials.Argon.getGas(8000),
                 null,
                 ItemList.Circuit_Silicon_Ingot3.get(1),
