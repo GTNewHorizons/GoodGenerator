@@ -385,7 +385,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
         this.nodeIncrease = aNBT.getInteger("nodeIncrease");
 
         this.mOutputAspects.aspects.clear();
-        NBTTagList tlist = aNBT.getTagList("Aspects", 69);
+        NBTTagList tlist = aNBT.getTagList("Aspects", 10);
         for (int j = 0; j < tlist.tagCount(); ++j) {
             NBTTagCompound rs = tlist.getCompoundTagAt(j);
             if (rs.hasKey("key"))
