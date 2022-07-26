@@ -23,6 +23,6 @@ public class LoadedList {
         THAUMIC_TINKERER = Loader.isModLoaded("ThaumicTinkerer");
         AUTOMAGY = Loader.isModLoaded("Automagy");
         WITCHING_GADGETS = Loader.isModLoaded("WitchingGadgets");
-        WITCHING_GADGETS = Loader.isModLoaded("thaumicenergistics");
+        THAUMIC_ENERGISTICS = Loader.isModLoaded("thaumicenergistics");
     }
 }
