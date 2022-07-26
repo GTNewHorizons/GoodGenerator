@@ -445,7 +445,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             if (xstr.nextInt(100) < Math.max(100 - this.nodePurificationEfficiency, 0)) {
                 final World WORLD = this.getBaseMetaTileEntity().getWorld();
                 GT_MetaTileEntity_Hatch_Muffler mufflerHatch =
-                        this.mMufflerHatches.get(xstr.next(this.mMufflerHatches.size()));
+                        this.mMufflerHatches.get(xstr.nextInt(this.mMufflerHatches.size()));
                 int x = mufflerHatch.getBaseMetaTileEntity().getXCoord();
                 int y = mufflerHatch.getBaseMetaTileEntity().getYCoord();
                 int z = mufflerHatch.getBaseMetaTileEntity().getZCoord();
