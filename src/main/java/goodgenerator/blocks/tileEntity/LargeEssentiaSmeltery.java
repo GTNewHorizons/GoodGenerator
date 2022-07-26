@@ -327,6 +327,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     private AspectList getEssentia(ItemStack itemStack, int amount) {
         AspectList aspectList = new AspectList();
         AspectList aspects = ThaumcraftCraftingManager.getObjectTags(itemStack);
+        aspects = ThaumcraftCraftingManager.getBonusTags(itemStack, aspects);
         if (aspects != null && aspects.size() != 0 && aspects.getAspects()[0] != null) {
             for (int i = 0; i < amount; i++) aspectList.add(aspects);
         } else aspectList.add(Aspect.ENTROPY, amount);
