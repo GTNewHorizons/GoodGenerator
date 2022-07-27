@@ -1,0 +1,52 @@
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Build and test
+
+on:
+  workflow_call:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Environment
+        if: env.INPUT_TIMEOUT == 0
+        run: env.INPUT_TIMEOUT = 90
+      - name: Checkout mod repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Checkout workflows repo
+        uses: actions/checkout@v3
+        with:
+          repository: GTNewHorizons/GTNH-Actions-Workflows
+          path: .gtnh-workflows
+          fetch-depth: 0
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Setup the workspace
+        run: ./gradlew setupCIWorkspace
+
+      - name: Build the mod
+        run: ./gradlew build
+
+      - name: Run server for ${{ env.INPUT_TIMEOUT }} seconds
+        run: |
+          mkdir run
+          echo "eula=true" > run/eula.txt
+          timeout ${{ env.INPUT_TIMEOUT }} ./gradlew runServer 2>&1 | tee -a server.log || true
+
+      - name: Test no errors reported during server run
+        run: |
+          chmod +x .gtnh-workflows/scripts/test_no_error_reports
+          .gtnh-workflows/scripts/test_no_error_reports
