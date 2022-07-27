@@ -10,9 +10,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Environment
-        if: env.INPUT_TIMEOUT == 0
-        run: env.INPUT_TIMEOUT = 90
       - name: Checkout mod repo
         uses: actions/checkout@v2
         with:
