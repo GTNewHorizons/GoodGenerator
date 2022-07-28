@@ -43,11 +43,11 @@ jobs:
       - name: Build the mod
         run: ./gradlew build
 
-      - name: Run server for ${{ env.INPUT_TIMEOUT }} seconds
+      - name: Run server for ${{ inputs.timeout }} seconds
         run: |
           mkdir run
           echo "eula=true" > run/eula.txt
-          timeout ${{ env.INPUT_TIMEOUT }} ./gradlew runServer 2>&1 | tee -a server.log || true
+          timeout ${{ inputs.timeout }} ./gradlew runServer 2>&1 | tee -a server.log || true
 
       - name: Test no errors reported during server run
         run: |
