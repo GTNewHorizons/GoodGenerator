@@ -11,5 +11,3 @@ jobs:
   build-and-test:
     uses: GTNewHorizons/GoodGenerator/.github/workflows/test.yml@test2
     secrets: inherit
-    with:
-      timeout: 240
