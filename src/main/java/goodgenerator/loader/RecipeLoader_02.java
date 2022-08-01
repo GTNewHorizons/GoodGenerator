@@ -365,117 +365,115 @@ public class RecipeLoader_02 {
                 400,
                 520000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.Fluid_Storage_Core_T5.get(1),
-            160000,
-            new Object[] {
-                GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 4),
-                ItemList.Electric_Pump_LuV.get(8),
-                ItemList.Quantum_Tank_EV.get(16),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32),
-                GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
-                ItemList.Machine_IV_Compressor.get(64)
-            },
-            new FluidStack[] {
-                Materials.Draconium.getMolten(2304),
-                Materials.Titanium.getMolten(288),
-                Materials.Lubricant.getFluid(64000)
-            },
-            ItemRefer.Fluid_Storage_Core_T6.get(1),
-            400,
-            2090000);
+                ItemRefer.Fluid_Storage_Core_T5.get(1),
+                160000,
+                new Object[] {
+                    GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 4),
+                    ItemList.Electric_Pump_LuV.get(8),
+                    ItemList.Quantum_Tank_EV.get(16),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32),
+                    GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
+                    ItemList.Machine_IV_Compressor.get(64)
+                },
+                new FluidStack[] {
+                    Materials.Draconium.getMolten(2304),
+                    Materials.Titanium.getMolten(288),
+                    Materials.Lubricant.getFluid(64000)
+                },
+                ItemRefer.Fluid_Storage_Core_T6.get(1),
+                400,
+                2090000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.Fluid_Storage_Core_T6.get(1),
-            320000,
-            new Object[] {
-                GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
-                ItemList.Electric_Pump_ZPM.get(8),
-                GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 1L, 0),
-                ItemList.Quantum_Tank_EV.get(32),
-                GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 8),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.InfinityCatalyst, 8),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
-            },
-            new FluidStack[] {
-                Materials.Draconium.getMolten(23040),
-                new FluidStack(solderIndalloy, 2304),
-                Materials.InfinityCatalyst.getMolten(1140)
-            },
-            ItemRefer.Fluid_Storage_Core_T7.get(1),
-            400,
-            8300000);
+                ItemRefer.Fluid_Storage_Core_T6.get(1),
+                320000,
+                new Object[] {
+                    GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
+                    ItemList.Electric_Pump_ZPM.get(8),
+                    GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 1L, 0),
+                    ItemList.Quantum_Tank_EV.get(32),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.InfinityCatalyst, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
+                },
+                new FluidStack[] {
+                    Materials.Draconium.getMolten(23040),
+                    new FluidStack(solderIndalloy, 2304),
+                    Materials.InfinityCatalyst.getMolten(1140)
+                },
+                ItemRefer.Fluid_Storage_Core_T7.get(1),
+                400,
+                8300000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.Fluid_Storage_Core_T7.get(1),
-            640000,
-            new Object[] {
-                GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
-                ItemList.Electric_Pump_UV.get(8),
-                GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 2L, 0),
-                ItemList.Quantum_Tank_EV.get(64),
-                GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 16),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
-            },
-            new FluidStack[] {
-                Materials.Draconium.getMolten(36864),
-                new FluidStack(solderIndalloy, 30240),
-                Materials.InfinityCatalyst.getMolten(5670)
-            },
-            ItemRefer.Fluid_Storage_Core_T8.get(1),
-            400,
-            33554000);
+                ItemRefer.Fluid_Storage_Core_T7.get(1),
+                640000,
+                new Object[] {
+                    GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
+                    ItemList.Electric_Pump_UV.get(8),
+                    GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 2L, 0),
+                    ItemList.Quantum_Tank_EV.get(64),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 16),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
+                },
+                new FluidStack[] {
+                    Materials.Draconium.getMolten(36864),
+                    new FluidStack(solderIndalloy, 30240),
+                    Materials.InfinityCatalyst.getMolten(5670)
+                },
+                ItemRefer.Fluid_Storage_Core_T8.get(1),
+                400,
+                33554000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.Fluid_Storage_Core_T8.get(1),
-            12800000,
-            new Object[] {
-                GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
-                ItemList.Electric_Pump_UHV.get(8),
-                GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 2L, 0),
-                ItemList.Quantum_Tank_IV.get(8),
-                GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 32),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
-            },
-            new FluidStack[] {
-                Materials.Draconium.getMolten(36864),
-                new FluidStack(solderIndalloy, 30240),
-                Materials.Transcendent.getMolten(1440),
-                Materials.InfinityCatalyst.getMolten(5670)
-            },
-
-            ItemRefer.Fluid_Storage_Core_T9.get(1),
-            400,
-            134217000);
+                ItemRefer.Fluid_Storage_Core_T8.get(1),
+                12800000,
+                new Object[] {
+                    GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
+                    ItemList.Electric_Pump_UHV.get(8),
+                    GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 2L, 0),
+                    ItemList.Quantum_Tank_IV.get(8),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 32),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
+                },
+                new FluidStack[] {
+                    Materials.Draconium.getMolten(36864),
+                    new FluidStack(solderIndalloy, 30240),
+                    Materials.Transcendent.getMolten(1440),
+                    Materials.InfinityCatalyst.getMolten(5670)
+                },
+                ItemRefer.Fluid_Storage_Core_T9.get(1),
+                400,
+                134217000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.Fluid_Storage_Core_T9.get(1),
-            25600000,
-            new Object[] {
-                GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
-                ItemList.Electric_Pump_UEV.get(8),
-                GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 4L, 0),
-                ItemList.Quantum_Tank_IV.get(16),
-                GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 32),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.CosmicNeutronium, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.CosmicNeutronium, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1)
-            },
-            new FluidStack[] {
-                Materials.Draconium.getMolten(36864),
-                new FluidStack(solderIndalloy, 46080),
-                Materials.Transcendent.getMolten(4320),
-                Materials.InfinityCatalyst.getMolten(17010)
-            },
-
-            ItemRefer.Fluid_Storage_Core_T10.get(1),
-            400,
-            536800000);
+                ItemRefer.Fluid_Storage_Core_T9.get(1),
+                25600000,
+                new Object[] {
+                    GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
+                    ItemList.Electric_Pump_UEV.get(8),
+                    GT_ModHandler.getModItem("Avaritia", "Neutronium_Compressor", 4L, 0),
+                    ItemList.Quantum_Tank_IV.get(16),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 32),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.CosmicNeutronium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.CosmicNeutronium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.SpaceTime, 1)
+                },
+                new FluidStack[] {
+                    Materials.Draconium.getMolten(36864),
+                    new FluidStack(solderIndalloy, 46080),
+                    Materials.Transcendent.getMolten(4320),
+                    Materials.InfinityCatalyst.getMolten(17010)
+                },
+                ItemRefer.Fluid_Storage_Core_T10.get(1),
+                400,
+                536800000);
 
         GT_Values.RA.addAssemblerRecipe(
                 new ItemStack[] {
@@ -527,7 +525,7 @@ public class RecipeLoader_02 {
                 },
                 ItemRefer.YOTTank_Cell_T3.get(1),
                 1000,
-            32000);
+                32000);
 
         GT_Values.RA.addAssemblylineRecipe(
                 ItemRefer.YOTTank_Cell_T3.get(1),
@@ -585,8 +583,8 @@ public class RecipeLoader_02 {
                 new Object[] {
                     GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
                     ItemRefer.Fluid_Storage_Core_T6.get(2),
-                    new Object[]{OrePrefixes.circuit.get(Materials.Infinite), 4L},
-                    new Object[]{OrePrefixes.circuit.get(Materials.Infinite), 4L},
+                    new Object[] {OrePrefixes.circuit.get(Materials.Infinite), 4L},
+                    new Object[] {OrePrefixes.circuit.get(Materials.Infinite), 4L},
                     ItemList.Electric_Pump_UMV.get(8),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 4),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 4),
@@ -604,141 +602,141 @@ public class RecipeLoader_02 {
                 1000,
                 2090000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.YOTTank_Cell_T6.get(1),
-            160000,
-            new Object[] {
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
-                ItemRefer.Fluid_Storage_Core_T7.get(2),
-                new Object[]{OrePrefixes.circuit.get(Materials.Bio), 4L},
-                new Object[]{OrePrefixes.circuit.get(Materials.Bio), 4L},
-                ItemList.Electric_Pump_UMV.get(8),
-                GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 8),
-                GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 8),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.CosmicNeutronium, 16),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.CosmicNeutronium, 16),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 16),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 16)
-            },
-            new FluidStack[] {
-                Materials.DraconiumAwakened.getMolten(14400),
-                FluidRegistry.getFluidStack("supercoolant", 46080),
-                Materials.Lubricant.getFluid(46080)
-            },
-            ItemRefer.YOTTank_Cell_T7.get(1),
-            1000,
-            8300000);
+                ItemRefer.YOTTank_Cell_T6.get(1),
+                160000,
+                new Object[] {
+                    GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
+                    ItemRefer.Fluid_Storage_Core_T7.get(2),
+                    new Object[] {OrePrefixes.circuit.get(Materials.Bio), 4L},
+                    new Object[] {OrePrefixes.circuit.get(Materials.Bio), 4L},
+                    ItemList.Electric_Pump_UMV.get(8),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.CosmicNeutronium, 16),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.CosmicNeutronium, 16),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 16),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 16)
+                },
+                new FluidStack[] {
+                    Materials.DraconiumAwakened.getMolten(14400),
+                    FluidRegistry.getFluidStack("supercoolant", 46080),
+                    Materials.Lubricant.getFluid(46080)
+                },
+                ItemRefer.YOTTank_Cell_T7.get(1),
+                1000,
+                8300000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.YOTTank_Cell_T7.get(1),
-            160000,
-            new Object[] {
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
-                ItemRefer.Fluid_Storage_Core_T8.get(2),
-                new Object[]{OrePrefixes.circuit.get(Materials.Nano), 4L},
-                new Object[]{OrePrefixes.circuit.get(Materials.Nano), 4L},
-                ItemList.Electric_Pump_UMV.get(8),
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NetherStar, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.CosmicNeutronium, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.DraconiumAwakened, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32)
-            },
-            new FluidStack[] {
-                Materials.DraconiumAwakened.getMolten(14400),
-                FluidRegistry.getFluidStack("supercoolant", 46080),
-                Materials.Lubricant.getFluid(46080)
-            },
-            ItemRefer.YOTTank_Cell_T8.get(1),
-            1000,
-            33554000);
+                ItemRefer.YOTTank_Cell_T7.get(1),
+                160000,
+                new Object[] {
+                    GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
+                    ItemRefer.Fluid_Storage_Core_T8.get(2),
+                    new Object[] {OrePrefixes.circuit.get(Materials.Nano), 4L},
+                    new Object[] {OrePrefixes.circuit.get(Materials.Nano), 4L},
+                    ItemList.Electric_Pump_UMV.get(8),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NetherStar, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.CosmicNeutronium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.DraconiumAwakened, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32)
+                },
+                new FluidStack[] {
+                    Materials.DraconiumAwakened.getMolten(14400),
+                    FluidRegistry.getFluidStack("supercoolant", 46080),
+                    Materials.Lubricant.getFluid(46080)
+                },
+                ItemRefer.YOTTank_Cell_T8.get(1),
+                1000,
+                33554000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.YOTTank_Cell_T8.get(1),
-            200000,
-            new Object[] {
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 2),
-                ItemRefer.Fluid_Storage_Core_T9.get(2),
-                new Object[]{OrePrefixes.circuit.get(Materials.Piko), 4L},
-                new Object[]{OrePrefixes.circuit.get(Materials.Piko), 4L},
-                ItemList.Electric_Pump_UMV.get(8),
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NetherStar, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.CosmicNeutronium, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.DraconiumAwakened, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32)
-            },
-            new FluidStack[] {
-                Materials.DraconiumAwakened.getMolten(14400),
-                FluidRegistry.getFluidStack("supercoolant", 46080),
-                Materials.Lubricant.getFluid(46080)
-            },
-            ItemRefer.YOTTank_Cell_T9.get(1),
-            1000,
-            134217000);
+                ItemRefer.YOTTank_Cell_T8.get(1),
+                200000,
+                new Object[] {
+                    GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 2),
+                    ItemRefer.Fluid_Storage_Core_T9.get(2),
+                    new Object[] {OrePrefixes.circuit.get(Materials.Piko), 4L},
+                    new Object[] {OrePrefixes.circuit.get(Materials.Piko), 4L},
+                    ItemList.Electric_Pump_UMV.get(8),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NetherStar, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.CosmicNeutronium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.DraconiumAwakened, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 32)
+                },
+                new FluidStack[] {
+                    Materials.DraconiumAwakened.getMolten(14400),
+                    FluidRegistry.getFluidStack("supercoolant", 46080),
+                    Materials.Lubricant.getFluid(46080)
+                },
+                ItemRefer.YOTTank_Cell_T9.get(1),
+                1000,
+                134217000);
         GT_Values.RA.addAssemblylineRecipe(
-            ItemRefer.YOTTank_Cell_T9.get(1),
-            240000,
-            new Object[] {
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 2),
-                ItemRefer.Fluid_Storage_Core_T10.get(2),
-                new Object[]{OrePrefixes.circuit.get(Materials.Quantum), 6L},
-                new Object[]{OrePrefixes.circuit.get(Materials.Quantum), 6L},
-                ItemList.Electric_Pump_UMV.get(8),
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NetherStar, 64),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.CosmicNeutronium, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.DraconiumAwakened, 12),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.SpaceTime, 5),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.SpaceTime, 5)
-            },
-            new FluidStack[] {
-                Materials.DraconiumAwakened.getMolten(14400),
-                Materials.Transcendent.getMolten(1440),
-                FluidRegistry.getFluidStack("supercoolant", 46080),
-                Materials.Lubricant.getFluid(46080)
-            },
-            ItemRefer.YOTTank_Cell_T10.get(1),
-            1000,
-            536800000);
+                ItemRefer.YOTTank_Cell_T9.get(1),
+                240000,
+                new Object[] {
+                    GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 2),
+                    ItemRefer.Fluid_Storage_Core_T10.get(2),
+                    new Object[] {OrePrefixes.circuit.get(Materials.Quantum), 6L},
+                    new Object[] {OrePrefixes.circuit.get(Materials.Quantum), 6L},
+                    ItemList.Electric_Pump_UMV.get(8),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NetherStar, 64),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.CosmicNeutronium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.DraconiumAwakened, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.SpaceTime, 5),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.SpaceTime, 5)
+                },
+                new FluidStack[] {
+                    Materials.DraconiumAwakened.getMolten(14400),
+                    Materials.Transcendent.getMolten(1440),
+                    FluidRegistry.getFluidStack("supercoolant", 46080),
+                    Materials.Lubricant.getFluid(46080)
+                },
+                ItemRefer.YOTTank_Cell_T10.get(1),
+                1000,
+                536800000);
 
-        //Craft 2x64X Tier to 1X+1 Tier
+        // Craft 2x64X Tier to 1X+1 Tier
         GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] {
-                ItemRefer.Fluid_Storage_Core_T6.get(64),
-                ItemRefer.Fluid_Storage_Core_T6.get(64),
-                GT_Utility.getIntegratedCircuit(2)
-            },
-            GT_Values.NF,
-            ItemRefer.Fluid_Storage_Core_T7.get(1),
-            200,
-            7680);
+                new ItemStack[] {
+                    ItemRefer.Fluid_Storage_Core_T6.get(64),
+                    ItemRefer.Fluid_Storage_Core_T6.get(64),
+                    GT_Utility.getIntegratedCircuit(2)
+                },
+                GT_Values.NF,
+                ItemRefer.Fluid_Storage_Core_T7.get(1),
+                200,
+                7680);
         GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] {
-                ItemRefer.Fluid_Storage_Core_T7.get(64),
-                ItemRefer.Fluid_Storage_Core_T7.get(64),
-                GT_Utility.getIntegratedCircuit(2)
-            },
-            GT_Values.NF,
-            ItemRefer.Fluid_Storage_Core_T8.get(1),
-            200,
-            7680);
+                new ItemStack[] {
+                    ItemRefer.Fluid_Storage_Core_T7.get(64),
+                    ItemRefer.Fluid_Storage_Core_T7.get(64),
+                    GT_Utility.getIntegratedCircuit(2)
+                },
+                GT_Values.NF,
+                ItemRefer.Fluid_Storage_Core_T8.get(1),
+                200,
+                7680);
         GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] {
-                ItemRefer.Fluid_Storage_Core_T8.get(64),
-                ItemRefer.Fluid_Storage_Core_T8.get(64),
-                GT_Utility.getIntegratedCircuit(2)
-            },
-            GT_Values.NF,
-            ItemRefer.Fluid_Storage_Core_T9.get(1),
-            200,
-            7680);
+                new ItemStack[] {
+                    ItemRefer.Fluid_Storage_Core_T8.get(64),
+                    ItemRefer.Fluid_Storage_Core_T8.get(64),
+                    GT_Utility.getIntegratedCircuit(2)
+                },
+                GT_Values.NF,
+                ItemRefer.Fluid_Storage_Core_T9.get(1),
+                200,
+                7680);
         GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] {
-                ItemRefer.Fluid_Storage_Core_T9.get(64),
-                ItemRefer.Fluid_Storage_Core_T9.get(64),
-                GT_Utility.getIntegratedCircuit(2)
-            },
-            GT_Values.NF,
-            ItemRefer.Fluid_Storage_Core_T10.get(1),
-            200,
-            7680);
+                new ItemStack[] {
+                    ItemRefer.Fluid_Storage_Core_T9.get(64),
+                    ItemRefer.Fluid_Storage_Core_T9.get(64),
+                    GT_Utility.getIntegratedCircuit(2)
+                },
+                GT_Values.NF,
+                ItemRefer.Fluid_Storage_Core_T10.get(1),
+                200,
+                7680);
 
         GT_Values.RA.addUnboxingRecipe(
                 ItemRefer.YOTTank_Cell_T1.get(1),
@@ -782,29 +780,29 @@ public class RecipeLoader_02 {
                 100,
                 480);
         GT_Values.RA.addUnboxingRecipe(
-            ItemRefer.YOTTank_Cell_T7.get(1),
-            ItemRefer.Fluid_Storage_Core_T7.get(2),
-            GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
-            100,
-            480);
+                ItemRefer.YOTTank_Cell_T7.get(1),
+                ItemRefer.Fluid_Storage_Core_T7.get(2),
+                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
+                100,
+                480);
         GT_Values.RA.addUnboxingRecipe(
-            ItemRefer.YOTTank_Cell_T8.get(1),
-            ItemRefer.Fluid_Storage_Core_T8.get(2),
-            GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
-            100,
-            480);
+                ItemRefer.YOTTank_Cell_T8.get(1),
+                ItemRefer.Fluid_Storage_Core_T8.get(2),
+                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
+                100,
+                480);
         GT_Values.RA.addUnboxingRecipe(
-            ItemRefer.YOTTank_Cell_T9.get(1),
-            ItemRefer.Fluid_Storage_Core_T9.get(2),
-            GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
-            100,
-            480);
+                ItemRefer.YOTTank_Cell_T9.get(1),
+                ItemRefer.Fluid_Storage_Core_T9.get(2),
+                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 1),
+                100,
+                480);
         GT_Values.RA.addUnboxingRecipe(
-            ItemRefer.YOTTank_Cell_T10.get(1),
-            ItemRefer.Fluid_Storage_Core_T10.get(2),
-            GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 1),
-            100,
-            480);
+                ItemRefer.YOTTank_Cell_T10.get(1),
+                ItemRefer.Fluid_Storage_Core_T10.get(2),
+                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 1),
+                100,
+                480);
 
         GT_Values.RA.addAutoclaveRecipe(
                 WerkstoffLoader.Tiberium.get(OrePrefixes.dust, 1),
