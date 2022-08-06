@@ -1870,6 +1870,7 @@ public class RecipeLoader_02 {
                     long superHeatedSteamAmount = (long) tUnit * 3 * tPlasma.amount;
                     long criticalSteamAmount = (long) tUnit * 3 * tPlasma.amount / 100;
                     while (superHeatedSteamAmount > Integer.MAX_VALUE) {
+                        GT_Log.out.print("Superheated steam amount exceeded max int for plasma " + tOutName);
                         waterAmount /= 2;
                         superHeatedSteamAmount /= 2;
                         criticalSteamAmount /= 2;
