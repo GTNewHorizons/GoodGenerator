@@ -27,7 +27,8 @@ public class RecipeLoader_02 {
     public static void RecipeLoad() {
         // Fix exploit with disassembler
         // Superconducting Coil is already blacklisted
-        GT_MetaTileEntity_Disassembler.getBlackList().add(new GT_ItemStack(GT_ModHandler.getModItem("miscutils", "gtplusplus.blockcasings.3", 1, 13)));
+        GT_MetaTileEntity_Disassembler.getBlackList()
+                .add(new GT_ItemStack(GT_ModHandler.getModItem("miscutils", "gtplusplus.blockcasings.3", 1, 13)));
         GT_MetaTileEntity_Disassembler.getBlackList().add(new GT_ItemStack(ItemList.Casing_Fusion_Coil.get(1)));
 
         GT_Values.RA.addAssemblerRecipe(
