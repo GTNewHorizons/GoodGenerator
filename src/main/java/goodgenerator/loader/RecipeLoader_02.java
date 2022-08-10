@@ -331,7 +331,7 @@ public class RecipeLoader_02 {
                     GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Titanium, 4),
                     ItemList.Electric_Pump_EV.get(8),
                     ItemList.Quantum_Tank_LV.get(4),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Europium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Europium, 8),
                     GT_ModHandler.getModItem("GalacticraftMars", "item.null", 4L, 6),
                     GT_OreDictUnificator.get(OrePrefixes.foil, Materials.StyreneButadieneRubber, 32),
                     GT_OreDictUnificator.get(OrePrefixes.foil, Materials.StyreneButadieneRubber, 32),
@@ -349,7 +349,7 @@ public class RecipeLoader_02 {
                     GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.MysteriousCrystal, 4),
                     ItemList.Electric_Pump_IV.get(8),
                     ItemList.Quantum_Tank_HV.get(8),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Neutronium, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Neutronium, 8),
                     GT_ModHandler.getModItem("GalacticraftMars", "item.null", 16L, 6),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Polycaprolactam, 12),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Polycaprolactam, 12),
@@ -371,9 +371,10 @@ public class RecipeLoader_02 {
                     GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 4),
                     ItemList.Electric_Pump_LuV.get(8),
                     ItemList.Quantum_Tank_EV.get(16),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 12),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 12),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8),
                     GT_ModHandler.getModItem("GalacticraftMars", "item.null", 64L, 6),
                     ItemList.Machine_IV_Compressor.get(64)
                 },
@@ -395,7 +396,8 @@ public class RecipeLoader_02 {
                     ItemList.Quantum_Tank_EV.get(32),
                     GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 8),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.InfinityCatalyst, 8),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8)
                 },
                 new FluidStack[] {
                     Materials.Draconium.getMolten(23040),
@@ -416,7 +418,8 @@ public class RecipeLoader_02 {
                     GT_OreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.Infinity, 16),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8)
                 },
                 new FluidStack[] {
                     Materials.Draconium.getMolten(36864),
@@ -438,7 +441,7 @@ public class RecipeLoader_02 {
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
                     GT_OreDictUnificator.get(OrePrefixes.plateQuintuple, Materials.Infinity, 12),
-                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 32)
+                    GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 8)
                 },
                 new FluidStack[] {
                     Materials.Draconium.getMolten(36864),
@@ -536,7 +539,7 @@ public class RecipeLoader_02 {
                     ItemRefer.Fluid_Storage_Core_T4.get(5),
                     new Object[] {"circuitInfinite", 4},
                     new Object[] {"circuitInfinite", 4},
-                    ItemList.Electric_Pump_UHV.get(8),
+                    ItemList.Electric_Pump_UV.get(8),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.MysteriousCrystal, 4),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.MysteriousCrystal, 4),
                     GT_OreDictUnificator.get(OrePrefixes.plate, Materials.ElectrumFlux, 16),
@@ -560,7 +563,7 @@ public class RecipeLoader_02 {
                     ItemRefer.Fluid_Storage_Core_T5.get(5),
                     new Object[] {"circuitBio", 4},
                     new Object[] {"circuitBio", 4},
-                    ItemList.Electric_Pump_UIV.get(8),
+                    ItemList.Electric_Pump_UHV.get(8),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.DraconiumAwakened, 4),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.DraconiumAwakened, 4),
                     GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 16),
@@ -585,7 +588,7 @@ public class RecipeLoader_02 {
                     ItemRefer.Fluid_Storage_Core_T6.get(2),
                     new Object[] {OrePrefixes.circuit.get(Materials.Infinite), 4L},
                     new Object[] {OrePrefixes.circuit.get(Materials.Infinite), 4L},
-                    ItemList.Electric_Pump_UMV.get(8),
+                    ItemList.Electric_Pump_UEV.get(8),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 4),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 4),
                     GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 16),
@@ -609,7 +612,7 @@ public class RecipeLoader_02 {
                     ItemRefer.Fluid_Storage_Core_T7.get(2),
                     new Object[] {OrePrefixes.circuit.get(Materials.Bio), 4L},
                     new Object[] {OrePrefixes.circuit.get(Materials.Bio), 4L},
-                    ItemList.Electric_Pump_UMV.get(8),
+                    ItemList.Electric_Pump_UIV.get(8),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 8),
                     GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.NetherStar, 8),
                     GT_OreDictUnificator.get(OrePrefixes.plate, Materials.CosmicNeutronium, 16),
