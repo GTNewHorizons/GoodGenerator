@@ -265,14 +265,14 @@ public class YottaFluidTank extends GT_MetaTileEntity_TooltipMultiBlockBase_EM i
     public String[] getInfoData() {
         return new String[] {
             StatCollector.translateToLocal("scanner.info.YOTTank.0"),
-            StatCollector.translateToLocal(EnumChatFormatting.GREEN
-                + CharExchanger.formatNumber(getCap()) + EnumChatFormatting.RESET + " L"),
+            StatCollector.translateToLocal(
+                    EnumChatFormatting.GREEN + CharExchanger.formatNumber(getCap()) + EnumChatFormatting.RESET + " L"),
             StatCollector.translateToLocal("scanner.info.YOTTank.1"),
-            StatCollector.translateToLocal(EnumChatFormatting.YELLOW
-                + CharExchanger.formatNumber(getFluidName()) + EnumChatFormatting.RESET),
+            StatCollector.translateToLocal(
+                    EnumChatFormatting.YELLOW + CharExchanger.formatNumber(getFluidName()) + EnumChatFormatting.RESET),
             StatCollector.translateToLocal("scanner.info.YOTTank.2"),
-            StatCollector.translateToLocal(EnumChatFormatting.BLUE
-                + CharExchanger.formatNumber(getStored()) + EnumChatFormatting.RESET + " L")
+            StatCollector.translateToLocal(
+                    EnumChatFormatting.BLUE + CharExchanger.formatNumber(getStored()) + EnumChatFormatting.RESET + " L")
         };
     }
 
