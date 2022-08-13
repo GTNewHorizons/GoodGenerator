@@ -243,9 +243,9 @@ public class YOTTAHatch extends GT_MetaTileEntity_Hatch
                     node.getGrid().postEvent(new MENetworkCellArrayUpdate());
                 }
             }
-            super.onPostTick(aBaseMetaTileEntity, aTick);
             ticksSinceUpdate = 0;
         }
+        super.onPostTick(aBaseMetaTileEntity, aTick);
     }
 
     @Override
