@@ -29,7 +29,8 @@ public abstract class GT_MetaTileEntity_TooltipMultiBlockBase_EM extends GT_Meta
         return tooltip;
     }
 
-    protected abstract GT_Multiblock_Tooltip_Builder createTooltip();
+    @Override
+    public abstract GT_Multiblock_Tooltip_Builder createTooltip();
 
     @Override
     public String[] getDescription() {
