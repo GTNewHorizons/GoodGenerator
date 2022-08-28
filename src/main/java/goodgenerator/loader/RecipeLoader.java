@@ -288,7 +288,7 @@ public class RecipeLoader {
                 MyMaterial.thorium232Tetrafluoride.getFluidOrGas(1000),
                 WerkstoffLoader.CalciumChloride.getFluidOrGas(1000),
                 MyMaterial.zincThoriumAlloy.get(OrePrefixes.ingot, 1),
-                WerkstoffLoader.Fluorspar.get(OrePrefixes.dust, 8),
+                WerkstoffLoader.Fluorspar.get(OrePrefixes.dust, 6),
                 300,
                 120,
                 3000);
