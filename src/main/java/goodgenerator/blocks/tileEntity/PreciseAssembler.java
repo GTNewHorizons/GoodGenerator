@@ -194,7 +194,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                     this.mEfficiencyIncrease = 10000;
                     tRecipe.isRecipeInputEqual(true, inputFluids, getStoredItemFromHatch(bus));
                     mOutputItems = tRecipe.mOutputs;
-                    calculateOverclockedNessMulti(
+                    calculateOverclockedNessMultiPara(
                             tRecipe.mEUt,
                             tRecipe.mDuration,
                             1,
