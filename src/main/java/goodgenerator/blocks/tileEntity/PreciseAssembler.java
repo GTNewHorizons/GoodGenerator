@@ -234,7 +234,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                     }
                     mOutputItems = Outputs.getValue().toArray(new ItemStack[0]);
                     calculateOverclockedNessMultiPara(
-                            (int) lEUt, time, 1, Math.min(Integer.MAX_VALUE, getMaxInputEnergy_EM()));
+                            (int) lEUt, time, 1, Math.min(Integer.MAX_VALUE - 1, getMaxInputEnergy_EM()));
                     this.updateSlots();
                     if (this.mEUt > 0) {
                         this.mEUt = (-this.mEUt);
