@@ -227,7 +227,7 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
                     || cyclicUpdate_EM()
                     || aBaseMetaTileEntity.hasWorkJustBeenEnabled()) {
                 if (mUpdate <= -1000) {
-                    mUpdate = 0;
+                    mUpdate = 5000;
                 }
                 checkStructure(true, aBaseMetaTileEntity);
             }
