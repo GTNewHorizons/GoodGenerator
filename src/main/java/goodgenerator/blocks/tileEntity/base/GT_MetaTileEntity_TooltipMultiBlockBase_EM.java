@@ -5,7 +5,6 @@ import gregtech.api.interfaces.ISecondaryDescribable;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Keyboard;
 
@@ -53,6 +52,6 @@ public abstract class GT_MetaTileEntity_TooltipMultiBlockBase_EM extends GT_Meta
 
     @Override
     public int getPollutionPerTick(ItemStack itemStack) {
-        return getPollutionPerSecond(itemStack)/20;
+        return getPollutionPerSecond(itemStack) / 20;
     }
 }
