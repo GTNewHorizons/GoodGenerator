@@ -10,7 +10,6 @@ import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_OreDictUnificator;
-import gtPlusPlus.core.material.ELEMENT;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
