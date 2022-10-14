@@ -94,7 +94,7 @@ public class FuelRecipeLoader {
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] {
                     MyMaterial.naquadahBasedFuelMkIII.getFluidOrGas(2000),
-                    new FluidStack(ELEMENT.STANDALONE.HYPOGEN.getFluid(), 1440)
+                    new FluidStack(FluidRegistry.getFluid("molten.hypogen"), 1440)
                 },
                 new ItemStack[] {
                     MyMaterial.extremelyUnstableNaquadah.get(OrePrefixes.dust, 27),
