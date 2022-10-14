@@ -10,6 +10,7 @@ import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_OreDictUnificator;
+import gtPlusPlus.core.material.ELEMENT;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -89,6 +90,23 @@ public class FuelRecipeLoader {
                 160,
                 2);
 
+        // Alternate higher tier recipe
+        MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
+                new FluidStack[] {
+                    MyMaterial.naquadahBasedFuelMkIII.getFluidOrGas(2000),
+                    new FluidStack(ELEMENT.STANDALONE.HYPOGEN.getFluid(), 1440)
+                },
+                new ItemStack[] {
+                    MyMaterial.extremelyUnstableNaquadah.get(OrePrefixes.dust, 27),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Bedrockium, 64),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.DraconiumAwakened, 64),
+                    MyMaterial.orundum.get(OrePrefixes.dust, 64),
+                },
+                MyMaterial.naquadahBasedFuelMkIV.getFluidOrGas(500),
+                75000000,
+                160,
+                2);
+
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] {
                     MyMaterial.naquadahBasedFuelMkIV.getFluidOrGas(2000),
@@ -102,5 +120,21 @@ public class FuelRecipeLoader {
                 100000000,
                 200,
                 2);
+
+        // Alternate higher tier recipe
+        MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
+                new FluidStack[] {
+                    MyMaterial.naquadahBasedFuelMkIV.getFluidOrGas(2000),
+                    FluidRegistry.getFluidStack("heavyradox", 1000),
+                },
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.SpaceTime, 8),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.TranscendentMetal, 16),
+                    MyMaterial.atomicSeparationCatalyst.get(OrePrefixes.dust, 48),
+                },
+                MyMaterial.naquadahBasedFuelMkV.getFluidOrGas(750),
+                300000000,
+                200,
+                3);
     }
 }
