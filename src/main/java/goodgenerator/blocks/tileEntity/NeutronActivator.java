@@ -213,7 +213,10 @@ public class NeutronActivator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                             'C',
                             ofChain(
                                     buildHatchAdder(NeutronActivator.class)
-                                            .atLeast(GT_HatchElement.InputHatch, GT_HatchElement.InputBus, GT_HatchElement.Maintenance)
+                                            .atLeast(
+                                                    GT_HatchElement.InputHatch,
+                                                    GT_HatchElement.InputBus,
+                                                    GT_HatchElement.Maintenance)
                                             .casingIndex(49)
                                             .dot(1)
                                             .build(),
