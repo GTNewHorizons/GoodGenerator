@@ -334,15 +334,15 @@ public class RecipeLoader {
             for (ItemStack m2 : mat2) {
                 for (ItemStack m3 : mat3) {
                     GT_Values.RA.addMixerRecipe(
-                        m1,
-                        m2,
-                        m3,
-                        GT_Utility.getIntegratedCircuit(4),
-                        Materials.Naquadah.getMolten(288),
-                        null,
-                        ItemRefer.Raw_Atomic_Separation_Catalyst.get(63),
-                        300,
-                        480);
+                            m1,
+                            m2,
+                            m3,
+                            GT_Utility.getIntegratedCircuit(4),
+                            Materials.Naquadah.getMolten(288),
+                            null,
+                            ItemRefer.Raw_Atomic_Separation_Catalyst.get(63),
+                            300,
+                            480);
                 }
             }
         }
