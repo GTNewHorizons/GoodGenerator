@@ -565,12 +565,12 @@ public class RecipeLoader {
         GT_Values.RA.addFuel(MyMaterial.naquadahGas.get(OrePrefixes.cell), null, 1024, 1);
 
         GT_Values.RA.addFusionReactorRecipe(
-                MyMaterial.lightNaquadahFuel.getFluidOrGas(65),
-                MyMaterial.heavyNaquadahFuel.getFluidOrGas(30),
+                MyMaterial.lightNaquadahFuel.getFluidOrGas(780),
+                MyMaterial.heavyNaquadahFuel.getFluidOrGas(360),
                 MyMaterial.naquadahBasedFuelMkI.getFluidOrGas(100),
-                5,
+                500,
                 26000,
-                330000000);
+                320000000);
 
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[] {
