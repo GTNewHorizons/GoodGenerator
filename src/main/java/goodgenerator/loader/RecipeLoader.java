@@ -521,9 +521,9 @@ public class RecipeLoader {
                 2040);
 
         GT_Values.RA.addBlastRecipe(
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.NaquadahEnriched, 32),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.NaquadahEnriched, 16),
                 GT_Utility.getIntegratedCircuit(16),
-                MyMaterial.fluoroantimonicAcid.getFluidOrGas(1000),
+                Materials.HydrofluoricAcid.getFluid(3000),
                 MyMaterial.acidNaquadahEmulsion.getFluidOrGas(2000),
                 MyMaterial.radioactiveSludge.get(OrePrefixes.dust, 3),
                 null,
@@ -534,7 +534,7 @@ public class RecipeLoader {
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[] {
                     GT_Utility.getIntegratedCircuit(3),
-                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 32)
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 8)
                 },
                 new FluidStack[] {
                     MyMaterial.acidNaquadahEmulsion.getFluidOrGas(1000),
@@ -1549,18 +1549,18 @@ public class RecipeLoader {
                 2040);
 
         GT_Values.RA.addCentrifugeRecipe(
-                MyMaterial.radioactiveSludge.get(OrePrefixes.dust, 1),
+                MyMaterial.radioactiveSludge.get(OrePrefixes.dust, 9),
                 null,
                 null,
-                Materials.Radon.getGas(5),
-                GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.Calcium, 2),
-                GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.Calcium, 1),
-                GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.Naquadah, 1),
-                GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.Uranium, 1),
-                GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.Plutonium, 1),
-                WerkstoffLoader.Tiberium.get(OrePrefixes.dustSmall, 1),
+                Materials.Radon.getGas(45),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 2),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Uranium, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Plutonium, 1),
+                WerkstoffLoader.Tiberium.get(OrePrefixes.dust, 1),
                 new int[] {10000, 9500, 8000, 2500, 2000, 2000},
-                100,
+                900,
                 120);
     }
 
