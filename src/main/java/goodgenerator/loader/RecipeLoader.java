@@ -575,17 +575,16 @@ public class RecipeLoader {
         GT_Values.RA.addMultiblockChemicalRecipe(
                 new ItemStack[] {
                     GT_Utility.getIntegratedCircuit(1),
-                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Praseodymium, 16),
-                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Samarium, 24),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.NetherStar, 4),
                     GT_OreDictUnificator.get(OrePrefixes.dust, Materials.ElectrumFlux, 32),
                 },
                 new FluidStack[] {
-                    MyMaterial.naquadahBasedFuelMkI.getFluidOrGas(1000), MyMaterial.naquadahGas.getFluidOrGas(2500)
+                    MyMaterial.naquadahBasedFuelMkI.getFluidOrGas(100), MyMaterial.naquadahGas.getFluidOrGas(1500)
                 },
-                new FluidStack[] {MyMaterial.naquadahBasedFuelMkII.getFluidOrGas(1000)},
+                new FluidStack[] {MyMaterial.naquadahBasedFuelMkII.getFluidOrGas(100)},
                 null,
-                200,
-                480000);
+                500,
+                525000);
 
         GT_Values.RA.addBlastRecipe(
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Naquadria, 32),
