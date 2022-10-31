@@ -32,16 +32,15 @@ public class RecipeLoader {
                 1920);
 
         GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] {
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Lanthanum, 4L),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 8L),
-                GT_Utility.getIntegratedCircuit(1)
-            },
-            Materials.Lead.getMolten(1152),
-            ItemRefer.Radiation_Protection_Plate.get(1),
-            400,
-            1920);
-
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Lanthanum, 4L),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 8L),
+                    GT_Utility.getIntegratedCircuit(1)
+                },
+                Materials.Lead.getMolten(1152),
+                ItemRefer.Radiation_Protection_Plate.get(1),
+                400,
+                1920);
 
         Fluid solderIndalloy = FluidRegistry.getFluid("molten.indalloy140") != null
                 ? FluidRegistry.getFluid("molten.indalloy140")
