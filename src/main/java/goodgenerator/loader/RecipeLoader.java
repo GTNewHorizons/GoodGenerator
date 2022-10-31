@@ -1570,10 +1570,10 @@ public class RecipeLoader {
                 2040);
 
         GT_Values.RA.addCentrifugeRecipe(
-                MyMaterial.radioactiveSludge.get(OrePrefixes.dust, 9),
+                MyMaterial.radioactiveSludge.get(OrePrefixes.dust, 4),
                 null,
                 null,
-                Materials.Radon.getGas(45),
+                Materials.Radon.getGas(20),
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 2),
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 1),
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 1),
