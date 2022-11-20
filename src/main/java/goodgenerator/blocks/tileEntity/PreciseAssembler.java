@@ -5,7 +5,6 @@ import static com.github.bartimaeusnek.bartworks.util.RecipeFinderForParallel.ha
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static goodgenerator.util.DescTextLocalization.BLUE_PRINT_INFO;
 import static gregtech.api.enums.GT_HatchElement.*;
-import static gregtech.api.enums.GT_HatchElement.Muffler;
 import static gregtech.api.util.GT_StructureUtility.ofFrame;
 
 import com.github.bartimaeusnek.bartworks.util.Pair;
@@ -17,7 +16,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_TooltipMultiBlockBase_EM;
+import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_LongPowerUsageBase;
 import goodgenerator.loader.Loaders;
 import goodgenerator.main.GoodGenerator;
 import goodgenerator.network.MessageResetTileTexture;
@@ -49,7 +48,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
-public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
+public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
         implements IConstructable, ISurvivalConstructable {
 
     private static final IIconContainer textureFontOn = new Textures.BlockIcons.CustomIcon("iconsets/OVERLAY_QTANK");
@@ -65,6 +64,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     protected int machineTier;
     protected int mode;
     protected int energyHatchTier;
+    private GT_Recipe lastRecipe;
 
     public PreciseAssembler(String name) {
         super(name);
@@ -188,21 +188,6 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
         super.onScrewdriverRightClick(aSide, aPlayer, aX, aY, aZ);
     }
 
-    protected void calculateOverclockedNessMultiPara(long aEUt, int aDuration, int mAmperage, long maxInputPower) {
-        // Prevent overclocking beyond MAX
-        maxInputPower = Math.min(maxInputPower, Integer.MAX_VALUE - 1);
-        while (aEUt <= maxInputPower && aDuration >= 1) {
-            aEUt = aEUt << 2;
-            aDuration = aDuration >> 1;
-        }
-        aEUt = aEUt >> 2;
-        aDuration = aDuration << 1;
-        if (aDuration <= 0) aDuration = 1;
-        if (aEUt == maxInputPower) aEUt = (long) (maxInputPower * 0.9);
-        this.mEUt = GT_Utility.safeInt(aEUt);
-        this.mMaxProgresstime = aDuration;
-    }
-
     @Override
     public boolean checkRecipe_EM(ItemStack itemStack) {
         if (casingTier < 0 || machineTier < 0) return false;
@@ -210,26 +195,23 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
         if (this.mode == 0) {
             for (GT_MetaTileEntity_Hatch_InputBus bus : mInputBusses) {
                 if (!isValidMetaTileEntity(bus)) continue;
-                GT_Recipe tRecipe = getRecipeMap()
+                this.lastRecipe = getRecipeMap()
                         .findRecipe(
                                 this.getBaseMetaTileEntity(),
+                                this.lastRecipe,
                                 false,
                                 Math.min(getMachineVoltageLimit(), getMaxInputEnergyPA()),
                                 inputFluids,
                                 getStoredItemFromHatch(bus));
-                if (tRecipe != null && tRecipe.mSpecialValue <= (casingTier + 1)) {
+                if (this.lastRecipe != null && this.lastRecipe.mSpecialValue <= (casingTier + 1)) {
                     this.mEfficiency = (10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000);
                     this.mEfficiencyIncrease = 10000;
-                    tRecipe.isRecipeInputEqual(true, inputFluids, getStoredItemFromHatch(bus));
-                    mOutputItems = tRecipe.mOutputs;
-                    calculateOverclockedNessMultiPara(
-                            tRecipe.mEUt,
-                            tRecipe.mDuration,
-                            1,
-                            Math.min(getMachineVoltageLimit(), getMaxInputEnergyPA()));
+                    this.lastRecipe.isRecipeInputEqual(true, inputFluids, getStoredItemFromHatch(bus));
+                    mOutputItems = this.lastRecipe.mOutputs;
+                    overclockLongPower(this.lastRecipe.mEUt, this.lastRecipe.mDuration, getMaxInputEnergyPA(), false);
                     this.updateSlots();
-                    if (this.mEUt > 0) {
-                        this.mEUt = (-this.mEUt);
+                    if (this.lEUt > 0) {
+                        this.lEUt = (-this.lEUt);
                     }
                     return true;
                 }
@@ -237,35 +219,31 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
         } else {
             for (GT_MetaTileEntity_Hatch_InputBus bus : mInputBusses) {
                 if (!isValidMetaTileEntity(bus) || getStoredItemFromHatch(bus).length < 1) continue;
-                GT_Recipe tRecipe = getRecipeMap()
+                this.lastRecipe = getRecipeMap()
                         .findRecipe(
                                 this.getBaseMetaTileEntity(),
+                                this.lastRecipe,
                                 false,
                                 Math.min(getMachineVoltageLimit(), getMaxInputEnergyPA()),
                                 inputFluids,
                                 getStoredItemFromHatch(bus));
-                if (tRecipe != null) {
+                if (this.lastRecipe != null) {
                     this.mEfficiency = (10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000);
                     this.mEfficiencyIncrease = 10000;
-                    long fullInput = getMaxInputEnergy_EM();
-                    int pall = handleParallelRecipe(tRecipe, inputFluids, getStoredItemFromHatch(bus), (int)
-                            Math.min((long) Math.pow(2, 4 + (casingTier + 1)), fullInput / tRecipe.mEUt));
+                    long fullInput = getMaxInputEnergyPA();
+                    int pall = handleParallelRecipe(this.lastRecipe, inputFluids, getStoredItemFromHatch(bus), (int)
+                            Math.min((long) Math.pow(2, 4 + (casingTier + 1)), fullInput / this.lastRecipe.mEUt));
                     if (pall <= 0) continue;
-                    Pair<ArrayList<FluidStack>, ArrayList<ItemStack>> Outputs = getMultiOutput(tRecipe, pall);
-                    long lEUt = (long) tRecipe.mEUt * (long) pall;
-                    int time = tRecipe.mDuration / 2;
-                    int modifier = 1;
-                    while (lEUt >= Integer.MAX_VALUE - 1) {
-                        lEUt = (long) tRecipe.mEUt * (long) pall / modifier;
-                        time = tRecipe.mDuration / 2 * modifier;
-                        modifier++;
-                    }
+                    Pair<ArrayList<FluidStack>, ArrayList<ItemStack>> Outputs = getMultiOutput(this.lastRecipe, pall);
                     mOutputItems = Outputs.getValue().toArray(new ItemStack[0]);
-                    calculateOverclockedNessMultiPara(
-                            (int) lEUt, time, 1, Math.min(Integer.MAX_VALUE - 1, getMaxInputEnergy_EM()));
+                    overclockLongPower(
+                            (long) this.lastRecipe.mEUt * (long) pall,
+                            this.lastRecipe.mDuration / 2,
+                            getMaxInputEnergyPA(),
+                            false);
                     this.updateSlots();
-                    if (this.mEUt > 0) {
-                        this.mEUt = (-this.mEUt);
+                    if (this.lEUt > 0) {
+                        this.lEUt = (-this.lEUt);
                     }
                     return true;
                 }
@@ -305,7 +283,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
 
     public long getMachineVoltageLimit() {
         if (machineTier < 0) return 0;
-        if (machineTier > 9) return GT_Values.V[energyHatchTier];
+        if (machineTier >= 9) return GT_Values.V[energyHatchTier];
         else return GT_Values.V[Math.min(machineTier, energyHatchTier)];
     }
 
@@ -325,41 +303,8 @@ public class PreciseAssembler extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     }
 
     @Override
-    public boolean drainEnergyInput_EM(long EUtTierVoltage, long EUtEffective, long Amperes) {
-        long EUuse = EUtEffective * Amperes;
-        if (EUuse < 0) {
-            EUuse = -EUuse;
-        }
-        for (GT_MetaTileEntity_Hatch tHatch : mEnergyHatches) {
-            long tDrain = Math.min(tHatch.getBaseMetaTileEntity().getStoredEU(), EUuse);
-            tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(tDrain, false);
-            EUuse -= tDrain;
-        }
-        for (GT_MetaTileEntity_Hatch tHatch : eEnergyMulti) {
-            long tDrain = Math.min(tHatch.getBaseMetaTileEntity().getStoredEU(), EUuse);
-            tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(tDrain, false);
-            EUuse -= tDrain;
-        }
-        return EUuse <= 0;
-    }
-
-    @Override
-    public boolean drainEnergyInput(long EUtEffective, long Amperes) {
-        long EUuse = EUtEffective * Amperes;
-        if (EUuse < 0) {
-            EUuse = -EUuse;
-        }
-        for (GT_MetaTileEntity_Hatch tHatch : mEnergyHatches) {
-            long tDrain = Math.min(tHatch.getBaseMetaTileEntity().getStoredEU(), EUuse);
-            tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(tDrain, false);
-            EUuse -= tDrain;
-        }
-        for (GT_MetaTileEntity_Hatch tHatch : eEnergyMulti) {
-            long tDrain = Math.min(tHatch.getBaseMetaTileEntity().getStoredEU(), EUuse);
-            tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(tDrain, false);
-            EUuse -= tDrain;
-        }
-        return EUuse <= 0;
+    protected long getRealVoltage() {
+        return getMaxInputEnergyPA();
     }
 
     @Override
