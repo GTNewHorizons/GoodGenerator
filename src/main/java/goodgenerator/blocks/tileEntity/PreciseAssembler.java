@@ -15,11 +15,8 @@ import com.gtnewhorizon.structurelib.structure.IItemSource;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureUtility;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_LongPowerUsageBase;
 import goodgenerator.loader.Loaders;
-import goodgenerator.main.GoodGenerator;
-import goodgenerator.network.MessageResetTileTexture;
 import goodgenerator.util.DescTextLocalization;
 import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.GregTech_API;
@@ -30,6 +27,7 @@ import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.GregTechTileClientEvents;
 import gregtech.api.metatileentity.implementations.*;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_HatchElementBuilder;
@@ -158,7 +156,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
             return mMufflerHatches.add((GT_MetaTileEntity_Hatch_Muffler) aMetaTileEntity);
         }
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_EnergyMulti) {
-            return eEnergyMulti.add((GT_MetaTileEntity_Hatch_EnergyMulti) aMetaTileEntity);
+            return mExoticEnergyHatches.add((GT_MetaTileEntity_Hatch_EnergyMulti) aMetaTileEntity);
         }
         return false;
     }
@@ -269,9 +267,9 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
                 rEnergy += tHatch.maxEUInput() * tHatch.maxAmperesIn();
             }
         }
-        for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti) {
+        for (GT_MetaTileEntity_Hatch tHatch : mExoticEnergyHatches) {
             if (isValidMetaTileEntity(tHatch)) {
-                rEnergy += tHatch.maxEUInput() * tHatch.Amperes;
+                rEnergy += tHatch.maxEUInput() * ((GT_MetaTileEntity_Hatch_EnergyMulti) tHatch).Amperes;
             }
         }
         return rEnergy;
@@ -333,14 +331,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
             if (casingTier >= 0) {
                 reUpdate(1539 + casingTier);
             }
-            GoodGenerator.CHANNEL.sendToAllAround(
-                    new MessageResetTileTexture(aBaseMetaTileEntity, casingTier),
-                    new NetworkRegistry.TargetPoint(
-                            aBaseMetaTileEntity.getWorld().provider.dimensionId,
-                            aBaseMetaTileEntity.getXCoord(),
-                            aBaseMetaTileEntity.getYCoord(),
-                            aBaseMetaTileEntity.getZCoord(),
-                            16));
+            getBaseMetaTileEntity().sendBlockEvent(GregTechTileClientEvents.CHANGE_CUSTOM_DATA, getUpdateData());
             return casingAmount >= 42
                     && machineTier >= 0
                     && casingTier >= 0
@@ -413,7 +404,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
                 tier = Math.max(tHatch.mTier, tier);
             }
         }
-        for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti) {
+        for (GT_MetaTileEntity_Hatch tHatch : mExoticEnergyHatches) {
             if (isValidMetaTileEntity(tHatch)) {
                 tier = Math.max(tHatch.mTier, tier);
             }
@@ -459,8 +450,21 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
         for (GT_MetaTileEntity_Hatch hatch : mMufflerHatches) {
             hatch.updateTexture(texture);
         }
-        for (GT_MetaTileEntity_Hatch hatch : eEnergyMulti) {
+        for (GT_MetaTileEntity_Hatch hatch : mExoticEnergyHatches) {
             hatch.updateTexture(texture);
+        }
+    }
+
+    @Override
+    public byte getUpdateData() {
+        return (byte) casingTier;
+    }
+
+    @Override
+    public void receiveClientEvent(byte aEventID, byte aValue) {
+        super.receiveClientEvent(aEventID, aValue);
+        if (aEventID == GregTechTileClientEvents.CHANGE_CUSTOM_DATA && (aValue & 0x80) == 0) {
+            casingTier = aValue;
         }
     }
 

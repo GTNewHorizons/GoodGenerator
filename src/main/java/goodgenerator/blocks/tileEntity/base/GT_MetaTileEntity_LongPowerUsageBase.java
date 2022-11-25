@@ -2,11 +2,8 @@ package goodgenerator.blocks.tileEntity.base;
 
 import com.github.bartimaeusnek.bartworks.util.BW_Util;
 import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_EnergyMulti;
-import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.*;
 import gregtech.api.util.GT_Utility;
-import java.util.ArrayList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
@@ -17,8 +14,6 @@ import net.minecraft.util.StatCollector;
 public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTileEntity_LongPowerUsageBase<T>>
         extends GT_MetaTileEntity_ExtendedPowerMultiBlockBase<T> {
 
-    protected final ArrayList<GT_MetaTileEntity_Hatch_EnergyMulti> eEnergyMulti = new ArrayList<>();
-
     protected GT_MetaTileEntity_LongPowerUsageBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
@@ -28,13 +23,8 @@ public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTile
     }
 
     @Override
-    public boolean drainEnergyInput(long aEU) {
-        return doEnergyDrain(aEU, 1);
-    }
-
-    @Override
     public void clearHatches() {
-        eEnergyMulti.clear();
+        mExoticEnergyHatches.clear();
         super.clearHatches();
     }
 
@@ -46,27 +36,12 @@ public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTile
                 rVoltage += tHatch.maxEUInput();
             }
         }
-        for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti) {
+        for (GT_MetaTileEntity_Hatch tHatch : mExoticEnergyHatches) {
             if (GT_MetaTileEntity_MultiBlockBase.isValidMetaTileEntity(tHatch)) {
                 rVoltage += tHatch.maxEUInput();
             }
         }
         return rVoltage;
-    }
-
-    @Override
-    public final boolean addToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
-        if (aTileEntity == null) {
-            return false;
-        }
-        IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
-        if (aMetaTileEntity == null) {
-            return false;
-        }
-        if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_EnergyMulti) {
-            return eEnergyMulti.add((GT_MetaTileEntity_Hatch_EnergyMulti) aMetaTileEntity);
-        }
-        return super.addToMachineList(aTileEntity, aBaseCasingIndex);
     }
 
     @Override
@@ -83,9 +58,9 @@ public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTile
                 rAmps += tHatch.maxAmperesIn();
             }
         }
-        for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti) {
+        for (GT_MetaTileEntity_Hatch tHatch : mExoticEnergyHatches) {
             if (GT_MetaTileEntity_MultiBlockBase.isValidMetaTileEntity(tHatch)) {
-                rAmps += tHatch.Amperes;
+                rAmps += ((GT_MetaTileEntity_Hatch_EnergyMulti) tHatch).Amperes;
             }
         }
         return rAmps;
@@ -109,7 +84,7 @@ public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTile
                 maxEnergy += tHatch.getBaseMetaTileEntity().getEUCapacity();
             }
         }
-        for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : this.eEnergyMulti) {
+        for (GT_MetaTileEntity_Hatch tHatch : this.mExoticEnergyHatches) {
             if (GT_MetaTileEntity_MultiBlockBase.isValidMetaTileEntity(tHatch)) {
                 storedEnergy += tHatch.getBaseMetaTileEntity().getStoredEU();
                 maxEnergy += tHatch.getBaseMetaTileEntity().getEUCapacity();
@@ -146,23 +121,5 @@ public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTile
             StatCollector.translateToLocal("GT5U.multiblock.pollution") + ": " + EnumChatFormatting.GREEN
                     + mPollutionReduction + EnumChatFormatting.RESET + " %"
         };
-    }
-
-    private boolean doEnergyDrain(long EUtEffective, long Amperes) {
-        long EUuse = EUtEffective * Amperes;
-        if (EUuse < 0) {
-            EUuse = -EUuse;
-        }
-        for (GT_MetaTileEntity_Hatch tHatch : mEnergyHatches) {
-            long tDrain = Math.min(tHatch.getBaseMetaTileEntity().getStoredEU(), EUuse);
-            tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(tDrain, false);
-            EUuse -= tDrain;
-        }
-        for (GT_MetaTileEntity_Hatch tHatch : eEnergyMulti) {
-            long tDrain = Math.min(tHatch.getBaseMetaTileEntity().getStoredEU(), EUuse);
-            tHatch.getBaseMetaTileEntity().decreaseStoredEnergyUnits(tDrain, false);
-            EUuse -= tDrain;
-        }
-        return EUuse <= 0;
     }
 }
