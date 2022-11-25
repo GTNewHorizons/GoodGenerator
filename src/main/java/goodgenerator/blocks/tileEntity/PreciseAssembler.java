@@ -48,7 +48,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
-public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
+public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<PreciseAssembler>
         implements IConstructable, ISurvivalConstructable {
 
     private static final IIconContainer textureFontOn = new Textures.BlockIcons.CustomIcon("iconsets/OVERLAY_QTANK");
@@ -75,7 +75,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
     }
 
     @Override
-    public IStructureDefinition<PreciseAssembler> getStructure_EM() {
+    public IStructureDefinition<PreciseAssembler> getStructureDefinition() {
         if (multiDefinition == null) {
             multiDefinition = StructureDefinition.<PreciseAssembler>builder()
                     .addShape(mName, transpose(new String[][] {
@@ -95,7 +95,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
                                             OutputBus,
                                             Maintenance,
                                             Muffler,
-                                            HatchElement.EnergyMulti.or(Energy))
+                                            ExoticEnergy)
                                     .adder(PreciseAssembler::addToPAssList)
                                     .casingIndex(1539)
                                     .dot(1)
@@ -172,6 +172,11 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
     }
 
     @Override
+    public boolean isCorrectMachinePart(ItemStack aStack) {
+        return true;
+    }
+
+    @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         aNBT.setInteger("casingTier", casingTier);
         aNBT.setInteger("machineTier", machineTier);
@@ -189,7 +194,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
     }
 
     @Override
-    public boolean checkRecipe_EM(ItemStack itemStack) {
+    public boolean checkRecipe(ItemStack itemStack) {
         if (casingTier < 0 || machineTier < 0) return false;
         FluidStack[] inputFluids = getStoredFluids().toArray(new FluidStack[0]);
         if (this.mode == 0) {
@@ -208,7 +213,8 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
                     this.mEfficiencyIncrease = 10000;
                     this.lastRecipe.isRecipeInputEqual(true, inputFluids, getStoredItemFromHatch(bus));
                     mOutputItems = this.lastRecipe.mOutputs;
-                    overclockLongPower(this.lastRecipe.mEUt, this.lastRecipe.mDuration, getMaxInputEnergyPA(), false);
+                    calculateOverclockedNessMulti(
+                            this.lastRecipe.mEUt, this.lastRecipe.mDuration, 1, getMaxInputEnergyPA());
                     this.updateSlots();
                     if (this.lEUt > 0) {
                         this.lEUt = (-this.lEUt);
@@ -236,11 +242,11 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
                     if (pall <= 0) continue;
                     Pair<ArrayList<FluidStack>, ArrayList<ItemStack>> Outputs = getMultiOutput(this.lastRecipe, pall);
                     mOutputItems = Outputs.getValue().toArray(new ItemStack[0]);
-                    overclockLongPower(
+                    calculateOverclockedNessMulti(
                             (long) this.lastRecipe.mEUt * (long) pall,
                             this.lastRecipe.mDuration / 2,
-                            getMaxInputEnergyPA(),
-                            false);
+                            1,
+                            getMaxInputEnergyPA());
                     this.updateSlots();
                     if (this.lEUt > 0) {
                         this.lEUt = (-this.lEUt);
@@ -252,9 +258,6 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
         return false;
     }
 
-    /**
-     * Modified version of {@link #getMaxInputEnergy()}
-     */
     private long getMaxInputEnergyPA() {
         long rEnergy = 0;
         if (mEnergyHatches.size() == 1) {
@@ -263,14 +266,12 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
         }
         for (GT_MetaTileEntity_Hatch_Energy tHatch : mEnergyHatches) {
             if (isValidMetaTileEntity(tHatch)) {
-                rEnergy += tHatch.getBaseMetaTileEntity().getInputVoltage()
-                        * tHatch.getBaseMetaTileEntity().getInputAmperage();
+                rEnergy += tHatch.maxEUInput() * tHatch.maxAmperesIn();
             }
         }
         for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti) {
             if (isValidMetaTileEntity(tHatch)) {
-                rEnergy += tHatch.getBaseMetaTileEntity().getInputVoltage()
-                        * tHatch.getBaseMetaTileEntity().getInputAmperage();
+                rEnergy += tHatch.maxEUInput() * tHatch.Amperes;
             }
         }
         return rEnergy;
@@ -309,7 +310,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        structureBuild_EM(mName, 4, 4, 0, stackSize, hintsOnly);
+        buildPiece(mName, stackSize, hintsOnly, 4, 4, 0);
     }
 
     @Override
@@ -322,12 +323,12 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
     }
 
     @Override
-    public boolean checkMachine_EM(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         this.machineTier = -1;
         this.casingAmount = 0;
         this.casingTier = -1;
         this.energyHatchTier = 0;
-        if (structureCheck_EM(mName, 4, 4, 0)) {
+        if (checkPiece(mName, 4, 4, 0)) {
             energyHatchTier = checkEnergyHatchTier();
             if (casingTier >= 0) {
                 reUpdate(1539 + casingTier);
@@ -383,6 +384,16 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase
     @Override
     public int getPollutionPerSecond(ItemStack aStack) {
         return 780;
+    }
+
+    @Override
+    public int getDamageToComponent(ItemStack aStack) {
+        return 0;
+    }
+
+    @Override
+    public boolean explodesOnComponentBreak(ItemStack aStack) {
+        return false;
     }
 
     @Override

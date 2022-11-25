@@ -2,17 +2,22 @@ package goodgenerator.blocks.tileEntity.base;
 
 import com.github.bartimaeusnek.bartworks.util.BW_Util;
 import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_EnergyMulti;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Energy;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Muffler;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_MultiBlockBase;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.implementations.*;
 import gregtech.api.util.GT_Utility;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import java.util.ArrayList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
-public abstract class GT_MetaTileEntity_LongPowerUsageBase extends GT_MetaTileEntity_TooltipMultiBlockBase_EM {
+/**
+ * Base class for multiblocks that supports TT energy hatches.
+ * @param <T>
+ */
+public abstract class GT_MetaTileEntity_LongPowerUsageBase<T extends GT_MetaTileEntity_LongPowerUsageBase<T>>
+        extends GT_MetaTileEntity_ExtendedPowerMultiBlockBase<T> {
+
+    protected final ArrayList<GT_MetaTileEntity_Hatch_EnergyMulti> eEnergyMulti = new ArrayList<>();
 
     protected GT_MetaTileEntity_LongPowerUsageBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -22,80 +27,46 @@ public abstract class GT_MetaTileEntity_LongPowerUsageBase extends GT_MetaTileEn
         super(aName);
     }
 
-    protected long lEUt;
-    protected int energyTier = -1;
-
     @Override
-    public void loadNBTData(NBTTagCompound aNBT) {
-        super.loadNBTData(aNBT);
-        this.lEUt = aNBT.getLong("lEUt");
-    }
-
-    @Override
-    public void saveNBTData(NBTTagCompound aNBT) {
-        super.saveNBTData(aNBT);
-        aNBT.setLong("lEUt", lEUt);
+    public boolean drainEnergyInput(long aEU) {
+        return doEnergyDrain(aEU, 1);
     }
 
     @Override
     public void clearHatches() {
+        eEnergyMulti.clear();
         super.clearHatches();
-        this.energyTier = -1;
     }
 
     @Override
-    public boolean drainEnergyInput(long EUtEffective, long Amperes) {
-        return doEnergyDrain(EUtEffective, Amperes);
-    }
-
-    @Override
-    public boolean drainEnergyInput_EM(long EUtTierVoltage, long EUtEffective, long Amperes) {
-        return doEnergyDrain(EUtEffective, Amperes);
-    }
-
-    protected void overclockLongPower(long aEUt, int aDuration, long maxInputVoltage, boolean perfectOC) {
-        // 5% space for cable loss
-        long zMaxInputVoltage = maxInputVoltage / 100L * 95L;
-        long zTime = aDuration;
-        while (aEUt < zMaxInputVoltage) {
-            aEUt = aEUt << 2;
-            zTime = zTime >> (perfectOC ? 2 : 1);
-            if (zTime <= 0) {
-                break;
+    public long getMaxInputVoltage() {
+        long rVoltage = 0;
+        for (GT_MetaTileEntity_Hatch_Energy tHatch : mEnergyHatches) {
+            if (GT_MetaTileEntity_MultiBlockBase.isValidMetaTileEntity(tHatch)) {
+                rVoltage += tHatch.maxEUInput();
             }
         }
-        if (zTime <= 0) {
-            zTime = 1;
+        for (GT_MetaTileEntity_Hatch_EnergyMulti tHatch : eEnergyMulti) {
+            if (GT_MetaTileEntity_MultiBlockBase.isValidMetaTileEntity(tHatch)) {
+                rVoltage += tHatch.maxEUInput();
+            }
         }
-        if (aEUt > zMaxInputVoltage) {
-            aEUt = aEUt >> 2;
-            zTime = zTime << (perfectOC ? 2 : 1);
-        }
-        if (zTime > Integer.MAX_VALUE - 1) {
-            zTime = Integer.MAX_VALUE - 1;
-        }
-        this.lEUt = aEUt;
-        this.mMaxProgresstime = (int) zTime;
+        return rVoltage;
     }
 
     @Override
-    public void stopMachine() {
-        this.lEUt = 0L;
-        super.stopMachine();
-    }
-
-    @Override
-    public boolean onRunningTick(ItemStack aStack) {
-        if (this.lEUt > 0) {
-            this.addEnergyOutput_EM(this.lEUt * (long) this.mEfficiency / 10000L, 1);
-            return true;
-        } else if (this.lEUt < 0
-                && !this.drainEnergyInput((-this.lEUt) * 10000L / (long) Math.max(1000, this.mEfficiency), 1)) {
-            this.stopMachine();
+    public final boolean addToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity == null) {
             return false;
-        } else {
-            return true;
         }
+        IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+        if (aMetaTileEntity == null) {
+            return false;
+        }
+        if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_EnergyMulti) {
+            return eEnergyMulti.add((GT_MetaTileEntity_Hatch_EnergyMulti) aMetaTileEntity);
+        }
+        return super.addToMachineList(aTileEntity, aBaseCasingIndex);
     }
 
     @Override
