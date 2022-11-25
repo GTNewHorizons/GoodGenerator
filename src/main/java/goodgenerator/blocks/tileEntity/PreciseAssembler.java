@@ -93,7 +93,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
                                             OutputBus,
                                             Maintenance,
                                             Muffler,
-                                            ExoticEnergy)
+                                            ExoticEnergy.or(Energy))
                                     .adder(PreciseAssembler::addToPAssList)
                                     .casingIndex(1539)
                                     .dot(1)
