@@ -643,8 +643,8 @@ public class ComponentAssemblyLine extends GT_MetaTileEntity_EnhancedMultiBlockB
         long tVoltage = GT_ExoticEnergyInputHelper.getMaxInputVoltageMulti(getExoticAndNormalEnergyHatchList());
         long tAmps = GT_ExoticEnergyInputHelper.getMaxInputAmpsMulti(getExoticAndNormalEnergyHatchList());
         long totalEU = tVoltage * tAmps;
-        ItemStack[] tItems = getCompactedInputs();
-        FluidStack[] tFluids = getCompactedFluids();
+        ItemStack[] tItems = getStoredInputs().toArray(new ItemStack[0]);
+        FluidStack[] tFluids = getStoredFluids().toArray(new FluidStack[0]);
         GT_Recipe foundRecipe = getRecipeMap().findRecipe(getBaseMetaTileEntity(), false, totalEU, tFluids, tItems);
         if (foundRecipe == null) return false;
         if (foundRecipe.mSpecialValue > casingTier + 1) return false;
@@ -661,7 +661,7 @@ public class ComponentAssemblyLine extends GT_MetaTileEntity_EnhancedMultiBlockB
         mMaxProgresstime = (int) (foundRecipe.mDuration / Math.pow(2, overclock_count));
         mMaxProgresstime = Math.max(1, mMaxProgresstime);
 
-        mOutputItems = foundRecipe.mOutputs.clone();
+        mOutputItems = foundRecipe.mOutputs;
         updateSlots();
         return true;
     }
