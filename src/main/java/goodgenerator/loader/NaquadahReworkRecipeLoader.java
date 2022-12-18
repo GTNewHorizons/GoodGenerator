@@ -74,10 +74,7 @@ public class NaquadahReworkRecipeLoader {
                             Materials.Carbon.getDust(1),
                             GT_Utility.copyAmount(0, GenericChem.mAdvancedNaquadahCatalyst)
                         },
-                        new FluidStack[] {
-                            Materials.SulfuricAcid.getFluid(16000),
-                            Materials.Oxygen.getGas(100L)
-                        },
+                        new FluidStack[] {Materials.SulfuricAcid.getFluid(16000), Materials.Oxygen.getGas(100L)},
                         new FluidStack[] {wasteLiquid.getFluidOrGas(32000)},
                         new ItemStack[] {
                             inertEnrichedNaquadah.get(OrePrefixes.dust, 64),
