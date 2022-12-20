@@ -12,6 +12,7 @@ import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.objects.ItemData;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
 import gtPlusPlus.core.recipe.common.CI;
@@ -25,7 +26,6 @@ import org.apache.logging.log4j.Level;
 
 public class ComponentAssemblyLineMiscRecipes {
 
-    @SuppressWarnings("deprecation")
     public static final Materials[] circuitTierMaterials = {
         Materials.Primitive,
         Materials.Basic,
@@ -35,7 +35,7 @@ public class ComponentAssemblyLineMiscRecipes {
         Materials.Elite,
         Materials.Master,
         Materials.Ultimate,
-        Materials.Superconductor,
+        Materials.SuperconductorUHV,
         Materials.Infinite,
         Materials.Bio,
         Materials.Nano,
@@ -51,7 +51,12 @@ public class ComponentAssemblyLineMiscRecipes {
         for (int i = 0; i < circuitTierMaterials.length; i++) MatToTier.put(circuitTierMaterials[i], i);
 
         MatToTier.forEach((mat, tier) -> {
-            for (ItemStack item : mat.mMaterialItems) CircuitToTier.put(item, tier);
+            for (ItemStack item : mat.mMaterialItems) {
+                ItemData data = GT_OreDictUnificator.getAssociation(item);
+                if (data != null && data.mPrefix == OrePrefixes.circuit) {
+                    CircuitToTier.put(item, tier);
+                }
+            }
         });
 
         generateCasingRecipes();
