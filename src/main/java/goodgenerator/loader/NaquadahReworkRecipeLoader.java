@@ -84,7 +84,7 @@ public class NaquadahReworkRecipeLoader {
                         new int[] {3300, 3300, 3300},
                         10 * 20,
                         (int) GT_Values.VP[11],
-                        3);
+                        2);
                 // Naquadria (UMV)
                 CORE.RA.addQuantumTransformerRecipe(
                         new ItemStack[] {
@@ -104,7 +104,7 @@ public class NaquadahReworkRecipeLoader {
                             Materials.Indium.getDust(64)
                         },
                         new int[] {3300, 3300, 3300},
-                        10 * 20,
+                        5 * 20,
                         (int) GT_Values.VP[12],
                         3);
                 // Activate Them
