@@ -82,8 +82,7 @@ public class ComponentAssemblyLineRecipeLoader {
                     }
 
                     int tier = info.getRight();
-                    int energy =
-                            (int) Math.min(Integer.MAX_VALUE - 7, (GT_Values.V[tier] - (GT_Values.V[tier] >> 4)) * 2);
+                    int energy = (int) Math.min(Integer.MAX_VALUE - 7, GT_Values.VP[tier - 1]);
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             compactItems(fixedInputs, info.getRight()).toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
