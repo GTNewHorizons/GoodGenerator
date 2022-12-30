@@ -77,8 +77,7 @@ public class NaquadahReworkRecipeLoader {
                         new FluidStack[] {Materials.SulfuricAcid.getFluid(16000), Materials.Oxygen.getGas(100L)},
                         new FluidStack[] {wasteLiquid.getFluidOrGas(32000)},
                         new ItemStack[] {
-                            inertEnrichedNaquadah.get(OrePrefixes.dust, 64),
-                            Materials.Trinium.getDust(64),
+                            inertEnrichedNaquadah.get(OrePrefixes.dust, 64), Materials.Trinium.getDust(64),
                         },
                         new int[] {3300, 3300, 3300},
                         10 * 20,
