@@ -80,6 +80,7 @@ public abstract class GT_MetaTileEntity_LargeTurbineBase
     protected int storedFluid = 0;
     protected int counter = 0;
     protected boolean looseFit = false;
+    protected long maxPower = 0;
 
     public GT_MetaTileEntity_LargeTurbineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -101,9 +102,14 @@ public abstract class GT_MetaTileEntity_LargeTurbineBase
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, 2, 2, 1)
+        maxPower = 0;
+        if (checkPiece(STRUCTURE_PIECE_MAIN, 2, 2, 1)
                 && mMaintenanceHatches.size() == 1
-                && mMufflerHatches.isEmpty() == (getPollutionPerTick(null) == 0);
+                && mMufflerHatches.isEmpty() == (getPollutionPerTick(null) == 0)) {
+            maxPower = getMaximumOutput();
+            return true;
+        }
+        return false;
     }
 
     public abstract Block getCasingBlock();
