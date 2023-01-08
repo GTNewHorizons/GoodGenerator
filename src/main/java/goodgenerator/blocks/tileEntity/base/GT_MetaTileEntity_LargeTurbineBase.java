@@ -228,6 +228,7 @@ public abstract class GT_MetaTileEntity_LargeTurbineBase
             if (isValidMetaTileEntity(aDynamo)) {
                 long aVoltage = aDynamo.maxEUOutput();
                 aTotal = aDynamo.maxAmperesOut() * aVoltage;
+                break;
             }
         }
         return aTotal;
