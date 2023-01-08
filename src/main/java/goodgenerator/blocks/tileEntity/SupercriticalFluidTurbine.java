@@ -84,6 +84,10 @@ public class SupercriticalFluidTurbine extends GT_MetaTileEntity_LargeTurbineBas
             tEU = Math.max(1, GT_Utility.safeInt((long) tEU * (long) aBaseEff / 100L));
         }
 
+        if (tEU > getMaximumOutput()) {
+            tEU = GT_Utility.safeInt(getMaximumOutput());
+        }
+
         return tEU;
     }
 

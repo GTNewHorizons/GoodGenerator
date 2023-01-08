@@ -216,6 +216,17 @@ public abstract class GT_MetaTileEntity_LargeTurbineBase
         return true;
     }
 
+    public long getMaximumOutput() {
+        long aTotal = 0;
+        for (GT_MetaTileEntity_Hatch_Dynamo aDynamo : mDynamoHatches) {
+            if (isValidMetaTileEntity(aDynamo)) {
+                long aVoltage = aDynamo.maxEUOutput();
+                aTotal = aDynamo.maxAmperesOut() * aVoltage;
+            }
+        }
+        return aTotal;
+    }
+
     @Override
     public String[] getInfoData() {
         int mPollutionReduction = 0;
