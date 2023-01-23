@@ -181,8 +181,7 @@ public class ExtremeHeatExchanger extends GT_MetaTileEntity_TooltipMultiBlockBas
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         aNBT.setBoolean("transformed", transformed);
-        if (hotName != null)
-            aNBT.setString("hotName", hotName);
+        if (hotName != null) aNBT.setString("hotName", hotName);
         super.saveNBTData(aNBT);
     }
 
