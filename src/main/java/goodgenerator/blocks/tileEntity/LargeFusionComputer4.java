@@ -67,8 +67,8 @@ public class LargeFusionComputer4 extends LargeFusionComputerPP {
                 .addCasingInfo("Compact Fusion Coil MK-II Prototype", 560)
                 .addCasingInfo("Infinity Catalyst Frame Box", 128)
                 .addCasingInfo("Neutronium Reinforced Borosilicate Glass Block", 63)
-                .addEnergyHatch("1-32, Hint block with dot 3", 3).addInputHatch("2-16, Hint block with dot 1", 1)
-                .addOutputHatch("1-16, Hint block with dot 2", 2).addStructureInfo("ALL Hatches must be UHV or better")
+                .addEnergyHatch("1-32, Hint block with dot 2", 2).addInputHatch("1-16, Hint block with dot 1", 1)
+                .addOutputHatch("1-16, Hint block with dot 1", 1).addStructureInfo("ALL Hatches must be UHV or better")
                 .toolTipFinisher("Good Generator");
         return tt;
     }
