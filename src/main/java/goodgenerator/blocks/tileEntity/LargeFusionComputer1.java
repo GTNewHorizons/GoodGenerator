@@ -20,6 +20,7 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
+import gregtech.api.util.GT_Utility;
 
 public class LargeFusionComputer1 extends LargeFusionComputer {
 
@@ -57,7 +58,11 @@ public class LargeFusionComputer1 extends LargeFusionComputer {
                 .addCasingInfo("Naquadah Alloy Frame Boxes", 128)
                 .addCasingInfo("Rhodium-Plated Palladium Reinforced Borosilicate Glass Block", 63)
                 .addEnergyHatch("1-32, Hint block with dot 2", 2).addInputHatch("1-16, Hint block with dot 1", 1)
-                .addOutputHatch("1-16, Hint block with dot 1", 1).addStructureInfo("ALL Hatches must be LuV or better")
+                .addOutputHatch("1-16, Hint block with dot 1", 1)
+                .addStructureInfo(
+                        "ALL Hatches must be " + GT_Utility.getColoredTierNameFromTier((byte) hatchTier())
+                                + EnumChatFormatting.GRAY
+                                + " or better")
                 .toolTipFinisher("Good Generator");
         return tt;
     }
