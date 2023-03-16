@@ -6,9 +6,11 @@ import static com.github.bartimaeusnek.bartworks.util.RecipeFinderForParallel.ha
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static goodgenerator.util.DescTextLocalization.BLUE_PRINT_INFO;
 import static gregtech.api.enums.GT_HatchElement.*;
+import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
 import static gregtech.api.util.GT_StructureUtility.ofFrame;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,8 +29,15 @@ import com.gtnewhorizon.structurelib.structure.IItemSource;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureUtility;
+import com.gtnewhorizons.modularui.api.drawable.IDrawable;
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
+import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 
 import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_LongPowerUsageBase;
+import goodgenerator.client.GUI.GG_UITextures;
 import goodgenerator.loader.Loaders;
 import goodgenerator.util.DescTextLocalization;
 import goodgenerator.util.MyRecipeAdder;
@@ -36,6 +45,7 @@ import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
+import gregtech.api.gui.modularui.GT_UITextures;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -444,5 +454,30 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
                     TextureFactory.of(textureFontOff),
                     TextureFactory.builder().addIcon(textureFontOff_Glow).glow().build() };
         } else return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(1539 + t) };
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+        builder.widget(
+                new ButtonWidget().setOnClick((clickData, widget) -> { mode = (mode + 1) % 2; }).setPlayClickSound(true)
+                        .setBackground(() -> {
+                            List<UITexture> ret = new ArrayList<>();
+                            ret.add(GT_UITextures.BUTTON_STANDARD);
+                            if (mode % 2 == 0) {
+                                ret.add(GG_UITextures.OVERLAY_BUTTON_PRECISE_MODE);
+                            } else {
+                                ret.add(GG_UITextures.OVERLAY_BUTTON_ASSEMBLER_MODE);
+                            }
+                            return ret.toArray(new IDrawable[0]);
+                        }).setPos(80, 91).setSize(16, 16)
+                        .addTooltip(StatCollector.translateToLocal("gui.PrecieAssembler.mode"))
+                        .setTooltipShowUpDelay(TOOLTIP_DELAY))
+                .widget(new FakeSyncWidget.IntegerSyncer(() -> mode, val -> mode = val));
+    }
+
+    @Override
+    protected boolean isInputSeparationEnabled() {
+        return true;
     }
 }
