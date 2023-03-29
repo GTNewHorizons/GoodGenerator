@@ -87,38 +87,8 @@ public class NeutronActivator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     public boolean checkRecipe_EM(ItemStack aStack) {
         this.mEfficiency = 10000;
 
-        ArrayList<FluidStack> tFluids = getStoredFluids();
-        ArrayList<ItemStack> tItems = getStoredInputs();
-        Collection<GT_Recipe> tRecipes = MyRecipeAdder.instance.NA.mRecipeList;
-
-        for (int i = 0; i < tFluids.size() - 1; i++) {
-            for (int j = i + 1; j < tFluids.size(); j++) {
-                if (GT_Utility.areFluidsEqual(tFluids.get(i), tFluids.get(j))) {
-                    if ((tFluids.get(i)).amount >= (tFluids.get(j)).amount) {
-                        tFluids.remove(j--);
-                    } else {
-                        tFluids.remove(i--);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < tItems.size() - 1; i++) {
-            for (int j = i + 1; j < tItems.size(); j++) {
-                if (GT_Utility.areStacksEqual(tItems.get(i), tItems.get(j))) {
-                    if ((tItems.get(i)).stackSize >= (tItems.get(j)).stackSize) {
-                        tItems.remove(j--);
-                    } else {
-                        tItems.remove(i--);
-                        break;
-                    }
-                }
-            }
-        }
-
-        FluidStack[] inFluids = tFluids.toArray(new FluidStack[0]);
-        ItemStack[] inItems = tItems.toArray(new ItemStack[0]);
+        FluidStack[] inFluids = getStoredFluids().toArray(new FluidStack[0]);
+        ItemStack[] inItems = getStoredInputs().toArray(new ItemStack[0]);
         int minNKE, maxNKE;
 
         lastRecipe = getRecipeMap()
