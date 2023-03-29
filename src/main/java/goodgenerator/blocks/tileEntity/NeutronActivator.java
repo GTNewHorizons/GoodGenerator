@@ -54,7 +54,7 @@ import gregtech.api.util.*;
 public class NeutronActivator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
         implements IConstructable, ISurvivalConstructable {
 
-    protected IStructureDefinition<NeutronActivator> multiDefinition = null;
+    protected static IStructureDefinition<NeutronActivator> multiDefinition = null;
     protected final ArrayList<NeutronAccelerator> mNeutronAccelerator = new ArrayList<>();
     protected final ArrayList<NeutronSensor> mNeutronSensor = new ArrayList<>();
     protected int casingAmount = 0;
