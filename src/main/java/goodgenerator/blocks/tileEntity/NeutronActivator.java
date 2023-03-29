@@ -198,7 +198,10 @@ public class NeutronActivator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                 .addOutputBus("Hint block with dot 2").addMaintenanceHatch("Hint block with dot 2")
                 .addOtherStructurePart("Neutron Accelerator", "Hint block with dot 2")
                 .addOtherStructurePart("Neutron Sensor", "Hint block with dot 2")
-                .addCasingInfo("Clean Stainless Steel Machine Casing", 7).toolTipFinisher("Good Generator");
+                .addCasingInfoRange("Clean Stainless Steel Machine Casing", 7, 31, false)
+                .addCasingInfoExactly("Processor Machine Casing", 18, false)
+                .addCasingInfoMin("Steel Frame Box", 16, false).addCasingInfoMin("Speeding Pipe Casing", 4, false)
+                .addCasingInfoMin("EV+ Glass", 32, false).toolTipFinisher("Good Generator");
         return tt;
     }
 
