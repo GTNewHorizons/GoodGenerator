@@ -53,7 +53,7 @@ public class ComponentAssemblyLine extends GT_MetaTileEntity_LongPowerUsageBase<
                     new String[][] {
                             { "         ", "   III   ", " HHI~IHH ", "HH III HH", "H       H", "H       H", "H  JJJ  H",
                                     "H  JJJ  H", "H  N N  H", "HHHHHHHHH" },
-                            { "         ", " EHHHHHE ", "E       E", "H       H", "A       A", "A       A", "A       A",
+                            { "         ", " ELHHHLE ", "E       E", "H       H", "A       A", "A       A", "A       A",
                                     "A  HHH  A", "A       A", "MHHHHHHHM" },
                             { "   HBH   ", " EL   LE ", "E       E", "HC     CH", "AC     CA", "AC     CA", "A D   D A",
                                     "A  HHH  A", "A       A", "MHHHHHHHM" },
@@ -113,7 +113,7 @@ public class ComponentAssemblyLine extends GT_MetaTileEntity_LongPowerUsageBase<
                                     "A  HHH  A", "A  n n  A", "MHHHHHHHM" },
                             { "   HBH   ", " EL   LE ", "E       E", "HC     CH", "AC     CA", "AC     CA", "A D   D A",
                                     "A  HHH  A", "A       A", "MHHHHHHHM" },
-                            { "         ", " EHHHHHE ", "E       E", "H       H", "A       A", "A       A", "A       A",
+                            { "         ", " ELHHHLE ", "E       E", "H       H", "A       A", "A       A", "A       A",
                                     "A  HHH  A", "A       A", "MHHHHHHHM" },
                             { "         ", "         ", " HHHHHHH ", "HH     HH", "H       H", "H       H", "H       H",
                                     "H       H", "H  KKK  H", "HHHHHHHHH" } })
