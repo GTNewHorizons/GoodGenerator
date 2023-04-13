@@ -26,14 +26,6 @@ public class IMCForNEI {
             sendCatalyst("gt.recipe.fusionreactor", "gregtech:gt.blockmachines:32023", -10);
         }
 
-        sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32019", -10);
-        sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32020", -10);
-        sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32021", -10);
-        if (LoadedList.GTPP) {
-            sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32022", -10);
-            sendCatalyst("gt.recipe.complexfusionreactor", "gregtech:gt.blockmachines:32023", -10);
-        }
-
         sendHandler("gg.recipe.componentassemblyline", "gregtech:gt.blockmachines:32026", 2);
         sendCatalyst("gg.recipe.componentassemblyline", "gregtech:gt.blockmachines:32026");
     }
