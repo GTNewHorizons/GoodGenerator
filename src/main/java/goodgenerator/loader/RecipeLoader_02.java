@@ -7,6 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader;
+import com.github.technus.tectech.recipe.TT_recipeAdder;
 
 import goodgenerator.crossmod.LoadedList;
 import goodgenerator.items.MyMaterial;
@@ -1263,16 +1264,16 @@ public class RecipeLoader_02 {
                     600,
                     (int) TierEU.RECIPE_UEV);
 
-            GT_Values.RA.addAssemblylineRecipe(
+            TT_recipeAdder.addResearchableAssemblylineRecipe(
                     ItemRefer.Compact_Fusion_MK3.get(1),
-                    24000,
-                    new Object[] { GregtechItemList.FusionComputer_UV2.get(48),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            ItemList.Circuit_Wafer_PPIC.get(64), ItemList.UHV_Coil.get(16),
-                            ALLOY.TITANSTEEL.getPlateDense(8), ItemRefer.HiC_T4.get(8),
+                    2_560_000,
+                    4_096,
+                    (int) TierEU.RECIPE_UHV,
+                    256,
+                    new Object[] { GregtechItemList.FusionComputer_UV2.get(48), new Object[] { "circuitInfinite", 1 },
+                            new Object[] { "circuitInfinite", 1 }, new Object[] { "circuitInfinite", 1 },
+                            new Object[] { "circuitInfinite", 1 }, ItemList.Circuit_Wafer_PPIC.get(64),
+                            ItemList.UHV_Coil.get(16), ALLOY.TITANSTEEL.getPlateDense(8), ItemRefer.HiC_T4.get(8),
                             ItemList.Field_Generator_UHV.get(8),
                             MyMaterial.enrichedNaquadahAlloy.get(OrePrefixes.gearGtSmall, 64) },
                     new FluidStack[] { GenericChem.TEFLON.getFluidStack(2304), MyMaterial.dalisenite.getMolten(1152),
@@ -1294,17 +1295,17 @@ public class RecipeLoader_02 {
                     3);
 
             // Compact MK5 Computer
-            GT_Values.RA.addAssemblylineRecipe(
-                    ItemRefer.Compact_Fusion_MK4.get(1),
-                    24000,
-                    new Object[] { GregtechItemList.FusionComputer_UV3.get(48),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Bio, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Bio, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Bio, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Bio, 1),
-                            ItemList.Circuit_Wafer_QPIC.get(64), ItemList.UHV_Coil.get(64),
-                            ELEMENT.STANDALONE.HYPOGEN.getPlateDense(8), ItemRefer.HiC_T5.get(8),
-                            ItemList.Field_Generator_UEV.get(8),
+            TT_recipeAdder.addResearchableAssemblylineRecipe(
+                    ItemRefer.Compact_Fusion_MK3.get(1),
+                    10_240_000,
+                    16_384,
+                    (int) TierEU.RECIPE_UEV,
+                    256,
+                    new Object[] { GregtechItemList.FusionComputer_UV3.get(48), new Object[] { "circuitBio", 1 },
+                            new Object[] { "circuitBio", 1 }, new Object[] { "circuitBio", 1 },
+                            new Object[] { "circuitBio", 1 }, ItemList.Circuit_Wafer_QPIC.get(64),
+                            ItemList.UHV_Coil.get(64), ELEMENT.STANDALONE.HYPOGEN.getPlateDense(8),
+                            ItemRefer.HiC_T5.get(8), ItemList.Field_Generator_UEV.get(8),
                             MyMaterial.metastableOganesson.get(OrePrefixes.gearGtSmall, 64) },
                     new FluidStack[] { MyMaterial.tairitsu.getMolten(2304), ALLOY.OCTIRON.getFluidStack(1152),
                             ELEMENT.STANDALONE.RHUGNOR.getFluidStack(288) },
