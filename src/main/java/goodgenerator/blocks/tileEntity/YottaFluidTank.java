@@ -317,22 +317,33 @@ public class YottaFluidTank extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
 
     @Override
     public String[] getInfoData() {
-        return new String[] {
-            StatCollector.translateToLocal("scanner.info.YOTTank.1"),
-            StatCollector.translateToLocal(EnumChatFormatting.YELLOW + CharExchanger.formatNumber(getFluidName() + EnumChatFormatting.RESET + " (" + EnumChatFormatting.GREEN + getPercent()) + "%" + EnumChatFormatting.RESET+  ")" ),
+        return new String[] { StatCollector.translateToLocal("scanner.info.YOTTank.1"), StatCollector.translateToLocal(
+                EnumChatFormatting.YELLOW + CharExchanger.formatNumber(
+                        getFluidName() + EnumChatFormatting.RESET + " (" + EnumChatFormatting.GREEN + getPercent())
+                        + "%"
+                        + EnumChatFormatting.RESET
+                        + ")"),
 
-            StatCollector.translateToLocal("scanner.info.YOTTank.0"),
-            StatCollector.translateToLocal(EnumChatFormatting.GREEN + CharExchanger.formatNumber(getCap()) + " L" + EnumChatFormatting.RESET ),
+                StatCollector.translateToLocal("scanner.info.YOTTank.0"),
+                StatCollector.translateToLocal(
+                        EnumChatFormatting.GREEN + CharExchanger.formatNumber(getCap())
+                                + " L"
+                                + EnumChatFormatting.RESET),
 
-            StatCollector.translateToLocal("scanner.info.YOTTank.2"),
-            StatCollector.translateToLocal(EnumChatFormatting.GREEN + CharExchanger.formatNumber(getStored()) + EnumChatFormatting.RESET + " L"),
+                StatCollector.translateToLocal("scanner.info.YOTTank.2"),
+                StatCollector.translateToLocal(
+                        EnumChatFormatting.GREEN + CharExchanger.formatNumber(getStored())
+                                + EnumChatFormatting.RESET
+                                + " L"),
 
-            StatCollector.translateToLocal("scanner.info.YOTTank.3"),
-            StatCollector.translateToLocal(EnumChatFormatting.YELLOW + CharExchanger.formatNumber(getLockedFluidName()) + EnumChatFormatting.RESET) };
+                StatCollector.translateToLocal("scanner.info.YOTTank.3"),
+                StatCollector.translateToLocal(
+                        EnumChatFormatting.YELLOW + CharExchanger.formatNumber(getLockedFluidName())
+                                + EnumChatFormatting.RESET) };
     }
 
     private String getPercent() {
-        return  String.valueOf(mStorageCurrent.multiply( new BigInteger("100")).divide(mStorage));
+        return String.valueOf(mStorageCurrent.multiply(new BigInteger("100")).divide(mStorage));
     }
 
     @Override
