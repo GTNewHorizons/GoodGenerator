@@ -317,29 +317,32 @@ public class YottaFluidTank extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
 
     @Override
     public String[] getInfoData() {
-        return new String[] { StatCollector.translateToLocal("scanner.info.YOTTank.1"), StatCollector.translateToLocal(
+        return new String[] {
+            StatCollector.translateToLocal("scanner.info.YOTTank.1"),
+            StatCollector.translateToLocal(
                 EnumChatFormatting.YELLOW + CharExchanger.formatNumber(
-                        getFluidName() + EnumChatFormatting.RESET + " (" + EnumChatFormatting.GREEN + getPercent())
-                        + "%"
-                        + EnumChatFormatting.RESET
-                        + ")"),
+                        getFluidName() + EnumChatFormatting.RESET)),
 
                 StatCollector.translateToLocal("scanner.info.YOTTank.0"),
                 StatCollector.translateToLocal(
                         EnumChatFormatting.GREEN + CharExchanger.formatNumber(getCap())
-                                + " L"
-                                + EnumChatFormatting.RESET),
+                                + EnumChatFormatting.RESET + " L"
+                ),
 
                 StatCollector.translateToLocal("scanner.info.YOTTank.2"),
                 StatCollector.translateToLocal(
                         EnumChatFormatting.GREEN + CharExchanger.formatNumber(getStored())
                                 + EnumChatFormatting.RESET
-                                + " L"),
+                                + " L" + " (" + EnumChatFormatting.GREEN + getPercent()
+                    + "%"
+                    + EnumChatFormatting.RESET
+                    + ")"),
 
                 StatCollector.translateToLocal("scanner.info.YOTTank.3"),
                 StatCollector.translateToLocal(
                         EnumChatFormatting.YELLOW + CharExchanger.formatNumber(getLockedFluidName())
-                                + EnumChatFormatting.RESET) };
+                                + EnumChatFormatting.RESET)
+        };
     }
 
     private String getPercent() {
