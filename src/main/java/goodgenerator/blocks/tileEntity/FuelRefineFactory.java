@@ -181,12 +181,6 @@ public class FuelRefineFactory extends GT_MetaTileEntity_TooltipMultiBlockBase_E
         cnt[0] = 0;
         cnt[1] = 0;
         cnt[2] = 0;
-        mWrench = true;
-        mScrewdriver = true;
-        mSoftHammer = true;
-        mHardHammer = true;
-        mSolderingTool = true;
-        mCrowbar = true;
         return structureCheck_EM(mName, 7, 12, 1) && getTier() != -1;
     }
 
@@ -299,6 +293,16 @@ public class FuelRefineFactory extends GT_MetaTileEntity_TooltipMultiBlockBase_E
         System.arraycopy(super.getInfoData(), 0, infoData, 0, super.getInfoData().length);
         infoData[super.getInfoData().length] = StatCollector.translateToLocal("scanner.info.FRF") + " " + this.Tier;
         return infoData;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsVoidProtection() {
+        return true;
     }
 
     @Override
