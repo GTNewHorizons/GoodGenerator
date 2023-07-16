@@ -105,7 +105,7 @@ public class NeutronActivator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                 }
                 mFloor = (lastRecipe.mSpecialValue % 10000) * 1000000;
                 mCeil = (lastRecipe.mSpecialValue / 10000) * 1000000;
-                if (eV > mCeil && eV < mFloor) {
+                if (eV > mCeil || eV < mFloor) {
                     setOutputItems(ItemRefer.Radioactive_Waste.get(4));
                 }
                 // NA does not consume power, its hatches do. Set it to 0 to be sure

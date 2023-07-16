@@ -213,7 +213,6 @@ public class PreciseAssembler extends GT_MetaTileEntity_LongPowerUsageBase<Preci
                     if (recipe.mSpecialValue > (casingTier + 1)) {
                         return CheckRecipeResultRegistry.insufficientMachineTier(recipe.mSpecialValue);
                     }
-                    return CheckRecipeResultRegistry.SUCCESSFUL;
                 }
                 return CheckRecipeResultRegistry.SUCCESSFUL;
             }
