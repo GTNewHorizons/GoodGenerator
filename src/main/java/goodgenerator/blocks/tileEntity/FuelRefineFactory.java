@@ -219,7 +219,7 @@ public class FuelRefineFactory extends GT_MetaTileEntity_TooltipMultiBlockBase_E
                     @NotNull GT_ParallelHelper helper) {
                 long ocFactor = 1L << (Tier - recipe.mSpecialValue);
                 return GT_OverclockCalculator
-                        .ofNoOverclock(((long) recipe.mEUt) * ocFactor, (int) (recipe.mDuration / ocFactor));
+                        .ofNoOverclock(((long) recipe.mEUt) * ocFactor, (int) Math.max(recipe.mDuration / ocFactor, 1));
             }
         };
     }
