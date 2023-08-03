@@ -20,7 +20,7 @@ public abstract class LargeFusionComputerPP extends LargeFusionComputer {
     @Override
     protected long getSingleHatchPower() {
         // Multiply by 8 so that we can have the original input power per hatch
-        return 2048L * tierOverclock() * getMaxPara() * extraPara(100) * 8;
+        return super.getSingleHatchPower() * 8;
     }
 
 }
