@@ -137,7 +137,7 @@ public class LargeFusionComputer4 extends LargeFusionComputerPP {
 
     @Override
     public int tierOverclock() {
-        return 64;
+        return 8;
     }
 
     @Override
