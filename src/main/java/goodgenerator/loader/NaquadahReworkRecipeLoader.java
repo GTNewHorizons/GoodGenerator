@@ -834,6 +834,104 @@ public class NaquadahReworkRecipeLoader {
 
         GT_Log.out.print("Centrifuge done!\n");
 
+        // For Centrifuge (PA)
+        for (GT_Recipe recipe : GT_Recipe.GT_Recipe_Map.sMultiblockCentrifugeRecipes.mRecipeList) {
+            ItemStack input = null;
+            if (recipe.mInputs.length > 0) input = recipe.mInputs[0];
+            if (GT_Utility.isStackValid(input)) {
+                int[] oreDict = OreDictionary.getOreIDs(input);
+                if (input.isItemEqual(GT_Bees.combs.getStackForType(CombType.DOB))) {
+                    GT_Recipe tRecipe = recipe.copy();
+                    boolean modified = false;
+                    for (int i = 0; i < tRecipe.mOutputs.length; i++) {
+                        if (!GT_Utility.isStackValid(tRecipe.mOutputs[i])) continue;
+                        if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadah.getDustTiny(1))) {
+                            tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                    tRecipe.mOutputs[i].stackSize * 2L,
+                                    naquadahEarth.get(OrePrefixes.dustTiny, 1));
+                            modified = true;
+                        }
+                    }
+                    if (modified) {
+                        reAdd.add(tRecipe);
+                        remove.add(recipe);
+                    }
+                } else for (int oreDictID : oreDict) {
+                    if (OreDictionary.getOreName(oreDictID).startsWith("dustPureNaq")
+                            || OreDictionary.getOreName(oreDictID).startsWith("dustImpureNaq")
+                            || OreDictionary.getOreName(oreDictID).startsWith("dustSpace")
+                            || OreDictionary.getOreName(oreDictID).startsWith("dustNaq")) {
+                        GT_Recipe tRecipe = recipe.copy();
+                        boolean modified = false;
+                        for (int i = 0; i < tRecipe.mOutputs.length; i++) {
+                            if (!GT_Utility.isStackValid(tRecipe.mOutputs[i])) continue;
+                            if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadah.getDustTiny(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        naquadahEarth.get(OrePrefixes.dustTiny, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.NaquadahEnriched.getDustTiny(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        enrichedNaquadahEarth.get(OrePrefixes.dustTiny, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadria.getDustTiny(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        naquadriaEarth.get(OrePrefixes.dustTiny, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadah.getDust(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        naquadahEarth.get(OrePrefixes.dust, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.NaquadahEnriched.getDust(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        enrichedNaquadahEarth.get(OrePrefixes.dust, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadria.getDust(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        naquadriaEarth.get(OrePrefixes.dust, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadah.getDustSmall(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        naquadahEarth.get(OrePrefixes.dustSmall, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.NaquadahEnriched.getDustSmall(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        enrichedNaquadahEarth.get(OrePrefixes.dustSmall, 1));
+                                modified = true;
+                            } else if (tRecipe.mOutputs[i].isItemEqual(Materials.Naquadria.getDustSmall(1))) {
+                                tRecipe.mOutputs[i] = GT_Utility.copyAmount(
+                                        tRecipe.mOutputs[i].stackSize * 2,
+                                        naquadriaEarth.get(OrePrefixes.dustSmall, 1));
+                                modified = true;
+                            }
+                        }
+                        if (modified) {
+                            reAdd.add(tRecipe);
+                            remove.add(recipe);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        GT_Recipe.GT_Recipe_Map.sMultiblockCentrifugeRecipes.mRecipeList.removeAll(remove);
+        GT_Recipe.GT_Recipe_Map.sMultiblockCentrifugeRecipes.mRecipeList.addAll(reAdd);
+        GT_Recipe.GT_Recipe_Map.sMultiblockCentrifugeRecipes.reInit();
+
+        GT_Log.out.print(GoodGenerator.MOD_ID + ": Replace " + remove.size() + "! ");
+
+        remove.clear();
+        reAdd.clear();
+
+        GT_Log.out.print("Centrifuge (PA) done!\n");
+
         // For Hammer
         for (GT_Recipe recipe : GT_Recipe.GT_Recipe_Map.sHammerRecipes.mRecipeList) {
             ItemStack input = recipe.mInputs[0];
@@ -974,8 +1072,8 @@ public class NaquadahReworkRecipeLoader {
         GT_Log.out.print("Multi Chemical Reactor done!\n");
 
         if (LoadedList.GTPP) {
-            // For Multi Centrifuge
-            // Blame alk. She made some shit in it, NEI will break down if anyone modify the hash list directly.
+            // For Gt++ Multi Centrifuge
+            // Apparently NEI will break down if one modifies the hash list directly.
             // GTPP_Recipe.GTPP_Recipe_Map.sMultiblockCentrifugeRecipes_GT.mRecipeList.clear();
             // RecipeGen_MultisUsingFluidInsteadOfCells.generateRecipesNotUsingCells(
             // GT_Recipe.GT_Recipe_Map.sCentrifugeRecipes,
