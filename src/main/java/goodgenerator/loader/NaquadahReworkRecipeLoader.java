@@ -1,10 +1,46 @@
 package goodgenerator.loader;
 
-import static goodgenerator.items.MyMaterial.*;
+import static goodgenerator.items.MyMaterial.P507;
+import static goodgenerator.items.MyMaterial.adamantine;
+import static goodgenerator.items.MyMaterial.concentratedEnrichedNaquadahSludge;
+import static goodgenerator.items.MyMaterial.enrichedNaquadahEarth;
+import static goodgenerator.items.MyMaterial.enrichedNaquadahGoo;
+import static goodgenerator.items.MyMaterial.enrichedNaquadahRichSolution;
+import static goodgenerator.items.MyMaterial.enrichedNaquadahSulphate;
+import static goodgenerator.items.MyMaterial.fluorineRichWasteLiquid;
+import static goodgenerator.items.MyMaterial.fluoroantimonicAcid;
+import static goodgenerator.items.MyMaterial.galliumHydroxide;
+import static goodgenerator.items.MyMaterial.indiumPhosphate;
+import static goodgenerator.items.MyMaterial.inertEnrichedNaquadah;
+import static goodgenerator.items.MyMaterial.inertNaquadah;
+import static goodgenerator.items.MyMaterial.inertNaquadria;
+import static goodgenerator.items.MyMaterial.lowQualityNaquadahEmulsion;
+import static goodgenerator.items.MyMaterial.lowQualityNaquadahSolution;
+import static goodgenerator.items.MyMaterial.lowQualityNaquadriaPhosphate;
+import static goodgenerator.items.MyMaterial.lowQualityNaquadriaSolution;
+import static goodgenerator.items.MyMaterial.lowQualityNaquadriaSulphate;
+import static goodgenerator.items.MyMaterial.magnesiumSulphate;
+import static goodgenerator.items.MyMaterial.naquadahAdamantiumSolution;
+import static goodgenerator.items.MyMaterial.naquadahEarth;
+import static goodgenerator.items.MyMaterial.naquadahGoo;
+import static goodgenerator.items.MyMaterial.naquadahRichSolution;
+import static goodgenerator.items.MyMaterial.naquadahine;
+import static goodgenerator.items.MyMaterial.naquadriaEarth;
+import static goodgenerator.items.MyMaterial.naquadriaGoo;
+import static goodgenerator.items.MyMaterial.naquadriaRichSolution;
+import static goodgenerator.items.MyMaterial.naquadriaSulphate;
+import static goodgenerator.items.MyMaterial.titaniumTrifluoride;
+import static goodgenerator.items.MyMaterial.towEthyl1Hexanol;
+import static goodgenerator.items.MyMaterial.triniumSulphate;
+import static goodgenerator.items.MyMaterial.wasteLiquid;
 import static goodgenerator.main.GG_Config_Loader.EnableNaquadahRework;
 import static gregtech.common.items.GT_MetaGenerated_Item_01.registerCauldronCleaningFor;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 
 import net.minecraft.item.ItemStack;
@@ -31,13 +67,16 @@ import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.*;
+import gregtech.api.util.GTPP_Recipe;
+import gregtech.api.util.GT_Log;
+import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GT_Utility;
 import gregtech.common.items.CombType;
 import gregtech.loaders.misc.GT_Bees;
 import gtPlusPlus.core.item.chemistry.GenericChem;
 import gtPlusPlus.core.lib.CORE;
 
-@SuppressWarnings("deprecation")
 public class NaquadahReworkRecipeLoader {
 
     public static void RecipeLoad() {
