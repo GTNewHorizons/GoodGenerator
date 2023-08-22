@@ -48,7 +48,8 @@ public class FuelRefineFactory extends GT_MetaTileEntity_TooltipMultiBlockBase_E
     private IStructureDefinition<FuelRefineFactory> multiDefinition = null;
     private int Tier = -1;
     private int[] cnt = new int[] { 0, 0, 0, 0 };
-    private static final Block[] coils = new Block[] { Loaders.FRF_Coil_1, Loaders.FRF_Coil_2, Loaders.FRF_Coil_3, Loaders.FRF_Coil_4 };
+    private static final Block[] coils = new Block[] { Loaders.FRF_Coil_1, Loaders.FRF_Coil_2, Loaders.FRF_Coil_3,
+            Loaders.FRF_Coil_4 };
 
     public FuelRefineFactory(String name) {
         super(name);
