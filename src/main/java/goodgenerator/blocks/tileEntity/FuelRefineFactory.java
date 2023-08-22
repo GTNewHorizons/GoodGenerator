@@ -133,7 +133,7 @@ public class FuelRefineFactory extends GT_MetaTileEntity_TooltipMultiBlockBase_E
 
             private int getIndex(ItemStack trigger) {
                 int s = trigger.stackSize;
-                if (s > 3 || s <= 0) s = 3;
+                if (s > 4 || s <= 0) s = 4;
                 return s - 1;
             }
 
@@ -181,6 +181,7 @@ public class FuelRefineFactory extends GT_MetaTileEntity_TooltipMultiBlockBase_E
         cnt[0] = 0;
         cnt[1] = 0;
         cnt[2] = 0;
+        cnt[3] = 0;
         return structureCheck_EM(mName, 7, 12, 1) && getTier() != -1;
     }
 
