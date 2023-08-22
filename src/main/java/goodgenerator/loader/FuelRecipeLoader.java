@@ -75,14 +75,13 @@ public class FuelRecipeLoader {
                 100,
                 1);
 
-        //Alternative higher tier recipe
+        // Alternative higher tier recipe
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.heavyNaquadahFuel.getFluidOrGas(800),
                         MyMaterial.lightNaquadahFuel.getFluidOrGas(1000), },
                 new ItemStack[] { MyMaterial.extremelyUnstableNaquadah.get(OrePrefixes.dust, 8),
-                        GT_ModHandler
-                            .getModItem("miscutils", "itemDustChromaticGlass", 9), ItemRefer.High_Density_Uranium.get(2),
-                        ItemRefer.High_Density_Plutonium.get(1), },
+                        GT_ModHandler.getModItem("miscutils", "itemDustChromaticGlass", 9),
+                        ItemRefer.High_Density_Uranium.get(2), ItemRefer.High_Density_Plutonium.get(1), },
                 MyMaterial.naquadahBasedFuelMkIII.getFluidOrGas(200),
                 2100000,
                 100,
