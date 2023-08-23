@@ -144,7 +144,7 @@ public class FuelRecipeLoader {
         // MK VI Naquadah Fuel
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.naquadahBasedFuelMkV.getFluidOrGas(2000),
-                        FluidRegistry.getFluidStack("molten.shirabon", 1008), },
+                        FluidRegistry.getFluidStack("molten.shirabon", 1440), },
                 new ItemStack[] { ELEMENT.STANDALONE.ASTRAL_TITANIUM.getDust(64),
                         GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Tritanium, 32), },
                 MyMaterial.naquadahBasedFuelMkVI.getFluidOrGas(500),
@@ -155,7 +155,7 @@ public class FuelRecipeLoader {
         // Alternate higher tier recipe
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.naquadahBasedFuelMkV.getFluidOrGas(2000),
-                        FluidRegistry.getFluidStack("molten.shirabon", 1008), },
+                        FluidRegistry.getFluidStack("molten.shirabon", 1440), },
                 new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.dust, MaterialsUEVplus.WhiteDwarfMatter, 8),
                         ELEMENT.STANDALONE.CELESTIAL_TUNGSTEN.getDust(64),
                         GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Tritanium, 48), },
