@@ -64,7 +64,8 @@ public class GG_Config_Loader {
         NaquadahFuelTime[7] = GG_Config
                 .get("LargeNaquadahReactor", "Naquadah Fuel MkV Burning Time", NaquadahFuelTime[7]).getInt();
         NaquadahFuelVoltage[8] = GG_Config
-                .get("LargeNaquadahReactor", "Naquadah Fuel MkVI Basic Output Voltage", NaquadahFuelVoltage[8]).getInt();
+                .get("LargeNaquadahReactor", "Naquadah Fuel MkVI Basic Output Voltage", NaquadahFuelVoltage[8])
+                .getInt();
         NaquadahFuelTime[8] = GG_Config
                 .get("LargeNaquadahReactor", "Naquadah Fuel MkVI Burning Time", NaquadahFuelTime[8]).getInt();
         CoolantEfficiency[0] = GG_Config.get("LargeNaquadahReactor", "Tachyon Fluid Efficiency", CoolantEfficiency[0])

@@ -14,10 +14,10 @@ import goodgenerator.util.ItemRefer;
 import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsUEVplus;
-import gtPlusPlus.core.material.ELEMENT;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
+import gtPlusPlus.core.material.ELEMENT;
 
 public class FuelRecipeLoader {
 
@@ -69,7 +69,7 @@ public class FuelRecipeLoader {
                 MyMaterial.naquadahBasedFuelMkVIDepleted.getFluidOrGas(1),
                 NaquadahFuelVoltage[8],
                 NaquadahFuelTime[8]);
-        //MK III Naquadah Fuel
+        // MK III Naquadah Fuel
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.heavyNaquadahFuel.getFluidOrGas(800),
                         MyMaterial.lightNaquadahFuel.getFluidOrGas(1000), },
@@ -92,7 +92,7 @@ public class FuelRecipeLoader {
                 2100000,
                 100,
                 1);
-        //MK IV Naquadah Fuel
+        // MK IV Naquadah Fuel
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.naquadahBasedFuelMkIII.getFluidOrGas(2000),
                         Materials.Praseodymium.getMolten(9216L) },
@@ -117,8 +117,8 @@ public class FuelRecipeLoader {
                 75000000,
                 160,
                 2);
-        
-        //MK V Naquadah Fuel
+
+        // MK V Naquadah Fuel
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.naquadahBasedFuelMkIV.getFluidOrGas(2000),
                         FluidRegistry.getFluidStack("heavyradox", 1000), },
@@ -141,7 +141,7 @@ public class FuelRecipeLoader {
                 200,
                 3);
 
-        //MK VI Naquadah Fuel
+        // MK VI Naquadah Fuel
         MyRecipeAdder.instance.addNaquadahFuelRefineRecipe(
                 new FluidStack[] { MyMaterial.naquadahBasedFuelMkV.getFluidOrGas(2000),
                         FluidRegistry.getFluidStack("molten.shirabon", 1000), },
