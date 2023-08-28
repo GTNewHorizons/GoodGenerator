@@ -286,15 +286,15 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
     public String[] getInfoData() {
         String[] info = super.getInfoData();
         info[4] = "Probably makes: " + EnumChatFormatting.RED
-                + this.getPowerFlow()
+                + GT_Utility.formatNumbers(this.getPowerFlow())
                 + EnumChatFormatting.RESET
                 + " EU/t";
         info[6] = "Problems: " + EnumChatFormatting.RED
-                + (this.getIdealStatus() - this.getRepairStatus())
+                + GT_Utility.formatNumbers(this.getIdealStatus() - this.getRepairStatus())
                 + EnumChatFormatting.RESET
                 + " Efficiency: "
                 + EnumChatFormatting.YELLOW
-                + tEff / 100D
+                + GT_Utility.formatNumbers(tEff / 100D)
                 + EnumChatFormatting.RESET
                 + " %";
         return info;
