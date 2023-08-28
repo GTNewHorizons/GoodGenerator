@@ -70,7 +70,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     private static final int MAX_CONFIGURABLE_LENGTH = MAX_STRUCTURE_LENGTH - DEFAULT_STRUCTURE_LENGTH;
 
     private static final int RECIPE_DURATION = 32;
-    private static final int RECIPE_EUT = 480;
+    private static final long RECIPE_EUT = 480;
     private static final float NODE_COST_MULTIPLIER = 1.15f;
 
     public AspectList mOutputAspects = new AspectList();
@@ -304,13 +304,18 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
             } else if (sur == 0) {
                 this.mOutputAspects.add(getEssentia(itemStack, stackSize));
                 if (!depleteInput(itemStack)) itemStack.stackSize = 0;
+                p = 0;
                 break;
             } else {
                 this.mOutputAspects.add(getEssentia(itemStack, p));
                 itemStack.stackSize -= p;
+                p = 0;
                 break;
             }
         }
+
+        double consumedItems = this.mParallel - p;
+        double averageVisPerItem = this.mOutputAspects.visSize() / consumedItems;
 
         this.mEfficiency = 10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000;
         this.mEfficiencyIncrease = 10000;
@@ -325,7 +330,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
 
         calculatePerfectOverclockedNessMulti(
                 RECIPE_EUT,
-                (int) Math.ceil(this.mOutputAspects.visSize() * RECIPE_DURATION * (1 - this.nodeIncrease * 0.005)),
+                (int) Math.ceil(averageVisPerItem * RECIPE_DURATION * (1 - this.nodeIncrease * 0.005)),
                 1,
                 Math.min(Integer.MAX_VALUE, getMaxInputEnergy_EM()));
 
