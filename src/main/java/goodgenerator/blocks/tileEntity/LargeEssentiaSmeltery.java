@@ -310,7 +310,8 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
                 consumedItems = maxParallels;
                 break;
             } else {
-                this.mOutputAspects.add(getEssentia(itemStack, maxParallels));
+                this.mOutputAspects.add(getEssentia(itemStack, maxParallels - consumedItems));
+                itemStack.stackSize -= maxParallels - consumedItems;
                 consumedItems = maxParallels;
                 break;
             }
