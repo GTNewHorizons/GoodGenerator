@@ -70,7 +70,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     private static final int MAX_CONFIGURABLE_LENGTH = MAX_STRUCTURE_LENGTH - DEFAULT_STRUCTURE_LENGTH;
 
     private static final int RECIPE_DURATION = 32;
-    private static final int RECIPE_EUT = 480;
+    private static final long RECIPE_EUT = 480;
     private static final float NODE_COST_MULTIPLIER = 1.15f;
 
     public AspectList mOutputAspects = new AspectList();
@@ -291,26 +291,30 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
 
         if (tInputList.size() == 0) return CheckRecipeResultRegistry.NO_RECIPE;
 
-        int p = (int) this.mParallel;
+        int maxParallels = (int) Math.min(this.mParallel, (double) getMaxInputEnergy_EM() / RECIPE_EUT);
+        int consumedItems = 0;
         for (int i = tInputList.size() - 1; i >= 0; i--) {
             ItemStack itemStack = tInputList.get(i);
             int stackSize = itemStack.stackSize;
-            int sur = p - stackSize;
+            int nextConsumedItems = consumedItems + stackSize;
 
-            if (sur > 0) {
-                p -= stackSize;
+            if (nextConsumedItems < maxParallels) {
+                consumedItems += stackSize;
                 this.mOutputAspects.add(getEssentia(itemStack, stackSize));
                 if (!depleteInput(itemStack)) itemStack.stackSize = 0;
-            } else if (sur == 0) {
+            } else if (nextConsumedItems == maxParallels) {
                 this.mOutputAspects.add(getEssentia(itemStack, stackSize));
                 if (!depleteInput(itemStack)) itemStack.stackSize = 0;
+                consumedItems = maxParallels;
                 break;
             } else {
-                this.mOutputAspects.add(getEssentia(itemStack, p));
-                itemStack.stackSize -= p;
+                this.mOutputAspects.add(getEssentia(itemStack, maxParallels));
+                consumedItems = maxParallels;
                 break;
             }
         }
+
+        double averageEssentiaPerItem = this.mOutputAspects.visSize() / (double) consumedItems;
 
         this.mEfficiency = 10000 - (this.getIdealStatus() - this.getRepairStatus()) * 1000;
         this.mEfficiencyIncrease = 10000;
@@ -323,9 +327,9 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
         this.drainNodePower(WORLD, x, y, z);
         this.nodePower -= expectedPower();
 
-        calculatePerfectOverclockedNessMulti(
-                RECIPE_EUT,
-                (int) Math.ceil(this.mOutputAspects.visSize() * RECIPE_DURATION * (1 - this.nodeIncrease * 0.005)),
+        calculateOverclockedNessMulti(
+                RECIPE_EUT * consumedItems,
+                (int) Math.ceil(averageEssentiaPerItem * RECIPE_DURATION * (1 - this.nodeIncrease * 0.005)),
                 1,
                 Math.min(Integer.MAX_VALUE, getMaxInputEnergy_EM()));
 
