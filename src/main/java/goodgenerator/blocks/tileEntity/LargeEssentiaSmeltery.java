@@ -70,7 +70,8 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
     private static final int MAX_CONFIGURABLE_LENGTH = MAX_STRUCTURE_LENGTH - DEFAULT_STRUCTURE_LENGTH;
 
     private static final int RECIPE_DURATION = 32;
-    private static final long RECIPE_EUT = 480;
+    private static final int RECIPE_EUT = 480;
+    private static final int MAX_PARALLELS = 64;
     private static final float NODE_COST_MULTIPLIER = 1.15f;
 
     public AspectList mOutputAspects = new AspectList();
@@ -129,6 +130,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
                 && this.mInputBusses.size() >= 1
                 && this.mEssentiaOutputHatches.size() >= 1) {
             this.mParallel = Math.floor(this.mParallel += 1 << this.pTier);
+            this.mParallel = Math.min(this.mParallel, MAX_PARALLELS);
             return true;
         }
         return false;
@@ -291,7 +293,7 @@ public class LargeEssentiaSmeltery extends GT_MetaTileEntity_TooltipMultiBlockBa
 
         if (tInputList.size() == 0) return CheckRecipeResultRegistry.NO_RECIPE;
 
-        int maxParallels = (int) Math.min(this.mParallel, (double) getMaxInputEnergy_EM() / RECIPE_EUT);
+        int maxParallels = (int) Math.min(this.mParallel, getMaxInputEnergy_EM() / (double) RECIPE_EUT);
         int consumedItems = 0;
         for (int i = tInputList.size() - 1; i >= 0; i--) {
             ItemStack itemStack = tInputList.get(i);
