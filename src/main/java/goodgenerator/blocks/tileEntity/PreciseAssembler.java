@@ -224,7 +224,7 @@ public class PreciseAssembler extends GT_MetaTileEntity_ExtendedPowerMultiBlockB
             protected GT_OverclockCalculator createOverclockCalculator(@NotNull GT_Recipe recipe) {
                 return super.createOverclockCalculator(recipe).setSpeedBoost(mode == 0 ? 1 : 0.5F).setAmperageOC(true);
             }
-        }.setMaxParallelSupplier(() -> (int) Math.pow(2, 4 + (casingTier + 1)));
+        }.setMaxParallelSupplier(() -> mode == 0 ? 1 : (int) Math.pow(2, 4 + (casingTier + 1)));
     }
 
     @Override
