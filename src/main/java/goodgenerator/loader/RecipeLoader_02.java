@@ -669,8 +669,8 @@ public class RecipeLoader_02 {
                 .itemOutputs(
                         WerkstoffLoader.Tiberium.get(OrePrefixes.gem, 1),
                         WerkstoffLoader.Tiberium.get(OrePrefixes.gem, 1))
-                .outputChances(10000, 2000).fluidInputs(MyMaterial.naquadahGas.getFluidOrGas(250)).noFluidOutputs()
-                .duration(400).eut(TierEU.RECIPE_HV).addTo(sAutoclaveRecipes);
+                .outputChances(10000, 2000).fluidInputs(MyMaterial.naquadahGas.getFluidOrGas(250)).duration(400)
+                .eut(TierEU.RECIPE_HV).addTo(sAutoclaveRecipes);
 
         GT_Values.RA.addChemicalBathRecipe(
                 Materials.Firestone.getGems(1),
