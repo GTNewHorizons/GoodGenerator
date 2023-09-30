@@ -245,6 +245,7 @@ public class ComponentAssemblyLineRecipeLoader {
 
             // Prevents things like AnyCopper or AnyIron from messing the search up.
             if (strippedOreDict.contains("Any")) continue;
+            if (strippedOreDict.contains("Magneto")) return null;
             if (strippedOreDict.contains("PTMEG")) return FluidRegistry.getFluidStack(
                     "molten.silicone",
                     (int) (orePrefix.mMaterialAmount / (GT_Values.M / 144)) * input.stackSize);
@@ -296,6 +297,10 @@ public class ComponentAssemblyLineRecipeLoader {
                     .collect(Collectors.toList())) {
                 if (dict.startsWith("circuit")) {
                     stacks.addAll(getWrappedCircuits(itemstack, totalItems, dict));
+                    isCompacted = true;
+                }
+                if (dict.contains("Magneto")) {
+                    stacks.addAll(multiplyAndSplitIntoStacks(itemstack, totalItems));
                     isCompacted = true;
                 }
             }
