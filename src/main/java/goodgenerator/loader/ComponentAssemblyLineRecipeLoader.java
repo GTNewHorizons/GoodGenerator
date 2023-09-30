@@ -23,6 +23,7 @@ import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Recipe;
@@ -34,7 +35,7 @@ public class ComponentAssemblyLineRecipeLoader {
     private static final String[] compPrefixes = { "Electric_Motor_", "Electric_Piston_", "Electric_Pump_",
             "Robot_Arm_", "Conveyor_Module_", "Emitter_", "Sensor_", "Field_Generator_", };
     private static final String[] blacklistedDictPrefixes = { "circuit" };
-    private static final String[] softBlacklistedDictPrefixes = { "Any", "crafting" };
+    private static final String[] softBlacklistedDictPrefixes = { "Any", "crafting", "nanite" };
 
     private static LinkedHashMap<List<GT_Recipe>, Pair<ItemList, Integer>> allAssemblerRecipes;
     private static LinkedHashMap<List<GT_Recipe.GT_Recipe_AssemblyLine>, Pair<ItemList, Integer>> allAsslineRecipes;
@@ -113,10 +114,16 @@ public class ComponentAssemblyLineRecipeLoader {
                     ArrayList<ItemStack> fixedInputs = new ArrayList<>();
                     ArrayList<FluidStack> fixedFluids = new ArrayList<>();
 
+                    int divisor = 1;
+
+                    if (recipe.mEUt == TierEU.RECIPE_UMV) {
+                        divisor = 16;
+                    }
+
                     // Multiplies the original fluid inputs
                     for (int j = 0; j < recipe.mFluidInputs.length; j++) {
                         FluidStack currFluid = recipe.mFluidInputs[j].copy();
-                        currFluid.amount *= INPUT_MULTIPLIER;
+                        currFluid.amount *= (double) INPUT_MULTIPLIER / divisor;
                         fixedFluids.add(currFluid);
                     }
 
@@ -133,8 +140,8 @@ public class ComponentAssemblyLineRecipeLoader {
                                 if (data != null && data.mPrefix == OrePrefixes.circuit) fixedInputs.addAll(
                                         multiplyAndSplitIntoStacks(
                                                 GT_OreDictUnificator.get(data.mPrefix, data.mMaterial.mMaterial, count),
-                                                INPUT_MULTIPLIER));
-                                else fixedInputs.addAll(multiplyAndSplitIntoStacks(input, INPUT_MULTIPLIER));
+                                            (INPUT_MULTIPLIER / divisor)));
+                                else fixedInputs.addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER / divisor)));
                             }
                         }
                     }
@@ -147,8 +154,8 @@ public class ComponentAssemblyLineRecipeLoader {
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             fixedInputs.toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
-                            info.getLeft().get(OUTPUT_MULTIPLIER), // The component output
-                            recipe.mDuration * INPUT_MULTIPLIER, // Takes as long as this many
+                            info.getLeft().get((OUTPUT_MULTIPLIER / divisor)),// The component output
+                            recipe.mDuration * (INPUT_MULTIPLIER / divisor), // Takes as long as this many
                             recipe.mEUt,
                             info.getRight()); // Casing tier
                 }
@@ -327,7 +334,7 @@ public class ComponentAssemblyLineRecipeLoader {
         allAssemblerRecipes = new LinkedHashMap<>();
         allAsslineRecipes = new LinkedHashMap<>();
         for (String compPrefix : compPrefixes) {
-            for (int t = 1; t <= 12; t++) {
+            for (int t = 1; t <= 13; t++) {
                 String vName = GT_Values.VN[t];
                 ItemList currentComponent = ItemList.valueOf(compPrefix + vName);
                 if (currentComponent.hasBeenSet()) {
