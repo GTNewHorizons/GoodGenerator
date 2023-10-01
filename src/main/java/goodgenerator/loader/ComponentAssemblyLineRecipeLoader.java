@@ -205,7 +205,7 @@ public class ComponentAssemblyLineRecipeLoader {
                 }
             }
             if (!isConverted) {
-                newInputs.addAll(multiplyAndSplitIntoStacks(input, count));
+                newInputs.add(GT_Utility.copyAmountUnsafe(count, input));
             }
         }
         inputs.clear();
