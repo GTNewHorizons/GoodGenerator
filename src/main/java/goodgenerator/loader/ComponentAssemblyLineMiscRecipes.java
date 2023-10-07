@@ -2,9 +2,6 @@ package goodgenerator.loader;
 
 import static goodgenerator.util.ItemRefer.*;
 import static goodgenerator.util.Log.LOGGER;
-import static gregtech.api.enums.Mods.GregTech;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sAssemblerRecipes;
-import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 
 import java.util.HashMap;
 
@@ -22,7 +19,6 @@ import com.github.technus.tectech.recipe.TT_recipeAdder;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import goodgenerator.items.MyMaterial;
-import goodgenerator.util.MyRecipeAdder;
 import goodgenerator.util.StackUtils;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
@@ -30,7 +26,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
-import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
 import gtPlusPlus.core.recipe.common.CI;

@@ -23,9 +23,8 @@ import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.TierEU;
 import gregtech.api.enums.MaterialsUEVplus;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Recipe;
@@ -131,7 +130,6 @@ public class ComponentAssemblyLineRecipeLoader {
                     ArrayList<ItemStack> fixedInputs = new ArrayList<>();
                     ArrayList<FluidStack> fixedFluids = new ArrayList<>();
 
-
                     // Multiplies the original fluid inputs
                     for (int j = 0; j < recipe.mFluidInputs.length; j++) {
                         FluidStack currFluid = recipe.mFluidInputs[j].copy();
@@ -153,8 +151,7 @@ public class ComponentAssemblyLineRecipeLoader {
                                         multiplyAndSplitIntoStacks(
                                                 GT_OreDictUnificator.get(data.mPrefix, data.mMaterial.mMaterial, count),
                                                 (INPUT_MULTIPLIER)));
-                                else fixedInputs
-                                        .addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER)));
+                                else fixedInputs.addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER)));
                             }
                         }
                     }
@@ -305,8 +302,8 @@ public class ComponentAssemblyLineRecipeLoader {
 
     /**
      * Transforms each {@code ItemStack}, if possible, into a more compact form. For example, a stack of 16 1x cables,
-     * when passed into the {@code items} array, will be converted into a single 16x cable. Also handles GraviStar and neutronium nanite
-     * conversion.
+     * when passed into the {@code items} array, will be converted into a single 16x cable. Also handles GraviStar and
+     * neutronium nanite conversion.
      */
     private static ArrayList<ItemStack> compactItems(List<ItemStack> items, int tier) {
         ArrayList<ItemStack> stacks = new ArrayList<>();
@@ -339,8 +336,12 @@ public class ComponentAssemblyLineRecipeLoader {
                 stacks.addAll(multiplyAndSplitIntoStacks(ItemList.NuclearStar.get(1), totalItems / 16));
                 isCompacted = true;
             }
-            if (GT_Utility.areStacksEqual(itemstack, GT_OreDictUnificator.get(OrePrefixes.nanite, Materials.Neutronium, 1))) {
-                stacks.addAll(multiplyAndSplitIntoStacks(GT_OreDictUnificator.get(OrePrefixes.nanite, Materials.Gold, 1), totalItems / 16));
+            if (GT_Utility
+                    .areStacksEqual(itemstack, GT_OreDictUnificator.get(OrePrefixes.nanite, Materials.Neutronium, 1))) {
+                stacks.addAll(
+                        multiplyAndSplitIntoStacks(
+                                GT_OreDictUnificator.get(OrePrefixes.nanite, Materials.Gold, 1),
+                                totalItems / 16));
                 isCompacted = true;
             }
             if (!isCompacted) stacks.addAll(multiplyAndSplitIntoStacks(itemstack, totalItems));
@@ -410,21 +411,23 @@ public class ComponentAssemblyLineRecipeLoader {
             double circuitMultiplier = magnetoConversionMultipliers.get(data.mPrefix).getRight();
             double materialMultiplier = magnetoConversionMultipliers.get(data.mPrefix).getLeft();
             stacks.addAll(
-                getWrappedCircuits(
+                    getWrappedCircuits(
                             GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            (int) (total * (circuitMultiplier / materialMultiplier)), "circuitInfinite"));
+                            (int) (total * (circuitMultiplier / materialMultiplier)),
+                            "circuitInfinite"));
             stacks.addAll(multiplyAndSplitIntoStacks(item, total));
         }
         return stacks;
     }
 
-    private static void addEternity(ArrayList<FluidStack> fluidInputs){
+    private static void addEternity(ArrayList<FluidStack> fluidInputs) {
         boolean eternity = false;
         boolean mhdcsm = false;
         int mhdcsmAmount = 0;
 
         for (FluidStack fluidstack : fluidInputs) {
-            if (fluidstack.getFluid().equals(FluidRegistry.getFluid("molten.magnetohydrodynamicallyconstrainedstarmatter"))) {
+            if (fluidstack.getFluid()
+                    .equals(FluidRegistry.getFluid("molten.magnetohydrodynamicallyconstrainedstarmatter"))) {
                 mhdcsm = true;
                 mhdcsmAmount = fluidstack.amount;
             }
