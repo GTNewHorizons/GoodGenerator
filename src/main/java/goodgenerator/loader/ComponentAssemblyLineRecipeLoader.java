@@ -131,16 +131,11 @@ public class ComponentAssemblyLineRecipeLoader {
                     ArrayList<ItemStack> fixedInputs = new ArrayList<>();
                     ArrayList<FluidStack> fixedFluids = new ArrayList<>();
 
-                    int divisor = 1;
-
-                    if (recipe.mEUt == TierEU.RECIPE_UMV) {
-                        divisor = 1;
-                    }
 
                     // Multiplies the original fluid inputs
                     for (int j = 0; j < recipe.mFluidInputs.length; j++) {
                         FluidStack currFluid = recipe.mFluidInputs[j].copy();
-                        currFluid.amount *= (double) INPUT_MULTIPLIER / divisor;
+                        currFluid.amount *= (double) INPUT_MULTIPLIER;
                         fixedFluids.add(currFluid);
                     }
 
@@ -157,9 +152,9 @@ public class ComponentAssemblyLineRecipeLoader {
                                 if (data != null && data.mPrefix == OrePrefixes.circuit) fixedInputs.addAll(
                                         multiplyAndSplitIntoStacks(
                                                 GT_OreDictUnificator.get(data.mPrefix, data.mMaterial.mMaterial, count),
-                                                (INPUT_MULTIPLIER / divisor)));
+                                                (INPUT_MULTIPLIER)));
                                 else fixedInputs
-                                        .addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER / divisor)));
+                                        .addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER)));
                             }
                         }
                     }
@@ -183,8 +178,8 @@ public class ComponentAssemblyLineRecipeLoader {
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             fixedInputs.toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
-                            info.getLeft().get((OUTPUT_MULTIPLIER / divisor)), // The component output
-                            recipe.mDuration * (INPUT_MULTIPLIER / divisor), // Takes as long as this many
+                            info.getLeft().get((OUTPUT_MULTIPLIER)), // The component output
+                            recipe.mDuration * (INPUT_MULTIPLIER), // Takes as long as this many
                             recipe.mEUt,
                             info.getRight()); // Casing tier
                 }
