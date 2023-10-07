@@ -1,6 +1,7 @@
 package goodgenerator.loader;
 
-import static goodgenerator.util.StackUtils.*;
+import static goodgenerator.util.StackUtils.getTotalItems;
+import static goodgenerator.util.StackUtils.mergeStacks;
 import static goodgenerator.util.StackUtils.multiplyAndSplitIntoStacks;
 
 import java.util.ArrayList;
