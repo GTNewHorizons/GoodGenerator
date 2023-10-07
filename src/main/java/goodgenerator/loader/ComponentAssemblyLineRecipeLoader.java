@@ -1,6 +1,7 @@
 package goodgenerator.loader;
 
 import static goodgenerator.util.StackUtils.*;
+import static goodgenerator.util.StackUtils.multiplyAndSplitIntoStacks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
+import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Recipe;
@@ -40,6 +42,7 @@ public class ComponentAssemblyLineRecipeLoader {
     private static LinkedHashMap<List<GT_Recipe>, Pair<ItemList, Integer>> allAssemblerRecipes;
     private static LinkedHashMap<List<GT_Recipe.GT_Recipe_AssemblyLine>, Pair<ItemList, Integer>> allAsslineRecipes;
 
+    private static final HashMap<OrePrefixes, Pair<Integer, Integer>> magnetoConversionMultipliers = new HashMap<>();
     private static final HashMap<OrePrefixes, OrePrefixes> conversion = new HashMap<>();
 
     private static final int INPUT_MULTIPLIER = 48;
@@ -59,6 +62,20 @@ public class ComponentAssemblyLineRecipeLoader {
         conversion.put(OrePrefixes.foil, OrePrefixes.plate);
         conversion.put(OrePrefixes.stick, OrePrefixes.stickLong);
         conversion.put(OrePrefixes.gearGtSmall, OrePrefixes.gearGt);
+        magnetoConversionMultipliers.put(OrePrefixes.frameGt, Pair.of(1, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.plate, Pair.of(1, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.plateDense, Pair.of(1, 3));
+        magnetoConversionMultipliers.put(OrePrefixes.stick, Pair.of(2, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.round, Pair.of(8, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.bolt, Pair.of(8, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.screw, Pair.of(8, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.ring, Pair.of(4, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.foil, Pair.of(8, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.gearGtSmall, Pair.of(1, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.rotor, Pair.of(1, 2));
+        magnetoConversionMultipliers.put(OrePrefixes.stickLong, Pair.of(1, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.gearGt, Pair.of(1, 2));
+        magnetoConversionMultipliers.put(OrePrefixes.wireFine, Pair.of(8, 1));
         findAllRecipes();
         generateAssemblerRecipes();
         generateAsslineRecipes();
@@ -117,7 +134,7 @@ public class ComponentAssemblyLineRecipeLoader {
                     int divisor = 1;
 
                     if (recipe.mEUt == TierEU.RECIPE_UMV) {
-                        divisor = 16;
+                        divisor = 1;
                     }
 
                     // Multiplies the original fluid inputs
@@ -140,8 +157,9 @@ public class ComponentAssemblyLineRecipeLoader {
                                 if (data != null && data.mPrefix == OrePrefixes.circuit) fixedInputs.addAll(
                                         multiplyAndSplitIntoStacks(
                                                 GT_OreDictUnificator.get(data.mPrefix, data.mMaterial.mMaterial, count),
-                                            (INPUT_MULTIPLIER / divisor)));
-                                else fixedInputs.addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER / divisor)));
+                                                (INPUT_MULTIPLIER / divisor)));
+                                else fixedInputs
+                                        .addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER / divisor)));
                             }
                         }
                     }
@@ -151,10 +169,21 @@ public class ComponentAssemblyLineRecipeLoader {
                     if (fixedInputs.size() > (addProgrammedCircuit ? 8 : 9))
                         replaceIntoFluids(fixedInputs, fixedFluids, 32);
                     if (addProgrammedCircuit) fixedInputs.add(GT_Utility.getIntegratedCircuit(componentCircuit));
+
+                    for (ItemStack itemstack : fixedInputs) {
+                        if (GT_OreDictUnificator.getAssociation(itemstack) != null) {
+                            String data = GT_OreDictUnificator.getAssociation(itemstack).mMaterial.mMaterial.mName;
+                            if (itemstack.stackSize >= 95 && data.contains("Magneto")) {
+                                replaceIntoFluids(fixedInputs, fixedFluids, 95);
+                                break;
+                            }
+                        }
+                    }
+                    addEternity(fixedFluids);
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             fixedInputs.toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
-                            info.getLeft().get((OUTPUT_MULTIPLIER / divisor)),// The component output
+                            info.getLeft().get((OUTPUT_MULTIPLIER / divisor)), // The component output
                             recipe.mDuration * (INPUT_MULTIPLIER / divisor), // Takes as long as this many
                             recipe.mEUt,
                             info.getRight()); // Casing tier
@@ -245,7 +274,6 @@ public class ComponentAssemblyLineRecipeLoader {
 
             // Prevents things like AnyCopper or AnyIron from messing the search up.
             if (strippedOreDict.contains("Any")) continue;
-            if (strippedOreDict.contains("Magneto")) return null;
             if (strippedOreDict.contains("PTMEG")) return FluidRegistry.getFluidStack(
                     "molten.silicone",
                     (int) (orePrefix.mMaterialAmount / (GT_Values.M / 144)) * input.stackSize);
@@ -282,7 +310,7 @@ public class ComponentAssemblyLineRecipeLoader {
 
     /**
      * Transforms each {@code ItemStack}, if possible, into a more compact form. For example, a stack of 16 1x cables,
-     * when passed into the {@code items} array, will be converted into a single 16x cable. Also handles GraviStar
+     * when passed into the {@code items} array, will be converted into a single 16x cable. Also handles GraviStar and neutronium nanite
      * conversion.
      */
     private static ArrayList<ItemStack> compactItems(List<ItemStack> items, int tier) {
@@ -300,7 +328,7 @@ public class ComponentAssemblyLineRecipeLoader {
                     isCompacted = true;
                 }
                 if (dict.contains("Magneto")) {
-                    stacks.addAll(multiplyAndSplitIntoStacks(itemstack, totalItems));
+                    stacks.addAll(getMagnetoConversion(itemstack, totalItems));
                     isCompacted = true;
                 }
             }
@@ -314,6 +342,10 @@ public class ComponentAssemblyLineRecipeLoader {
             }
             if (GT_Utility.areStacksEqual(itemstack, ItemList.Gravistar.get(1)) && tier >= 9) {
                 stacks.addAll(multiplyAndSplitIntoStacks(ItemList.NuclearStar.get(1), totalItems / 16));
+                isCompacted = true;
+            }
+            if (GT_Utility.areStacksEqual(itemstack, GT_OreDictUnificator.get(OrePrefixes.nanite, Materials.Neutronium, 1))) {
+                stacks.addAll(multiplyAndSplitIntoStacks(GT_OreDictUnificator.get(OrePrefixes.nanite, Materials.Gold, 1), totalItems / 16));
                 isCompacted = true;
             }
             if (!isCompacted) stacks.addAll(multiplyAndSplitIntoStacks(itemstack, totalItems));
@@ -374,5 +406,40 @@ public class ComponentAssemblyLineRecipeLoader {
         else stacks.addAll(multiplyAndSplitIntoStacks(item, total));
 
         return stacks;
+    }
+
+    private static List<ItemStack> getMagnetoConversion(ItemStack item, int total) {
+        ArrayList<ItemStack> stacks = new ArrayList<>();
+        ItemData data = GT_OreDictUnificator.getAssociation(item);
+        if (data != null) {
+            double circuitMultiplier = magnetoConversionMultipliers.get(data.mPrefix).getRight();
+            double materialMultiplier = magnetoConversionMultipliers.get(data.mPrefix).getLeft();
+            stacks.addAll(
+                getWrappedCircuits(
+                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
+                            (int) (total * (circuitMultiplier / materialMultiplier)), "circuitInfinite"));
+            stacks.addAll(multiplyAndSplitIntoStacks(item, total));
+        }
+        return stacks;
+    }
+
+    private static void addEternity(ArrayList<FluidStack> fluidInputs){
+        boolean eternity = false;
+        boolean mhdcsm = false;
+        int mhdcsmAmount = 0;
+
+        for (FluidStack fluidstack : fluidInputs) {
+            if (fluidstack.getFluid().equals(FluidRegistry.getFluid("molten.magnetohydrodynamicallyconstrainedstarmatter"))) {
+                mhdcsm = true;
+                mhdcsmAmount = fluidstack.amount;
+            }
+            if (fluidstack.getFluid().equals(FluidRegistry.getFluid("molten.eternity"))) {
+                eternity = true;
+            }
+        }
+
+        if (mhdcsm && !eternity) {
+            fluidInputs.add(MaterialsUEVplus.Eternity.getMolten(mhdcsmAmount - 576 * 48));
+        }
     }
 }
