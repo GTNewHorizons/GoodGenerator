@@ -42,7 +42,7 @@ public class ComponentAssemblyLineRecipeLoader {
     private static LinkedHashMap<List<GT_Recipe>, Pair<ItemList, Integer>> allAssemblerRecipes;
     private static LinkedHashMap<List<GT_Recipe.GT_Recipe_AssemblyLine>, Pair<ItemList, Integer>> allAsslineRecipes;
 
-    private static final HashMap<OrePrefixes, Pair<Integer, Integer>> magnetoConversionMultipliers = new HashMap<>();
+    private static final HashMap<OrePrefixes, Double> magnetoConversionMultipliers = new HashMap<>();
     private static final HashMap<OrePrefixes, OrePrefixes> conversion = new HashMap<>();
 
     private static final int INPUT_MULTIPLIER = 48;
@@ -62,20 +62,20 @@ public class ComponentAssemblyLineRecipeLoader {
         conversion.put(OrePrefixes.foil, OrePrefixes.plate);
         conversion.put(OrePrefixes.stick, OrePrefixes.stickLong);
         conversion.put(OrePrefixes.gearGtSmall, OrePrefixes.gearGt);
-        magnetoConversionMultipliers.put(OrePrefixes.frameGt, Pair.of(1, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.plate, Pair.of(1, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.plateDense, Pair.of(1, 3));
-        magnetoConversionMultipliers.put(OrePrefixes.stick, Pair.of(2, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.round, Pair.of(8, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.bolt, Pair.of(8, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.screw, Pair.of(8, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.ring, Pair.of(4, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.foil, Pair.of(8, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.gearGtSmall, Pair.of(1, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.rotor, Pair.of(1, 2));
-        magnetoConversionMultipliers.put(OrePrefixes.stickLong, Pair.of(1, 1));
-        magnetoConversionMultipliers.put(OrePrefixes.gearGt, Pair.of(1, 2));
-        magnetoConversionMultipliers.put(OrePrefixes.wireFine, Pair.of(8, 1));
+        magnetoConversionMultipliers.put(OrePrefixes.frameGt, 1.0);
+        magnetoConversionMultipliers.put(OrePrefixes.plate, 1.0);
+        magnetoConversionMultipliers.put(OrePrefixes.plateDense, 3.0);
+        magnetoConversionMultipliers.put(OrePrefixes.stick, 1.0 / 2.0);
+        magnetoConversionMultipliers.put(OrePrefixes.round, 1.0 / 8.0);
+        magnetoConversionMultipliers.put(OrePrefixes.bolt, 1.0 / 8.0);
+        magnetoConversionMultipliers.put(OrePrefixes.screw, 1.0 / 8.0);
+        magnetoConversionMultipliers.put(OrePrefixes.ring, 1.0 / 4.0);
+        magnetoConversionMultipliers.put(OrePrefixes.foil, 1.0 / 8.0);
+        magnetoConversionMultipliers.put(OrePrefixes.gearGtSmall, 1.0);
+        magnetoConversionMultipliers.put(OrePrefixes.rotor, 2.0);
+        magnetoConversionMultipliers.put(OrePrefixes.stickLong, 1.0);
+        magnetoConversionMultipliers.put(OrePrefixes.gearGt, 2.0);
+        magnetoConversionMultipliers.put(OrePrefixes.wireFine, 1.0 / 8.0);
         findAllRecipes();
         generateAssemblerRecipes();
         generateAsslineRecipes();
@@ -409,12 +409,11 @@ public class ComponentAssemblyLineRecipeLoader {
         ArrayList<ItemStack> stacks = new ArrayList<>();
         ItemData data = GT_OreDictUnificator.getAssociation(item);
         if (data != null) {
-            double circuitMultiplier = magnetoConversionMultipliers.get(data.mPrefix).getRight();
-            double materialMultiplier = magnetoConversionMultipliers.get(data.mPrefix).getLeft();
+            double multiplier = magnetoConversionMultipliers.get(data.mPrefix);
             stacks.addAll(
                     getWrappedCircuits(
                             GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            (int) (total * (circuitMultiplier / materialMultiplier)),
+                            (int) (total * multiplier),
                             "circuitInfinite"));
             stacks.addAll(multiplyAndSplitIntoStacks(item, total));
         }
