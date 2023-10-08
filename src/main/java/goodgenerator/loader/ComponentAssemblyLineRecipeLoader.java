@@ -100,10 +100,12 @@ public class ComponentAssemblyLineRecipeLoader {
                         fixedFluids.add(currFluid);
                     }
 
+                    fixedInputs = compactItems(fixedInputs, info.getRight());
+                    replaceIntoFluids(fixedInputs, fixedFluids, 64);
                     int tier = info.getRight();
                     int energy = (int) Math.min(Integer.MAX_VALUE - 7, GT_Values.VP[tier - 1]);
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
-                            compactItems(fixedInputs, info.getRight()).toArray(new ItemStack[0]),
+                            fixedInputs.toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
                             info.getLeft().get(OUTPUT_MULTIPLIER),
                             recipe.mDuration * INPUT_MULTIPLIER,
@@ -157,21 +159,12 @@ public class ComponentAssemblyLineRecipeLoader {
                         }
                     }
                     fixedInputs = compactItems(fixedInputs, info.getRight());
-                    replaceIntoFluids(fixedInputs, fixedFluids, 128);
+                    replaceIntoFluids(fixedInputs, fixedFluids, 64);
                     // If it overflows then it tries REALLY HARD to cram as much stuff into there.
                     if (fixedInputs.size() > (addProgrammedCircuit ? 8 : 9))
                         replaceIntoFluids(fixedInputs, fixedFluids, 32);
                     if (addProgrammedCircuit) fixedInputs.add(GT_Utility.getIntegratedCircuit(componentCircuit));
 
-                    for (ItemStack itemstack : fixedInputs) {
-                        if (GT_OreDictUnificator.getAssociation(itemstack) != null) {
-                            String data = GT_OreDictUnificator.getAssociation(itemstack).mMaterial.mMaterial.mName;
-                            if (itemstack.stackSize >= 95 && data.contains("Magneto")) {
-                                replaceIntoFluids(fixedInputs, fixedFluids, 95);
-                                break;
-                            }
-                        }
-                    }
                     addEternity(fixedFluids);
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             fixedInputs.toArray(new ItemStack[0]),
@@ -319,10 +312,12 @@ public class ComponentAssemblyLineRecipeLoader {
                 if (dict.startsWith("circuit")) {
                     stacks.addAll(getWrappedCircuits(itemstack, totalItems, dict));
                     isCompacted = true;
+                    break;
                 }
                 if (dict.contains("Magneto")) {
                     stacks.addAll(getMagnetoConversion(itemstack, totalItems));
                     isCompacted = true;
+                    break;
                 }
             }
 
@@ -409,12 +404,14 @@ public class ComponentAssemblyLineRecipeLoader {
         ArrayList<ItemStack> stacks = new ArrayList<>();
         ItemData data = GT_OreDictUnificator.getAssociation(item);
         if (data != null) {
-            double multiplier = magnetoConversionMultipliers.get(data.mPrefix);
-            stacks.addAll(
+            if (total >= 64) {
+                double multiplier = magnetoConversionMultipliers.get(data.mPrefix);
+                stacks.addAll(
                     getWrappedCircuits(
-                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                            (int) (total * multiplier),
-                            "circuitInfinite"));
+                        GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
+                        (int) (total * multiplier),
+                        "circuitInfinite"));
+            }
             stacks.addAll(multiplyAndSplitIntoStacks(item, total));
         }
         return stacks;
