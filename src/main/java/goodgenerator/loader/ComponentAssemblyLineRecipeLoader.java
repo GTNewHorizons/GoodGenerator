@@ -437,7 +437,7 @@ public class ComponentAssemblyLineRecipeLoader {
 
         if (mhdcsm && !eternity) {
             // 576 * 48 is substracted because uxv parts have 576L mhdcsm fluid (not solid, so no EIC conversion needed)
-            // in their assline recipes and each CoAl recipes has 48x recipe inputs
+            // in their assline recipes and each CoAl recipe has 48x recipe inputs
             fluidInputs.add(MaterialsUEVplus.Eternity.getMolten(mhdcsmAmount - 576 * 48));
         }
     }
