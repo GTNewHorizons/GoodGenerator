@@ -38,6 +38,7 @@ public class ComponentAssemblyLineRecipeLoader {
             "Robot_Arm_", "Conveyor_Module_", "Emitter_", "Sensor_", "Field_Generator_", };
     private static final String[] blacklistedDictPrefixes = { "circuit" };
     private static final String[] softBlacklistedDictPrefixes = { "Any", "crafting", "nanite" };
+    private static final String moltenMHDCSM = "molten.magnetohydrodynamicallyconstrainedstarmatter";
 
     private static LinkedHashMap<List<GT_Recipe>, Pair<ItemList, Integer>> allAssemblerRecipes;
     private static LinkedHashMap<List<GT_Recipe.GT_Recipe_AssemblyLine>, Pair<ItemList, Integer>> allAsslineRecipes;
@@ -47,6 +48,7 @@ public class ComponentAssemblyLineRecipeLoader {
 
     private static final int INPUT_MULTIPLIER = 48;
     private static final int OUTPUT_MULTIPLIER = 64;
+    private static final int FLUID_CONVERSION_STACKSIZE_THRESHOLD = 64;
 
     public static void run() {
         ComponentAssemblyLineMiscRecipes.run();
@@ -159,13 +161,13 @@ public class ComponentAssemblyLineRecipeLoader {
                         }
                     }
                     fixedInputs = compactItems(fixedInputs, info.getRight());
-                    replaceIntoFluids(fixedInputs, fixedFluids, 64);
+                    replaceIntoFluids(fixedInputs, fixedFluids, FLUID_CONVERSION_STACKSIZE_THRESHOLD);
                     // If it overflows then it tries REALLY HARD to cram as much stuff into there.
                     if (fixedInputs.size() > (addProgrammedCircuit ? 8 : 9))
-                        replaceIntoFluids(fixedInputs, fixedFluids, 32);
+                        replaceIntoFluids(fixedInputs, fixedFluids, FLUID_CONVERSION_STACKSIZE_THRESHOLD / 2);
                     if (addProgrammedCircuit) fixedInputs.add(GT_Utility.getIntegratedCircuit(componentCircuit));
 
-                    addEternity(fixedFluids);
+                    addEternityForMHDCSM(fixedFluids);
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             fixedInputs.toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
@@ -403,28 +405,28 @@ public class ComponentAssemblyLineRecipeLoader {
     private static List<ItemStack> getMagnetoConversion(ItemStack item, int total) {
         ArrayList<ItemStack> stacks = new ArrayList<>();
         ItemData data = GT_OreDictUnificator.getAssociation(item);
-        if (data != null) {
-            if (total >= 64) {
-                double multiplier = magnetoConversionMultipliers.get(data.mPrefix);
-                stacks.addAll(
-                        getWrappedCircuits(
-                                GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                                (int) (total * multiplier),
-                                "circuitInfinite"));
-            }
-            stacks.addAll(multiplyAndSplitIntoStacks(item, total));
+        if (data == null) {
+            return stacks;
         }
+        if (total >= FLUID_CONVERSION_STACKSIZE_THRESHOLD) {
+            double multiplier = magnetoConversionMultipliers.get(data.mPrefix);
+            stacks.addAll(
+                    getWrappedCircuits(
+                            GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
+                            (int) (total * multiplier),
+                            "circuitInfinite"));
+        }
+        stacks.addAll(multiplyAndSplitIntoStacks(item, total));
         return stacks;
     }
 
-    private static void addEternity(ArrayList<FluidStack> fluidInputs) {
+    private static void addEternityForMHDCSM(ArrayList<FluidStack> fluidInputs) {
         boolean eternity = false;
         boolean mhdcsm = false;
         int mhdcsmAmount = 0;
 
         for (FluidStack fluidstack : fluidInputs) {
-            if (fluidstack.getFluid()
-                    .equals(FluidRegistry.getFluid("molten.magnetohydrodynamicallyconstrainedstarmatter"))) {
+            if (fluidstack.getFluid().equals(FluidRegistry.getFluid(moltenMHDCSM))) {
                 mhdcsm = true;
                 mhdcsmAmount = fluidstack.amount;
             }
@@ -435,7 +437,7 @@ public class ComponentAssemblyLineRecipeLoader {
 
         if (mhdcsm && !eternity) {
             // 576 * 48 is substracted because uxv parts have 576L mhdcsm fluid (not solid, so no EIC conversion needed)
-            // in their assline recipes
+            // in their assline recipes and each CoAl recipes has 48x recipe inputs
             fluidInputs.add(MaterialsUEVplus.Eternity.getMolten(mhdcsmAmount - 576 * 48));
         }
     }
