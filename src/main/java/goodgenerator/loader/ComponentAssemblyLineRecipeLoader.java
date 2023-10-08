@@ -151,8 +151,8 @@ public class ComponentAssemblyLineRecipeLoader {
                                 if (data != null && data.mPrefix == OrePrefixes.circuit) fixedInputs.addAll(
                                         multiplyAndSplitIntoStacks(
                                                 GT_OreDictUnificator.get(data.mPrefix, data.mMaterial.mMaterial, count),
-                                                (INPUT_MULTIPLIER)));
-                                else fixedInputs.addAll(multiplyAndSplitIntoStacks(input, (INPUT_MULTIPLIER)));
+                                                INPUT_MULTIPLIER));
+                                else fixedInputs.addAll(multiplyAndSplitIntoStacks(input, INPUT_MULTIPLIER));
                             }
                         }
                     }
@@ -176,8 +176,8 @@ public class ComponentAssemblyLineRecipeLoader {
                     MyRecipeAdder.instance.addComponentAssemblyLineRecipe(
                             fixedInputs.toArray(new ItemStack[0]),
                             fixedFluids.toArray(new FluidStack[0]),
-                            info.getLeft().get((OUTPUT_MULTIPLIER)), // The component output
-                            recipe.mDuration * (INPUT_MULTIPLIER), // Takes as long as this many
+                            info.getLeft().get(OUTPUT_MULTIPLIER), // The component output
+                            recipe.mDuration * INPUT_MULTIPLIER, // Takes as long as this many
                             recipe.mEUt,
                             info.getRight()); // Casing tier
                 }
