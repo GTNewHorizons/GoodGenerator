@@ -407,10 +407,10 @@ public class ComponentAssemblyLineRecipeLoader {
             if (total >= 64) {
                 double multiplier = magnetoConversionMultipliers.get(data.mPrefix);
                 stacks.addAll(
-                    getWrappedCircuits(
-                        GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
-                        (int) (total * multiplier),
-                        "circuitInfinite"));
+                        getWrappedCircuits(
+                                GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Infinite, 1),
+                                (int) (total * multiplier),
+                                "circuitInfinite"));
             }
             stacks.addAll(multiplyAndSplitIntoStacks(item, total));
         }
