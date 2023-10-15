@@ -302,7 +302,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long airEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 0;
+        double ceoOutput = 1.0D;
         int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 15;
         if (depleteInput(Materials.LiquidAir.getFluid(ceoInput))) {
             ceoOutput = 1.5D;
@@ -314,8 +314,8 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long thermalEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 0;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 7;
+        double ceoOutput = 1.0D;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 5;
         if (depleteInput(Materials.SuperCoolant.getFluid(ceoInput))) {
             ceoOutput = 10.0D;
         } else if (depleteInput(FluidRegistry.getFluidStack("cryotheum", ceoInput))) {
@@ -355,19 +355,19 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long victusEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 1.0D;
+        double ceoOutput = 0;
         int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 75;
         if (depleteInput(FluidRegistry.getFluidStack("xpjuice", ceoInput))) {
-            ceoOutput = 3.0D;
+            ceoOutput = 4.5D;
         } else if (depleteInput(FluidRegistry.getFluidStack("lifeessence", ceoInput))) {
-            ceoOutput = 7.5D;
+            ceoOutput = 15.0D;
         }
         return (long) (baseValue * ceoOutput);
     }
 
     public long taintedEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 1.0D;
+        double ceoOutput = 0D;
         int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 50;
         int chance = 2000;
         if (depleteInput(FluidRegistry.getFluidStack("fluidpure", ceoInput))) {
@@ -390,7 +390,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long mechanicEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 1.0D;
+        double ceoOutput = 0;
         int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 75;
         if (depleteInput(Materials.Lubricant.getFluid(ceoInput))) {
             ceoOutput = 2.0D;
@@ -400,7 +400,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long spiritEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 1.0D;
+        double ceoOutput = 0;
         int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 5;
         if (depleteInput(FluidRegistry.getFluidStack("witchery:fluidspirit", ceoInput))) {
             ceoOutput = 10D * (1 + mStableValue / 50D);
@@ -412,8 +412,8 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long radiationEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 1.0D;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 6;
+        double ceoOutput = 0;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 2;
         if (depleteInput(Materials.Caesium.getMolten(ceoInput))) {
             ceoOutput = 2.5D;
         } else if (depleteInput(Materials.Uranium235.getMolten(ceoInput))) {
@@ -428,7 +428,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long electricEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = Math.pow(4.5, GT_Utility.getTier(getVoltageLimit()));
+        double ceoOutput = Math.pow(5, GT_Utility.getTier(getVoltageLimit()));
         return (long) (baseValue * ceoOutput);
     }
 
