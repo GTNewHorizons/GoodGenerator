@@ -1381,3 +1381,4 @@ public class RecipeLoader {
         MaterialFix.MaterialFluidExtractionFix(MyMaterial.shirabon);
     }
 }
+

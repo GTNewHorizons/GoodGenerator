@@ -110,6 +110,8 @@ public final class ItemRefer {
     public static ItemRefer Essentia_Cell_T2 = getItemStack(essentiaCell, 1);
     public static ItemRefer Essentia_Cell_T3 = getItemStack(essentiaCell, 2);
     public static ItemRefer Essentia_Cell_T4 = getItemStack(essentiaCell, 3);
+    public static ItemRefer Essentia_Cell_T5 = getItemStack(essentiaCell, 4);
+    public static ItemRefer Essentia_Cell_T6 = getItemStack(essentiaCell, 5);
     public static ItemRefer Essentia_Hatch = getItemStack(essentiaHatch);
     public static ItemRefer YOTTank_Casing = getItemStack(yottaFluidTankCasing);
     public static ItemRefer YOTTank_Cell_T1 = getItemStack(yottaFluidTankCell, 0);

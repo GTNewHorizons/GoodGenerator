@@ -1,23 +1,5 @@
 package goodgenerator.blocks.tileEntity;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static goodgenerator.util.DescTextLocalization.BLUE_PRINT_INFO;
-import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
-
-import java.util.ArrayList;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidRegistry;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader;
 import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_DynamoMulti;
 import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_DynamoTunnel;
@@ -26,7 +8,6 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IItemSource;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-
 import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_TooltipMultiBlockBase_EM;
 import goodgenerator.crossmod.thaumcraft.LargeEssentiaEnergyData;
 import goodgenerator.items.MyMaterial;
@@ -50,9 +31,25 @@ import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gregtech.api.util.GT_Utility;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
+
+import java.util.ArrayList;
+
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static goodgenerator.util.DescTextLocalization.BLUE_PRINT_INFO;
+import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
 
 public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
         implements IConstructable, ISurvivalConstructable {
@@ -84,17 +81,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
         mEssentiaHatch.clear();
         return structureCheck_EM(mName, 4, 0, 4) && (mDynamoHatches.size() + eDynamoMulti.size()) == 1
                 && checkHatchTier()
-                && checkNoLaser()
                 && updateEssentiaHatchState();
-    }
-
-    private boolean checkNoLaser() {
-        for (GT_MetaTileEntity_Hatch_DynamoMulti tHatch : eDynamoMulti) {
-            if (tHatch instanceof GT_MetaTileEntity_Hatch_DynamoTunnel) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public boolean checkHatchTier() {
@@ -194,9 +181,15 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
                         x.mTierLimit = Math.max(x.mTierLimit, 6);
                     }, ofBlock(Loaders.essentiaCell, 2)), onElementPass(x -> {
                         x.mStableValue += 10;
+                        x.mTierLimit = Math.max(x.mTierLimit, 7);
+                    }, ofBlock(Loaders.essentiaCell, 3)), onElementPass(x -> {
+                        x.mStableValue += 17;
                         x.mTierLimit = Math.max(x.mTierLimit, 8);
+                     }, ofBlock(Loaders.essentiaCell, 4)), onElementPass(x -> {
+                        x.mStableValue += 30;
+                        x.mTierLimit = Math.max(x.mTierLimit, 9);
                     },
-                            ofBlock(Loaders.essentiaCell, 3))))
+                            ofBlock(Loaders.essentiaCell, 5))))
                     .addElement(
                             'X',
                             ofChain(
@@ -217,6 +210,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
         }
         return false;
     }
+
 
     public final boolean addLargeEssentiaGeneratorList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
         if (aTileEntity == null) {
@@ -308,7 +302,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
     public long airEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
         double ceoOutput = 0;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 8;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 15;
         if (depleteInput(Materials.LiquidAir.getFluid(ceoInput))) {
             ceoOutput = 1.5D;
         } else if (depleteInput(Materials.Air.getGas(ceoInput))) {
@@ -320,19 +314,19 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
     public long thermalEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
         double ceoOutput = 0;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 2;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 7;
         if (depleteInput(Materials.SuperCoolant.getFluid(ceoInput))) {
-            ceoOutput = 9.0D;
+            ceoOutput = 10.0D;
         } else if (depleteInput(FluidRegistry.getFluidStack("cryotheum", ceoInput))) {
-            ceoOutput = 5.0D;
+            ceoOutput = 7.5D;
         } else if (depleteInput(FluidRegistry.getFluidStack("ic2coolant", ceoInput))) {
-            ceoOutput = 1.5D;
+            ceoOutput = 2.5D;
         } else if (depleteInput(Materials.Ice.getSolid(ceoInput))) {
-            ceoOutput = 1.2D;
+            ceoOutput = 1.5D;
         } else if (depleteInput(FluidRegistry.getFluidStack("ic2distilledwater", ceoInput))) {
             ceoOutput = 1.0D;
         } else if (depleteInput(Materials.Water.getFluid(ceoInput))) {
-            ceoOutput = 0.5D;
+            ceoOutput = 0.8D;
         }
 
         return (long) (baseValue * ceoOutput);
@@ -341,15 +335,15 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
     public long unstableEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
         double ceoOutput = 0;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 4;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 2;
         if (depleteInput(WerkstoffLoader.Xenon.getFluidOrGas(ceoInput))) {
-            ceoOutput = 4.0D;
+            ceoOutput = 6.0D;
         } else if (depleteInput(WerkstoffLoader.Krypton.getFluidOrGas(ceoInput))) {
-            ceoOutput = 3.0D;
+            ceoOutput = 4.5D;
         } else if (depleteInput(Materials.Argon.getFluid(ceoInput))) {
-            ceoOutput = 2.5D;
+            ceoOutput = 3.5D;
         } else if (depleteInput(WerkstoffLoader.Neon.getFluidOrGas(ceoInput))) {
-            ceoOutput = 2.2D;
+            ceoOutput = 2.5D;
         } else if (depleteInput(Materials.Helium.getFluid(ceoInput))) {
             ceoOutput = 2.0D;
         } else if (depleteInput(Materials.Nitrogen.getFluid(ceoInput))) {
@@ -361,11 +355,11 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
     public long victusEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
         double ceoOutput = 1.0D;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 18;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 75;
         if (depleteInput(FluidRegistry.getFluidStack("xpjuice", ceoInput))) {
-            ceoOutput = 2.0D;
+            ceoOutput = 3.0D;
         } else if (depleteInput(FluidRegistry.getFluidStack("lifeessence", ceoInput))) {
-            ceoOutput = 6.0D;
+            ceoOutput = 7.5D;
         }
         return (long) (baseValue * ceoOutput);
     }
@@ -373,13 +367,13 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
     public long taintedEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
         double ceoOutput = 1.0D;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 3;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 50;
         int chance = 2000;
         if (depleteInput(FluidRegistry.getFluidStack("fluidpure", ceoInput))) {
-            ceoOutput = 60.0D;
+            ceoOutput = 100D;
             chance = 0;
         } else if (depleteInput(FluidRegistry.getFluidStack("fluiddeath", ceoInput))) {
-            ceoOutput = Math.pow(25000D / baseValue, 4);
+            ceoOutput = Math.pow(25000D / baseValue, 3);
             chance = 4000;
         }
 
@@ -395,10 +389,10 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
 
     public long mechanicEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = 0;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 20;
+        double ceoOutput = 1.0D;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 75;
         if (depleteInput(Materials.Lubricant.getFluid(ceoInput))) {
-            ceoOutput = 1.0D;
+            ceoOutput = 2.0D;
         }
         return (long) (baseValue * ceoOutput);
     }
@@ -406,11 +400,11 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
     public long spiritEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
         double ceoOutput = 1.0D;
-        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 2;
+        int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 5;
         if (depleteInput(FluidRegistry.getFluidStack("witchery:fluidspirit", ceoInput))) {
-            ceoOutput = 10D * (1 + mStableValue / 100D);
+            ceoOutput = 10D * (1 + mStableValue / 50D);
         } else if (depleteInput(FluidRegistry.getFluidStack("witchery:hollowtears", ceoInput))) {
-            ceoOutput = 15D * (1 + 100D / mStableValue);
+            ceoOutput = 15D * (1 + 50D / mStableValue);
         }
         return (long) (baseValue * ceoOutput);
     }
@@ -420,20 +414,20 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
         double ceoOutput = 1.0D;
         int ceoInput = (int) LargeEssentiaEnergyData.getAspectCeo(aspect) * 6;
         if (depleteInput(Materials.Caesium.getMolten(ceoInput))) {
-            ceoOutput = 2.0D;
+            ceoOutput = 2.5D;
         } else if (depleteInput(Materials.Uranium235.getMolten(ceoInput))) {
-            ceoOutput = 3.0D;
-        } else if (depleteInput(Materials.Naquadah.getMolten(ceoInput))) {
             ceoOutput = 4.0D;
+        } else if (depleteInput(Materials.Naquadah.getMolten(ceoInput))) {
+            ceoOutput = 5.0D;
         } else if (depleteInput(MyMaterial.atomicSeparationCatalyst.getMolten(ceoInput))) {
-            ceoOutput = 16.0D;
+            ceoOutput = 20.0D;
         }
         return (long) (baseValue * ceoOutput);
     }
 
     public long electricEssentia(Aspect aspect) {
         long baseValue = LargeEssentiaEnergyData.getAspectFuelValue(aspect);
-        double ceoOutput = Math.pow(3.0, GT_Utility.getTier(getVoltageLimit()));
+        double ceoOutput = Math.pow(4.5, GT_Utility.getTier(getVoltageLimit()));
         return (long) (baseValue * ceoOutput);
     }
 
