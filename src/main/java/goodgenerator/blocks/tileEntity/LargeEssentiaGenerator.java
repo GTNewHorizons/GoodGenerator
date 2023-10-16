@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader;
 import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_DynamoMulti;
+import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_DynamoTunnel;
 import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IItemSource;
@@ -83,6 +84,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
         mEssentiaHatch.clear();
         return structureCheck_EM(mName, 4, 0, 4) && (mDynamoHatches.size() + eDynamoMulti.size()) == 1
                 && checkHatchTier()
+                && checkNoLaser()
                 && updateEssentiaHatchState();
     }
 
@@ -95,6 +97,15 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
         }
         for (GT_MetaTileEntity_Hatch_DynamoMulti tHatch : eDynamoMulti) {
             if (tHatch.mTier > mTierLimit) return false;
+        }
+        return true;
+    }
+
+    private boolean checkNoLaser() {
+        for (GT_MetaTileEntity_Hatch_DynamoMulti tHatch : eDynamoMulti) {
+            if (tHatch instanceof GT_MetaTileEntity_Hatch_DynamoTunnel) {
+                return false;
+            }
         }
         return true;
     }
@@ -492,6 +503,7 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
                 .addInfo("Maybe some Thaumaturges are upset by it. . .").addInfo("Transform Essentia into energy!")
                 .addInfo("The Diffusion Cell determines the highest hatch tier that the LEG can accept.")
                 .addInfo("You can find more information about this generator in the Thaumonomicon.")
+                .addInfo("Supports normal Dynamo Hatches or TecTech ones for up to 64A, but no Laser Hatches.")
                 .addInfo("The structure is too complex!").addInfo(BLUE_PRINT_INFO).addSeparator()
                 .addMaintenanceHatch("Hint block with dot 1").addInputHatch("Hint block with dot 1")
                 .addDynamoHatch("Hint block with dot 1")
