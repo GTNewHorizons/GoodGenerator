@@ -1,5 +1,7 @@
 package goodgenerator.crossmod.thaumcraft;
 
+import static gregtech.api.enums.Mods.GoodGenerator;
+import static gregtech.api.util.GT_ModHandler.getModItem;
 import static thaumcraft.api.ThaumcraftApi.addArcaneCraftingRecipe;
 
 import java.util.Arrays;
@@ -69,7 +71,7 @@ public class Research {
                                 new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Master, 1L),
                                         new ItemStack(ConfigBlocks.blockJar, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.gearGt, Materials.Thaumium, 1L),
-                                        GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Amethyst, 1L),
+                                        GT_OreDictUnificator.get(OrePrefixes.gemExquisite, Materials.Amethyst, 1L),
                                         new ItemStack(ConfigBlocks.blockWoodenDevice, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
                                         ItemList.QuantumStar.get(1), ItemList.Sensor_IV.get(1) },
@@ -100,6 +102,7 @@ public class Research {
                                         GT_OreDictUnificator.get(OrePrefixes.pipeTiny, Materials.StainlessSteel, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.plate, Materials.ElectricalSteel, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.plate, Materials.ElectricalSteel, 1),
+                                        GT_ModHandler.getModItem(Mods.HardcoreEnderExpansion.ID, "rune", 1, 4),
                                         ItemList.Electric_Pump_HV.get(1L), new ItemStack(ConfigBlocks.blockTube, 1, 4),
                                         new ItemStack(ConfigBlocks.blockCosmeticOpaque, 1, 2), },
                                 ItemRefer.Essentia_Cell_T1.get(1),
@@ -151,6 +154,7 @@ public class Research {
                                         ItemList.Electric_Pump_IV.get(1L), ItemList.QuantumStar.get(1L),
                                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 3),
                                         ItemList.Reactor_Coolant_Sp_1.get(1L),
+                                        GT_ModHandler.getModItem(Mods.Thaumcraft.ID, "blockStoneDevice", 1, 14),
                                         GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Plutonium241, 1), },
                                 ItemRefer.Essentia_Cell_T2.get(1),
                                 6,
@@ -165,6 +169,7 @@ public class Research {
                                         ItemList.Electric_Pump_LuV.get(1L),
                                         new ItemStack(ConfigItems.itemResource, 1, 14), Ic2Items.fluidregulator,
                                         new ItemStack(ConfigBlocks.blockJar, 1, 0),
+                                        GT_ModHandler.getModItem(Mods.Thaumcraft.ID, "ItemEldritchObject", 1, 2),
                                         GT_OreDictUnificator.get(OrePrefixes.gearGtSmall, Materials.Ichorium, 1) },
                                 ItemRefer.Essentia_Cell_T3.get(1),
                                 8,
@@ -175,10 +180,11 @@ public class Research {
                         GregTech_API.sThaumcraftCompat.addInfusionRecipe(
                                 "ESSENTIA_CELL",
                                 ItemRefer.Essentia_Cell_T3.get(1),
-                                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.ring, Materials.Europium, 1),
+                                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.ring, Materials.Neutronium, 1),
                                         ItemList.Emitter_LuV.get(1L), new ItemStack(ItemRegistry.bw_realglas, 1, 4),
                                         GT_OreDictUnificator.get(OrePrefixes.plate, Materials.StellarAlloy, 1),
-                                        GT_OreDictUnificator.get(OrePrefixes.cellPlasma, Materials.Helium, 1),
+                                        GT_ModHandler.getModItem(Mods.ThaumicBases.ID, "entityDeconstructor", 1),
+                                        GT_ModHandler.getModItem(Mods.GTPlusPlus.ID, "item.itemBufferCore8", 1),
                                         new ItemStack(ConfigItems.itemShard, 1, 6), },
                                 ItemRefer.Essentia_Cell_T4.get(1),
                                 10,
@@ -189,9 +195,9 @@ public class Research {
                         GregTech_API.sThaumcraftCompat.addInfusionRecipe(
                                 "ESSENTIA_CELL",
                                 ItemRefer.Essentia_Cell_T4.get(1),
-                                new ItemStack[] {
-                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.MysteriousCrystal, 1),
+                                new ItemStack[] { GT_ModHandler.getModItem(Mods.Witchery.ID, "ingredient", 1, 23),
                                         ItemList.Emitter_UV.get(1L),
+                                        GT_ModHandler.getModItem(Mods.ThaumicTinkerer.ID, "xpTalisman", 1),
                                         GT_ModHandler.getModItem(Mods.Avaritia.ID, "Resource", 1, 5),
                                         ItemList.Circuit_Board_Wetware.get(1),
                                         GT_ModHandler.getModItem(Mods.TaintedMagic.ID, "ItemMaterial", 1, 5),
@@ -283,12 +289,12 @@ public class Research {
                         GregTech_API.sThaumcraftCompat.addInfusionRecipe(
                                 "ESSENTIA_UPGRADE_AIR",
                                 ItemRefer.Essentia_Upgrade_Empty.get(1),
-                                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.cell, Materials.LiquidAir, 1),
+                                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.cell, Materials.NobleGases, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Hydrogen, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Helium, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 1),
-                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.VibrantAlloy, 1),
-                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnergeticAlloy, 1), },
+                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1),
+                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.TPV, 1), },
                                 ItemRefer.Essentia_Upgrade_Air.get(1),
                                 5,
                                 Arrays.asList(
@@ -319,8 +325,8 @@ public class Research {
                                 "ESSENTIA_UPGRADE_THERMAL",
                                 ItemRefer.Essentia_Upgrade_Empty.get(1),
                                 new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.lens, Materials.Firestone, 1),
-                                        GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Netherrack, 1),
-                                        Ic2Items.reactorPlatingHeat, ItemList.Casing_Coil_Nichrome.get(1),
+                                        GT_ModHandler.getModItem(Mods.ThaumicTinkerer.ID, "brightNitor", 1),
+                                        Ic2Items.reactorPlatingHeat, ItemList.Casing_Coil_HSSS.get(1),
                                         new ItemStack(ConfigItems.itemResource, 1, 1),
                                         new ItemStack(ConfigItems.itemResource, 1, 0), },
                                 ItemRefer.Essentia_Upgrade_Thermal.get(1),
@@ -353,7 +359,8 @@ public class Research {
                                         GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Unstable, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.gearGt, Materials.Void, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedEntropy, 1),
-                                        Ic2Items.industrialTnt, new ItemStack(ItemRegistry.DESTRUCTOPACK) },
+                                        GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Shadow, 1),
+                                        new ItemStack(ItemRegistry.DESTRUCTOPACK) },
                                 ItemRefer.Essentia_Upgrade_Unstable.get(1),
                                 6,
                                 Arrays.asList(
@@ -423,7 +430,7 @@ public class Research {
                                 new ItemStack[] { new ItemStack(ConfigBlocks.blockTaintFibres, 1, 0),
                                         new ItemStack(ConfigBlocks.blockTaintFibres, 1, 2),
                                         new ItemStack(ConfigItems.itemResource, 1, 11),
-                                        GT_OreDictUnificator.get(OrePrefixes.spring, Materials.NaquadahEnriched, 1),
+                                        GT_OreDictUnificator.get(OrePrefixes.spring, Materials.NaquadahAlloy, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.gearGt, Materials.EndSteel, 1),
                                         new ItemStack(Block.getBlockById(138), 1), },
                                 ItemRefer.Essentia_Upgrade_Tainted.get(1),
@@ -457,10 +464,10 @@ public class Research {
                                 ItemRefer.Essentia_Upgrade_Empty.get(1),
                                 new ItemStack[] { new ItemStack(ConfigBlocks.blockTube, 1, 4),
                                         new ItemStack(ConfigBlocks.blockTube, 1, 2),
-                                        GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.VividAlloy, 1),
+                                        GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.HeeEndium, 1),
                                         GT_OreDictUnificator
                                                 .get(OrePrefixes.pipeMedium, Materials.Polybenzimidazole, 1),
-                                        ItemList.Electric_Motor_EV.get(1), ItemList.Electric_Pump_EV.get(1), },
+                                        ItemList.Electric_Motor_IV.get(1), ItemList.Electric_Pump_IV.get(1), },
                                 ItemRefer.Essentia_Upgrade_Mechanics.get(1),
                                 5,
                                 Arrays.asList(
@@ -494,7 +501,7 @@ public class Research {
                                         GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.Shadow, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.spring, Materials.FierySteel, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Milk, 1),
-                                        ItemList.Machine_EV_Scanner.get(1) },
+                                        ItemList.Machine_IV_Scanner.get(1) },
                                 ItemRefer.Essentia_Upgrade_Spirit.get(1),
                                 5,
                                 Arrays.asList(
@@ -528,7 +535,8 @@ public class Research {
                                 new ItemStack[] { ItemRefer.High_Density_Plutonium.get(1),
                                         ItemRefer.High_Density_Uranium.get(1), ItemRefer.High_Density_Thorium.get(1),
                                         GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Americium, 1),
-                                        WerkstoffLoader.Tiberium.get(OrePrefixes.gem, 1), },
+                                        WerkstoffLoader.Tiberium.get(OrePrefixes.gemExquisite, 1),
+                                        getModItem(GoodGenerator.ID, "advancedRadiationProtectionPlate", 1) },
                                 ItemRefer.Essentia_Upgrade_Radiation.get(1),
                                 8,
                                 Collections.singletonList(new TC_Aspects.TC_AspectStack(TC_Aspects.RADIO, 1024))),
@@ -556,7 +564,7 @@ public class Research {
                                 "ESSENTIA_UPGRADE_RADIATION",
                                 ItemRefer.Essentia_Upgrade_Empty.get(1),
                                 new ItemStack[] {
-                                        GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorMV, 1),
+                                        GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorHV, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorEV, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorIV, 1),

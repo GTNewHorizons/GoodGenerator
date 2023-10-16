@@ -2,9 +2,9 @@
   "Essentia": [
     {
       "name": "Aer",
-      "fuelValue": 10000,
+      "fuelValue": 15000,
       "category": "AIR",
-      "consumeCeo": 1.0
+      "consumeCeo": 1.2
     },
     {
       "name": "Terra",
@@ -62,9 +62,9 @@
     },
     {
       "name": "Motus",
-      "fuelValue": 20000,
+      "fuelValue": 30000,
       "category": "AIR",
-      "consumeCeo": 1.0
+      "consumeCeo": 1.5
     },
     {
       "name": "Gelum",
@@ -116,9 +116,9 @@
     },
     {
       "name": "Volatus",
-      "fuelValue": 56000,
+      "fuelValue": 64000,
       "category": "AIR",
-      "consumeCeo": 11.2
+      "consumeCeo": 10.0
     },
     {
       "name": "Tenebrae",
@@ -158,9 +158,9 @@
     },
     {
       "name": "Auram",
-      "fuelValue": 76800,
+      "fuelValue": 86400,
       "category": "AIR",
-      "consumeCeo": 7.0
+      "consumeCeo": 7.5
     },
     {
       "name": "Vitium",
