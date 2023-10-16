@@ -65,14 +65,14 @@ public class Research {
                 new Object[] { "research.ESSENTIA_GENERATOR.page.0",
                         GregTech_API.sThaumcraftCompat.addInfusionRecipe(
                                 "ESSENTIA_GENERATOR",
-                                ItemList.Hull_HV.get(1),
-                                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Advanced, 1L),
+                                ItemList.Hull_LuV.get(1),
+                                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Master, 1L),
                                         new ItemStack(ConfigBlocks.blockJar, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.gearGt, Materials.Thaumium, 1L),
-                                        GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Emerald, 1L),
+                                        GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Amethyst, 1L),
                                         new ItemStack(ConfigBlocks.blockWoodenDevice, 1),
-                                        GT_OreDictUnificator.get(OrePrefixes.spring, Materials.Manyullyn, 1L),
-                                        Ic2Items.teslaCoil, ItemList.Sensor_MV.get(1) },
+                                        GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                                        ItemList.QuantumStar.get(1), ItemList.Sensor_IV.get(1) },
                                 ItemRefer.Large_Essentia_Generator.get(1),
                                 6,
                                 Arrays.asList(
@@ -95,7 +95,7 @@ public class Research {
                                         new TC_Aspects.TC_AspectStack(TC_Aspects.COGNITIO, 32))),
                         GregTech_API.sThaumcraftCompat.addInfusionRecipe(
                                 "ESSENTIA_GENERATOR",
-                                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Thaumium, 1),
+                                GT_ModHandler.getModItem(Mods.Botania.ID, "manaResource", 1, 9),
                                 new ItemStack[] {
                                         GT_OreDictUnificator.get(OrePrefixes.pipeTiny, Materials.StainlessSteel, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.plate, Materials.ElectricalSteel, 1),
@@ -218,25 +218,25 @@ public class Research {
                                         new TC_Aspects.TC_AspectStack(TC_Aspects.PERMUTATIO, 512))) });
         ItemStack broad = new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6);
         if (LoadedList.GTNH_CORE) broad = GT_ModHandler.getModItem("dreamcraft", "item.ArcaneSlate", 1);
-        GregTech_API.sThaumcraftCompat
-                .addResearch(
-                        "ESSENTIA_UPGRADE_BLANK",
-                        "Upgrade your generator",
-                        "Let's try some more dangerous essentia.",
-                        new String[] { "ESSENTIA_GENERATOR" },
-                        "ARTIFICE",
-                        ItemRefer.Essentia_Upgrade_Empty.get(1),
-                        2,
-                        0,
-                        -9,
-                        4,
-                        Arrays.asList(
-                                new TC_Aspects.TC_AspectStack(TC_Aspects.AURAM, 10L),
-                                new TC_Aspects.TC_AspectStack(TC_Aspects.PERMUTATIO, 10L),
-                                new TC_Aspects.TC_AspectStack(TC_Aspects.INSTRUMENTUM, 10L),
-                                new TC_Aspects.TC_AspectStack(TC_Aspects.ELECTRUM, 10L)),
-                        null,
-                        new Object[] { "research.ESSENTIA_UPGRADE_BLANK.page.0", addArcaneCraftingRecipe(
+        GregTech_API.sThaumcraftCompat.addResearch(
+                "ESSENTIA_UPGRADE_BLANK",
+                "Upgrade your generator",
+                "Let's try some more dangerous essentia.",
+                new String[] { "ESSENTIA_GENERATOR" },
+                "ARTIFICE",
+                ItemRefer.Essentia_Upgrade_Empty.get(1),
+                2,
+                0,
+                -9,
+                4,
+                Arrays.asList(
+                        new TC_Aspects.TC_AspectStack(TC_Aspects.AURAM, 10L),
+                        new TC_Aspects.TC_AspectStack(TC_Aspects.PERMUTATIO, 10L),
+                        new TC_Aspects.TC_AspectStack(TC_Aspects.INSTRUMENTUM, 10L),
+                        new TC_Aspects.TC_AspectStack(TC_Aspects.ELECTRUM, 10L)),
+                null,
+                new Object[] { "research.ESSENTIA_UPGRADE_BLANK.page.0",
+                        addArcaneCraftingRecipe(
                                 "ESSENTIA_UPGRADE_BLANK",
                                 ItemRefer.Essentia_Upgrade_Empty.get(1),
                                 new AspectList().add(Aspect.AIR, 80).add(Aspect.ENTROPY, 50).add(Aspect.ORDER, 50)
@@ -261,7 +261,7 @@ public class Research {
                                 'Z',
                                 broad,
                                 'I',
-                                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.PulsatingIron, 1)), });
+                                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Osmiridium, 1)), });
         GregTech_API.sThaumcraftCompat.addResearch(
                 "ESSENTIA_UPGRADE_AIR",
                 "Essentia: AIR",
@@ -286,9 +286,9 @@ public class Research {
                                 new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.cell, Materials.LiquidAir, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Hydrogen, 1),
                                         GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Helium, 1),
-                                        GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Argon, 1),
-                                        WerkstoffLoader.Neon.get(OrePrefixes.cell, 1),
-                                        WerkstoffLoader.Krypton.get(OrePrefixes.cell, 1), },
+                                        GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 1),
+                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.VibrantAlloy, 1),
+                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnergeticAlloy, 1), },
                                 ItemRefer.Essentia_Upgrade_Air.get(1),
                                 5,
                                 Arrays.asList(
@@ -460,7 +460,7 @@ public class Research {
                                         GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.VividAlloy, 1),
                                         GT_OreDictUnificator
                                                 .get(OrePrefixes.pipeMedium, Materials.Polybenzimidazole, 1),
-                                        ItemList.Electric_Motor_IV.get(1), ItemList.Electric_Pump_IV.get(1), },
+                                        ItemList.Electric_Motor_EV.get(1), ItemList.Electric_Pump_EV.get(1), },
                                 ItemRefer.Essentia_Upgrade_Mechanics.get(1),
                                 5,
                                 Arrays.asList(
@@ -527,8 +527,8 @@ public class Research {
                                 ItemRefer.Essentia_Upgrade_Empty.get(1),
                                 new ItemStack[] { ItemRefer.High_Density_Plutonium.get(1),
                                         ItemRefer.High_Density_Uranium.get(1), ItemRefer.High_Density_Thorium.get(1),
-                                        Ic2Items.UranFuel, Ic2Items.MOXFuel,
-                                        WerkstoffLoader.Tiberium.get(OrePrefixes.gem, 1) },
+                                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Americium, 1),
+                                        WerkstoffLoader.Tiberium.get(OrePrefixes.gem, 1), },
                                 ItemRefer.Essentia_Upgrade_Radiation.get(1),
                                 8,
                                 Collections.singletonList(new TC_Aspects.TC_AspectStack(TC_Aspects.RADIO, 1024))),

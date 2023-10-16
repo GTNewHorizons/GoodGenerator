@@ -87,7 +87,7 @@ public class EssentiaHatch extends TileEntity implements IAspectContainer, IEsse
     }
 
     public void fillfrompipe() {
-        if (getEssentiaAmount(null) >= 50) return;
+        if (getEssentiaAmount(null) >= 64) return;
         TileEntity[] te = new TileEntity[ForgeDirection.VALID_DIRECTIONS.length];
         for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
             te[i] = ThaumcraftApiHelper.getConnectableTile(
