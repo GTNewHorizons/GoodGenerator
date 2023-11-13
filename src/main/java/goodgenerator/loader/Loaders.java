@@ -196,7 +196,7 @@ public class Loaders {
             "essentiaCell",
             new String[] { GoodGenerator.MOD_ID + ":essentiaCell/1", GoodGenerator.MOD_ID + ":essentiaCell/2",
                     GoodGenerator.MOD_ID + ":essentiaCell/3", GoodGenerator.MOD_ID + ":essentiaCell/4",
-                    GoodGenerator.MOD_ID + ":essentiaCell/5", GoodGenerator.MOD_ID + ":essentiaCell/6", });
+                    GoodGenerator.MOD_ID + ":essentiaCell/5", });
     public static final Block speedingPipe = new ComplexTextureCasing(
             "speedingPipe",
             new String[] { GoodGenerator.MOD_ID + ":speedingPipe_SIDE" },

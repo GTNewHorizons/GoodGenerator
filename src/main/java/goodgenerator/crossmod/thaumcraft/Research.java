@@ -207,21 +207,7 @@ public class Research {
                                 Arrays.asList(
                                         new TC_Aspects.TC_AspectStack(TC_Aspects.AQUA, 512),
                                         new TC_Aspects.TC_AspectStack(TC_Aspects.VACUOS, 512),
-                                        new TC_Aspects.TC_AspectStack(TC_Aspects.PERMUTATIO, 256))),
-                        GregTech_API.sThaumcraftCompat.addInfusionRecipe(
-                                "ESSENTIA_CELL",
-                                ItemRefer.Essentia_Cell_T5.get(1),
-                                new ItemStack[] { GT_ModHandler.getModItem(Mods.Botania.ID, "corporeaSpark", 1),
-                                        ItemList.Field_Generator_UHV.get(1L), ItemList.Quantum_Tank_IV.get(1),
-                                        ItemList.Electric_Motor_UEV.get(1),
-                                        GT_ModHandler.getModItem(Mods.TaintedMagic.ID, "ItemFocusEldritch", 1),
-                                        GT_ModHandler.getModItem(Mods.BloodArsenal.ID, "compacter", 1) },
-                                ItemRefer.Essentia_Cell_T6.get(1),
-                                10,
-                                Arrays.asList(
-                                        new TC_Aspects.TC_AspectStack(TC_Aspects.AQUA, 1024),
-                                        new TC_Aspects.TC_AspectStack(TC_Aspects.VACUOS, 1024),
-                                        new TC_Aspects.TC_AspectStack(TC_Aspects.PERMUTATIO, 512))) });
+                                        new TC_Aspects.TC_AspectStack(TC_Aspects.PERMUTATIO, 256))), });
         ItemStack broad = new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6);
         if (LoadedList.GTNH_CORE) broad = GT_ModHandler.getModItem("dreamcraft", "item.ArcaneSlate", 1);
         GregTech_API.sThaumcraftCompat.addResearch(
