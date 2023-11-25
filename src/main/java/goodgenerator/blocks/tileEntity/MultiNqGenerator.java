@@ -195,7 +195,6 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     public @NotNull CheckRecipeResult checkProcessing_EM() {
 
         ArrayList<FluidStack> tFluids = getStoredFluids();
-
         for (int i = 0; i < tFluids.size() - 1; i++) {
             for (int j = i + 1; j < tFluids.size(); j++) {
                 if (GT_Utility.areFluidsEqual(tFluids.get(i), tFluids.get(j))) {
@@ -234,7 +233,10 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     public boolean onRunningTick(ItemStack stack) {
         if (this.getBaseMetaTileEntity().isServerSide()) {
             if (mMaxProgresstime != 0 && mProgresstime % 20 == 0) {
+                // If there's no startRecipeProcessing, ME input hatch wouldn't work
+                startRecipeProcessing();
                 FluidStack[] input = getStoredFluids().toArray(new FluidStack[0]);
+                endRecipeProcessing();
                 int eff = 100, time = 1;
                 if (LiquidAirConsumptionPerSecond != 0
                         && !consumeFuel(Materials.LiquidAir.getFluid(LiquidAirConsumptionPerSecond), input)) {
