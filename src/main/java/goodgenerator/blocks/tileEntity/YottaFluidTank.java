@@ -53,7 +53,6 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch;
-import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Input;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Output;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
@@ -252,20 +251,20 @@ public class YottaFluidTank extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                                             Byte.MAX_VALUE,
                                             YottaFluidTank::setMeta,
                                             te -> (byte) te.getMeta())))
-                    .addElement('R', ofChain(cells(10))).addElement(
-                            'F',
-                            ofFrame(Materials.Steel))
+                    .addElement('R', ofChain(cells(10))).addElement('F', ofFrame(Materials.Steel))
                     .addElement(
                             'I',
-                                    buildHatchAdder(YottaFluidTank.class).atLeast(GT_HatchElement.InputHatch).casingIndex(1537).dot(1).buildAndChain(Loaders.yottaFluidTankCasing, 0))
+                            buildHatchAdder(YottaFluidTank.class).atLeast(GT_HatchElement.InputHatch).casingIndex(1537)
+                                    .dot(1).buildAndChain(Loaders.yottaFluidTankCasing, 0))
                     .addElement(
                             'M',
-                                    buildHatchAdder(YottaFluidTank.class).atLeast(GT_HatchElement.Maintenance)
-                                            .casingIndex(1537).dot(2).buildAndChain(Loaders.yottaFluidTankCasing, 0))
+                            buildHatchAdder(YottaFluidTank.class).atLeast(GT_HatchElement.Maintenance).casingIndex(1537)
+                                    .dot(2).buildAndChain(Loaders.yottaFluidTankCasing, 0))
                     .addElement(
                             'O',
-                                    buildHatchAdder(YottaFluidTank.class).atLeast(GT_HatchElement.OutputHatch)
-                                            .adder(YottaFluidTank::addOutput).casingIndex(1537).dot(1).buildAndChain(Loaders.yottaFluidTankCasing, 0))
+                            buildHatchAdder(YottaFluidTank.class).atLeast(GT_HatchElement.OutputHatch)
+                                    .adder(YottaFluidTank::addOutput).casingIndex(1537).dot(1)
+                                    .buildAndChain(Loaders.yottaFluidTankCasing, 0))
                     .build();
         }
         return multiDefinition;

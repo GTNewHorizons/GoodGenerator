@@ -4,7 +4,6 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static goodgenerator.util.DescTextLocalization.BLUE_PRINT_INFO;
 import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
 
-import goodgenerator.util.DescTextLocalization;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +24,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_TooltipMultiBlockBase_EM;
 import goodgenerator.loader.Loaders;
+import goodgenerator.util.DescTextLocalization;
 import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.enums.GT_HatchElement;
 import gregtech.api.enums.Textures;
