@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import goodgenerator.util.DescTextLocalization;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -30,6 +29,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import goodgenerator.blocks.tileEntity.base.GT_MetaTileEntity_TooltipMultiBlockBase_EM;
 import goodgenerator.loader.Loaders;
+import goodgenerator.util.DescTextLocalization;
 import goodgenerator.util.MyRecipeAdder;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_HatchElement;
