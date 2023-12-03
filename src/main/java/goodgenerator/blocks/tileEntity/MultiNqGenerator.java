@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -23,8 +22,8 @@ import com.github.bartimaeusnek.bartworks.util.Pair;
 import com.github.technus.tectech.thing.metaTileEntity.hatch.GT_MetaTileEntity_Hatch_DynamoMulti;
 import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
-import com.gtnewhorizon.structurelib.structure.IItemSource;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
@@ -201,7 +200,6 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     public @NotNull CheckRecipeResult checkProcessing_EM() {
 
         ArrayList<FluidStack> tFluids = getStoredFluids();
-
         for (int i = 0; i < tFluids.size() - 1; i++) {
             for (int j = i + 1; j < tFluids.size(); j++) {
                 if (GT_Utility.areFluidsEqual(tFluids.get(i), tFluids.get(j))) {
@@ -240,6 +238,8 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     public boolean onRunningTick(ItemStack stack) {
         if (this.getBaseMetaTileEntity().isServerSide()) {
             if (mMaxProgresstime != 0 && mProgresstime % 20 == 0) {
+                // If there's no startRecipeProcessing, ME input hatch wouldn't work
+                startRecipeProcessing();
                 FluidStack[] input = getStoredFluids().toArray(new FluidStack[0]);
                 int eff = 100, time = 1;
                 if (LiquidAirConsumptionPerSecond != 0
@@ -247,6 +247,7 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                     this.mEUt = 0;
                     this.trueEff = 0;
                     this.trueOutput = 0;
+                    endRecipeProcessing();
                     return true;
                 }
                 if (getCoolant(input, true) != null) eff = getCoolant(input, false).getValue();
@@ -254,6 +255,7 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                 this.mEUt = basicOutput * eff * time / 100;
                 this.trueEff = eff;
                 this.trueOutput = (long) basicOutput * (long) eff * (long) time / 100;
+                endRecipeProcessing();
             }
             addAutoEnergy(trueOutput);
         }
@@ -433,8 +435,8 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
     }
 
     @Override
-    public int survivalConstruct(ItemStack stackSize, int elementBudget, IItemSource source, EntityPlayerMP actor) {
+    public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivialBuildPiece(mName, stackSize, 3, 7, 0, elementBudget, source, actor, false, true);
+        return survivialBuildPiece(mName, stackSize, 3, 7, 0, elementBudget, env, false, true);
     }
 }
