@@ -236,13 +236,13 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                 // If there's no startRecipeProcessing, ME input hatch wouldn't work
                 startRecipeProcessing();
                 FluidStack[] input = getStoredFluids().toArray(new FluidStack[0]);
-                endRecipeProcessing();
                 int eff = 100, time = 1;
                 if (LiquidAirConsumptionPerSecond != 0
                         && !consumeFuel(Materials.LiquidAir.getFluid(LiquidAirConsumptionPerSecond), input)) {
                     this.mEUt = 0;
                     this.trueEff = 0;
                     this.trueOutput = 0;
+                    endRecipeProcessing();
                     return true;
                 }
                 if (getCoolant(input, true) != null) eff = getCoolant(input, false).getValue();
@@ -250,6 +250,7 @@ public class MultiNqGenerator extends GT_MetaTileEntity_TooltipMultiBlockBase_EM
                 this.mEUt = basicOutput * eff * time / 100;
                 this.trueEff = eff;
                 this.trueOutput = (long) basicOutput * (long) eff * (long) time / 100;
+                endRecipeProcessing();
             }
             addAutoEnergy(trueOutput);
         }
