@@ -303,6 +303,7 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
                                     0,
                                     Math.min(mEfficiency + mEfficiencyIncrease, getMaxEfficiency(mInventory[1])));
                             mOutputItems = null;
+                            mOutputFluids = null;
                             mProgresstime = 0;
                             mMaxProgresstime = 0;
                             mEfficiencyIncrease = 0;
@@ -568,13 +569,8 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
             case 9 -> EnumChatFormatting.RED + "IV" + EnumChatFormatting.RESET;
             default -> EnumChatFormatting.GOLD + "V" + EnumChatFormatting.RESET;
         };
-        float plasmaOut = 0;
-        if (this.mLastRecipe != null) {
-            if (this.mLastRecipe.getFluidOutput(0) != null) {
-                plasmaOut = (float) this.mLastRecipe.getFluidOutput(0).amount / (float) this.mLastRecipe.mDuration
-                        * this.para;
-            }
-        }
+        double plasmaOut = 0;
+        if (mMaxProgresstime > 0) plasmaOut = (double) mOutputFluids[0].amount / mMaxProgresstime;
 
         return new String[] { EnumChatFormatting.BLUE + "Fusion Reactor MK " + EnumChatFormatting.RESET + tier,
                 StatCollector.translateToLocal("scanner.info.UX.0") + ": "
