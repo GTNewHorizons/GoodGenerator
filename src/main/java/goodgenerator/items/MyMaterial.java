@@ -1212,7 +1212,7 @@ public class MyMaterial implements Runnable {
                     .setSpeedOverride(100F),
             Werkstoff.Types.MIXTURE,
             new Werkstoff.GenerationFeatures().onlyDust().addMolten().addMetalItems().addCraftingMetalWorkingItems()
-                    .addMultipleIngotMetalWorkingItems().addMixerRecipes((short) 6),
+                    .addMultipleIngotMetalWorkingItems().addMixerRecipes((short) 6).addMetaSolidifierRecipes(),
             OffsetID + 108,
             TextureSet.SET_SHINY,
             new Pair<>(WerkstoffLoader.Ruthenium, 1),
