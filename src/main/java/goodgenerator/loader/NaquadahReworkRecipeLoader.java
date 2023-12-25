@@ -1126,8 +1126,10 @@ public class NaquadahReworkRecipeLoader {
                 if (GT_Utility.isStackValid(input)) {
                     int[] oreDict = OreDictionary.getOreIDs(input);
                     for (int oreDictID : oreDict) {
+                        // spotless:off
                         if (OreDictionary.getOreName(oreDictID).startsWith("dustImpureNaq")
                             || OreDictionary.getOreName(oreDictID).startsWith("dustPureNaq")) {
+                            // spotless:on
                             GT_Recipe tRecipe = recipe.copy();
                             boolean modified = false;
                             for (int i = 0; i < tRecipe.mOutputs.length; i++) {
