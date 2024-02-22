@@ -4,7 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GT_StructureUtility.filterByMTETier;
 import static gregtech.api.util.GT_StructureUtility.ofFrame;
-import static gregtech.api.util.GT_Utility.filterValidMTEs;
+import static gregtech.api.util.GT_Utility.*;
 
 import java.util.List;
 
@@ -449,7 +449,11 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
             @NotNull
             @Override
             protected GT_OverclockCalculator createOverclockCalculator(@NotNull GT_Recipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(overclock(recipe.mSpecialValue));
+                int overclockCount = overclock(recipe.mSpecialValue);
+                if (GT_Values.VP[LargeFusionComputer.this.tier()] <= roundUpVoltage(recipe.mEUt)) {
+                    overclockCount = 0;
+                }
+                return super.createOverclockCalculator(recipe).limitOverclockCount(overclockCount);
             }
 
             @NotNull
