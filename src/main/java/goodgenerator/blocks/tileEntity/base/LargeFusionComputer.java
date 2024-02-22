@@ -588,7 +588,7 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
                         + EnumChatFormatting.RESET,
                 StatCollector.translateToLocal("GT5U.fusion.req") + ": "
                         + EnumChatFormatting.RED
-                        + GT_Utility.formatNumbers(lEUt)
+                        + GT_Utility.formatNumbers(-lEUt)
                         + EnumChatFormatting.RESET
                         + "EU/t",
                 StatCollector.translateToLocal("GT5U.multiblock.energy") + ": "
