@@ -4,7 +4,8 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GT_StructureUtility.filterByMTETier;
 import static gregtech.api.util.GT_StructureUtility.ofFrame;
-import static gregtech.api.util.GT_Utility.*;
+import static gregtech.api.util.GT_Utility.filterValidMTEs;
+import static gregtech.api.util.GT_Utility.roundUpVoltage;
 
 import java.util.List;
 
