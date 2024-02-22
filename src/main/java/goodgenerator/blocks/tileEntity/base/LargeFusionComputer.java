@@ -455,7 +455,8 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GT_Recipe recipe) {
-                if (!mRunningOnLoad && recipe.mSpecialValue > maxEUStore()) {
+                if (!mRunningOnLoad && recipe.mSpecialValue > maxEUStore()
+                        || GT_Values.VP[LargeFusionComputer.this.tier()] < recipe.mEUt) {
                     return CheckRecipeResultRegistry.insufficientStartupPower(recipe.mSpecialValue);
                 }
                 maxParallel = getMaxPara() * extraPara(recipe.mSpecialValue);
