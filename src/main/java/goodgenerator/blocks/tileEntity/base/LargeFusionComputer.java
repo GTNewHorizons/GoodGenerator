@@ -454,6 +454,11 @@ public abstract class LargeFusionComputer extends GT_MetaTileEntity_TooltipMulti
                 if (GT_Values.VP[LargeFusionComputer.this.tier()] <= roundUpVoltage(recipe.mEUt)) {
                     overclockCount = 0;
                 }
+                // If it's a mk5 reactor and no startupOC has been performed but the recipe is mk4, then perform 1 OC
+                if (LargeFusionComputer.this.tier() == 10 && overclockCount == 0
+                        && roundUpVoltage(recipe.mEUt) < GT_Values.VP[LargeFusionComputer.this.tier()]) {
+                    overclockCount++;
+                }
                 return super.createOverclockCalculator(recipe).limitOverclockCount(overclockCount);
             }
 
