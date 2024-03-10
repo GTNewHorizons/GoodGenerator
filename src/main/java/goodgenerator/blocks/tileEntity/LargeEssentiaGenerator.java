@@ -426,9 +426,10 @@ public class LargeEssentiaGenerator extends GT_MetaTileEntity_TooltipMultiBlockB
         for (EssentiaHatch hatch : this.mEssentiaHatch) {
             AspectList aspects = hatch.getAspects();
             for (Aspect aspect : aspects.aspects.keySet()) {
-                if (!isValidEssentia(aspect) || getPerAspectEnergy(aspect) == 0) continue;
+                if (!isValidEssentia(aspect)) continue;
                 while (EUt <= (voltageLimit * ampLimit) && aspects.getAmount(aspect) > 0) {
                     EUt += getPerAspectEnergy(aspect) * mStableValue / 25;
+                    if (EUt == 0) break;
                     aspects.reduce(aspect, 1);
                     if (aspects.getAmount(aspect) == 0) aspects.remove(aspect);
                 }
