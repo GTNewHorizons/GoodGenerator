@@ -271,18 +271,6 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
 
     void addAutoEnergy() {
         long exEU = this.getPowerFlow() * tEff / 10000;
-        if (!mDynamoHatches.isEmpty()) {
-            GT_MetaTileEntity_Hatch_Dynamo tHatch = mDynamoHatches.get(0);
-            if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
-                tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
-            }
-        }
-        if (!eDynamoMulti.isEmpty()) {
-            GT_MetaTileEntity_Hatch_DynamoMulti tHatch = eDynamoMulti.get(0);
-            if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
-                tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
-            }
-        }
     }
 
     public FluidStack getPromoter() {
