@@ -235,7 +235,7 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
             consumeAllLiquid(tFuel, tFluids);
             consumeAllLiquid(getPromoter(), tFluids);
             this.setPowerFlow((long) (FuelAmount * recipe.mSpecialValue * FuelsValueBonus / 20.0D));
-            this.mMaxProgresstime = 25;
+            this.mMaxProgresstime = 1;
             this.updateSlots();
             return CheckRecipeResultRegistry.GENERATING;
         }
