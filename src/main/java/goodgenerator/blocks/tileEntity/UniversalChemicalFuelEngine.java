@@ -235,7 +235,7 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
             consumeAllLiquid(tFuel, tFluids);
             consumeAllLiquid(getPromoter(), tFluids);
             this.setPowerFlow((long) (FuelAmount * recipe.mSpecialValue * FuelsValueBonus / 20.0D));
-            this.mMaxProgresstime = 20;
+            this.mMaxProgresstime = 25;
             this.updateSlots();
             return CheckRecipeResultRegistry.GENERATING;
         }
@@ -271,6 +271,18 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
 
     void addAutoEnergy() {
         long exEU = this.getPowerFlow() * tEff / 10000;
+        if (!mDynamoHatches.isEmpty()) {
+            GT_MetaTileEntity_Hatch_Dynamo tHatch = mDynamoHatches.get(0);
+            if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
+                tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
+            } else tHatch.doExplosion(tHatch.maxEUOutput());
+        }
+        if (!eDynamoMulti.isEmpty()) {
+            GT_MetaTileEntity_Hatch_DynamoMulti tHatch = eDynamoMulti.get(0);
+            if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
+                tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
+            } else tHatch.doExplosion(tHatch.maxEUOutput());
+        }
     }
 
     public FluidStack getPromoter() {
