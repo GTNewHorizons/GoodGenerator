@@ -306,7 +306,7 @@ public class ComponentAssemblyLine extends GT_MetaTileEntity_ExtendedPowerMultiB
 
     @Override
     public boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer aPlayer,
-                                          float aX, float aY, float aZ, ItemStack aTool) {
+            float aX, float aY, float aZ, ItemStack aTool) {
         if (aPlayer.isSneaking()) {
             batchMode = !batchMode;
             if (batchMode) {
