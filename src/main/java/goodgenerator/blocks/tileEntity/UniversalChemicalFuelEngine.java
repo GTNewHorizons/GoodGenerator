@@ -55,8 +55,11 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
     protected final double GAS_EFFICIENCY_COEFFICIENT = 0.04D;
     protected final double ROCKET_EFFICIENCY_COEFFICIENT = 0.005D;
     protected final double EFFICIENCY_CEILING = 1.5D;
+    protected final int EXPLOSION_SAFETY_TIMER = 200;
 
     private long tEff;
+    private int explosionSafetyTicks;
+    private boolean isExplosionSafe;
 
     private IStructureDefinition<UniversalChemicalFuelEngine> multiDefinition = null;
 
@@ -243,8 +246,22 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
     }
 
     @Override
+    public void stopMachine() {
+        // Reset the counter for explosion safety, so that it works again when the machine restarts
+        explosionSafetyTicks = 0;
+        super.stopMachine();
+    }
+    @Override
     public boolean onRunningTick(ItemStack stack) {
         super.onRunningTick(stack);
+        // Counts ticks up to the defined timer (200 ticks, 10 seconds)
+        // The multiblock will not explode due to excess energy during this time
+        if (explosionSafetyTicks < EXPLOSION_SAFETY_TIMER) {
+            explosionSafetyTicks++;
+            isExplosionSafe = true;
+        }
+        else if (isExplosionSafe) isExplosionSafe = false;
+
         if (this.getBaseMetaTileEntity().isServerSide()) {
             addAutoEnergy();
         }
@@ -275,13 +292,13 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
             GT_MetaTileEntity_Hatch_Dynamo tHatch = mDynamoHatches.get(0);
             if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
                 tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
-            } else tHatch.doExplosion(tHatch.maxEUOutput());
+            } else if (!isExplosionSafe) tHatch.doExplosion(tHatch.maxEUOutput());
         }
         if (!eDynamoMulti.isEmpty()) {
             GT_MetaTileEntity_Hatch_DynamoMulti tHatch = eDynamoMulti.get(0);
             if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
                 tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
-            } else tHatch.doExplosion(tHatch.maxEUOutput());
+            } else if (!isExplosionSafe) tHatch.doExplosion(tHatch.maxEUOutput());
         }
     }
 
