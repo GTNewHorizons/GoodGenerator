@@ -187,6 +187,9 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
                 .addInfo("BURNING BURNING BURNING").addInfo("Use combustible liquid to generate power.")
                 .addInfo("You need to supply Combustion Promoter to keep it running.")
                 .addInfo("This engine will consume all the fuel and combustion promoter in the hatch every second.")
+                .addInfo("If the energy hatch's buffer fills up, the machine will explode due to accumulated energy!")
+                .addInfo("When turned on, the engine goes through a 10-second starting period which prevents explosions.")
+                .addInfo("Even if an explosion is prevented due to excess fuel, all the fuel in the hatch will be voided.")
                 .addInfo("The efficiency is determined by the proportion of Combustion Promoter to fuel.")
                 .addInfo("The proportion is bigger, and the efficiency will be higher.")
                 .addInfo("It creates sqrt(Current Output Power) pollution every second")
@@ -198,8 +201,8 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
                                 + ".")
                 .addInfo("The efficiency is up to 150%.").addInfo("The structure is too complex!")
                 .addInfo(BLUE_PRINT_INFO).addSeparator().beginStructureBlock(5, 4, 9, false)
-                .addMaintenanceHatch("Hint block with dot 1").addMufflerHatch("Hint block with dot 2")
-                .addInputHatch("Hint block with dot 3").addDynamoHatch("Hint block with dot 4")
+                .addMaintenanceHatch("Hint block with dot 1").addMufflerHatch("Hint block with dot 2 (fill all slots with mufflers)")
+                .addInputHatch("Hint block with dot 3 (fill all slots with input hatches)").addDynamoHatch("Hint block with dot 4")
                 .toolTipFinisher("Good Generator");
         return tt;
     }
@@ -292,13 +295,19 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
             GT_MetaTileEntity_Hatch_Dynamo tHatch = mDynamoHatches.get(0);
             if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
                 tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
-            } else if (!isExplosionSafe) tHatch.doExplosion(tHatch.maxEUOutput());
+            } else if (!isExplosionSafe) {
+                tHatch.doExplosion(tHatch.maxEUOutput());
+                stopMachine();
+            }
         }
         if (!eDynamoMulti.isEmpty()) {
             GT_MetaTileEntity_Hatch_DynamoMulti tHatch = eDynamoMulti.get(0);
             if (tHatch.maxEUOutput() * tHatch.maxAmperesOut() >= exEU) {
                 tHatch.setEUVar(Math.min(tHatch.maxEUStore(), tHatch.getBaseMetaTileEntity().getStoredEU() + exEU));
-            } else if (!isExplosionSafe) tHatch.doExplosion(tHatch.maxEUOutput());
+            } else if (!isExplosionSafe) {
+                tHatch.doExplosion(tHatch.maxEUOutput());
+                stopMachine();
+            }
         }
     }
 
