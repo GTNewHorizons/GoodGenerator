@@ -9,6 +9,7 @@ import static gregtech.api.enums.Textures.BlockIcons.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import gregtech.api.enums.TickTime;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -55,7 +56,7 @@ public class UniversalChemicalFuelEngine extends GT_MetaTileEntity_TooltipMultiB
     protected final double GAS_EFFICIENCY_COEFFICIENT = 0.04D;
     protected final double ROCKET_EFFICIENCY_COEFFICIENT = 0.005D;
     protected final double EFFICIENCY_CEILING = 1.5D;
-    protected final int HEATING_TIMER = 200;
+    protected final int HEATING_TIMER = TickTime.SECOND * 10;
 
     private long tEff;
     private int heatingTicks;
