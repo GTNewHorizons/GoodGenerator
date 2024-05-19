@@ -9,7 +9,6 @@ import static gregtech.api.enums.Textures.BlockIcons.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import gregtech.api.enums.TickTime;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -30,6 +29,7 @@ import goodgenerator.loader.Loaders;
 import goodgenerator.util.DescTextLocalization;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_HatchElement;
+import gregtech.api.enums.TickTime;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
